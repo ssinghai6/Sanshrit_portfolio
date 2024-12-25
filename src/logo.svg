@@ -1,0 +1,11 @@
+import customLogo from './logo.png';  // Note the './' to indicate current directory
+
+function App() {
+  return (
+    <div>
+      <img src={customLogo} alt="Custom logo" />
+    </div>
+  );
+}
+
+export default App;
