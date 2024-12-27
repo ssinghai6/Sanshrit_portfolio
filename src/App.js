@@ -44,7 +44,7 @@ const Portfolio = () => {
                 <Mail size={20} />
               </a>
               <a 
-                href="https://1drv.ms/b/c/a9a13d4ed9947e83/EQjjrz1D_01Fr-BphkloJBsB6fYF7b0T62KNQUk5LlEsmw?e=86Sv3G" 
+                href="https://1drv.ms/b/c/a9a13d4ed9947e83/EQjjrz1D_01Fr-BphkloJBsB6fYF7b0T62KNQUk5LlEsmw?e=tRZnx2" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-olive-500 transition-colors"
@@ -96,7 +96,7 @@ const Portfolio = () => {
               <p className="text-zinc-400 font-mono">
                 TensorFlow • PyTorch • Scikit-learn • OpenCV • LangChain
                 <br />
-                OR-Tools • TigerGraph GSQL • Kafka • Azure Eventhub 
+                OR-Tools • TigerGraph GSQL • Kafka • Azure Event Hubs 
               </p>
             </div>
           </div>
@@ -127,7 +127,7 @@ const Portfolio = () => {
                   <li><strong>Machine Learning - </strong> Unsupervised learning models and Data Science for understanding and planning logistics operations</li>
                   <li><strong>Graph Algorithms - </strong>Developed TigerGraph GSQL for logistic network</li>
                   <li><strong>Optimization - </strong>Built optimizer using OR-Tools for network optimization</li>
-                  <li><strong>Real Time Data Ingestion - </strong> Designed and implemented a scalable data pipeline on Azure Event Hub</li>
+                  <li><strong>Real Time Data Ingestion - </strong> Designed and implemented a scalable data pipeline on Azure Event Hubs</li>
                 </ul>
               </div>
             </div>
