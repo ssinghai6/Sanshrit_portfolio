@@ -44,7 +44,7 @@ const Portfolio = () => {
                 <Mail size={20} />
               </a>
               <a 
-                href="https://1drv.ms/b/c/a9a13d4ed9947e83/ERjoQ8mmnbdIk4Nc_WDkKjcBaQ9tmOG_Dat6KnRXF8KXBA?e=Zx4KHD" 
+                href="https://1drv.ms/f/c/a9a13d4ed9947e83/En-c4oEDxOhMjqq6W4QeIEQBQ1RmLZ4paaGcmjsPCv83fw?e=J0d3gD" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-olive-500 transition-colors"
