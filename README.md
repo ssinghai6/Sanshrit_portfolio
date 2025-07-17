@@ -13,8 +13,8 @@ This repository showcases a curated collection of my projects spanning supervise
 | [📉 Credit Card Fraud Detection](https://github.com/ssinghai6/Fraud_transactions) | Built an ML pipeline to classify fraudulent transactions using XGBoost and Random Forest; handled imbalanced data using SMOTE and custom fraud pattern features. | XGBoost, Random Forest, SMOTE, pandas, matplotlib |
 | [🧠 RAG-based Document Chatbot](https://github.com/ssinghai6/DocBot) | Built a Retrieval-Augmented Generation (RAG) chatbot using LangChain, LLaMA 3.2, and FAISS for intelligent document querying. | LangChain, LLaMA 3.2, FAISS, Streamlit |
 | [🚛 Logistics Optimization Solver] | Developed integer programming models to optimize fleet-wide truck assignment based on profit, integrated with OR-Tools and Gurobi. | Python, OR-Tools, Gurobi, optimization |
-| [📈 Chicago Crime Prediction](https://github.com/ssinghai6/Chicago-Crime-Analysis) | Analyzed 7M+ crime records and built predictive models to forecast crime likelihood across ZIP codes. | PySpark, AWS, Tableau, Flask, XGBoost |
-| [🔬 Stress Field Prediction](https://github.com/ssinghai6/StressFieldPrediction) | Replaced FEM simulations with deep learning models (Autoencoders, ANN) to predict stress distribution in geotechnical domains. | TensorFlow, Autoencoders, ANN |
+| [📈 Chicago Crime Prediction](https://github.com/ssinghai6/CSE6242-DVA-Team007) | Analyzed 7M+ crime records and built predictive models to forecast crime likelihood across ZIP codes. | PySpark, AWS, Tableau, Flask, XGBoost |
+| [🔬 Stress Field Prediction](https://github.com/ssinghai6/Intelligent-Tunneling-Machine-Learning-based-Prediction-) | Replaced FEM simulations with deep learning models (Autoencoders, ANN) to predict stress distribution in geotechnical domains. | TensorFlow, Autoencoders, ANN |
 
 ---
 

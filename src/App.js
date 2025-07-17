@@ -289,6 +289,14 @@ const Portfolio = () => {
                   >
                     <Github size={20} />
                   </a>
+                  <a 
+                    href="https://github.com/ssinghai6/Fraud_transactions" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-zinc-400 hover:text-olive-500 transition-colors"
+                  >
+                    <ExternalLink size={20} />
+                  </a>
                 </div>
               </div>
               <p className="text-zinc-400">
@@ -306,7 +314,7 @@ const Portfolio = () => {
                 </div>
                 <div className="flex space-x-4">
                   <a 
-                    href="#" 
+                    href="https://github.com/ssinghai6/CSE6242-DVA-Team007" 
                     className="text-zinc-400 hover:text-olive-500 transition-colors"
                   >
                     <Github size={20} />
