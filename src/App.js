@@ -44,7 +44,7 @@ const Portfolio = () => {
                 <Mail size={20} />
               </a>
               <a 
-                href="https://1drv.ms/b/c/a9a13d4ed9947e83/EfLoCjyh9fxJgWO7nEk7hxsBJE_pTMv5X5x14u_OdYUzTg?e=cxHlBS" 
+                href="https://1drv.ms/b/c/a9a13d4ed9947e83/EXS8G8zoBs5CowVwcGx9Gm4BFTw8WEO0aCnzWgSyY5SuKw?e=Gowt1P" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-olive-500 transition-colors"
@@ -124,6 +124,7 @@ const Portfolio = () => {
               </div>
               <div className="pl-24">
                 <ul className="list-disc space-y-2 text-zinc-400">
+                  <li><strong>LLM - </strong> Built a RAG-based GenAI chatbot using LangChain + FAISS for efficient planning</li>
                   <li><strong>Machine Learning - </strong> Unsupervised learning models and Data Science for understanding and planning logistics operations</li>
                   <li><strong>Graph Algorithms - </strong>Developed TigerGraph GSQL for logistic network</li>
                   <li><strong>Optimization - </strong>Built optimizer using OR-Tools for network optimization</li>
@@ -268,6 +269,30 @@ const Portfolio = () => {
               </div>
               <p className="text-zinc-400">
                 Deep Learning Frameworks for bypassing FEM Simulation and predicting the stress responses based on mechanical properties of soil domain
+              </p>
+            </div>
+
+            <div className="group">
+              <div className="flex justify-between items-start mb-4">
+                <div>
+                  <h4 className="text-zinc-100 group-hover:text-olive-500 transition-colors">
+                    Credit Card Fraud Detection (ML Pipeline)
+                  </h4>
+                  <p className="text-zinc-400">XGBoost and Random Forest Implementation</p>
+                </div>
+                <div className="flex space-x-4">
+                  <a 
+                    href="https://github.com/ssinghai6/Fraud_transactions" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-zinc-400 hover:text-olive-500 transition-colors"
+                  >
+                    <Github size={20} />
+                  </a>
+                </div>
+              </div>
+              <p className="text-zinc-400">
+                Developed an end-to-end fraud detection pipeline using XGBoost and Random Forest on imbalanced transaction data. Engineered fraud-specific features such as reversal detection and multi-swipe patterns, and addressed class imbalance using SMOTE.
               </p>
             </div>
 
