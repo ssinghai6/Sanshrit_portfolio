@@ -1,70 +1,39 @@
-# Getting Started with Create React App
+# 📊 Sanshrit's Data Science & Machine Learning Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to my portfolio! I'm Sanshrit Singhai — a Data Scientist with experience building end-to-end ML and Generative AI solutions across logistics, finance, and research domains.
 
-## Available Scripts
+This repository showcases a curated collection of my projects spanning supervised learning, unsupervised learning, optimization, generative AI, and time series forecasting.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🔍 Projects Overview
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+| Project | Description | Key Technologies |
+|--------|-------------|------------------|
+| [📉 Credit Card Fraud Detection](https://github.com/ssinghai6/Fraud_transactions) | Built an ML pipeline to classify fraudulent transactions using XGBoost and Random Forest; handled imbalanced data using SMOTE and custom fraud pattern features. | XGBoost, Random Forest, SMOTE, pandas, matplotlib |
+| [🧠 RAG-based Document Chatbot](https://github.com/ssinghai6/DocBot) | Built a Retrieval-Augmented Generation (RAG) chatbot using LangChain, LLaMA 3.2, and FAISS for intelligent document querying. | LangChain, LLaMA 3.2, FAISS, Streamlit |
+| [🚛 Logistics Optimization Solver] | Developed integer programming models to optimize fleet-wide truck assignment based on profit, integrated with OR-Tools and Gurobi. | Python, OR-Tools, Gurobi, optimization |
+| [📈 Chicago Crime Prediction](https://github.com/ssinghai6/Chicago-Crime-Analysis) | Analyzed 7M+ crime records and built predictive models to forecast crime likelihood across ZIP codes. | PySpark, AWS, Tableau, Flask, XGBoost |
+| [🔬 Stress Field Prediction](https://github.com/ssinghai6/StressFieldPrediction) | Replaced FEM simulations with deep learning models (Autoencoders, ANN) to predict stress distribution in geotechnical domains. | TensorFlow, Autoencoders, ANN |
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 🧠 Skills Highlighted
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Languages:** Python, SQL, Julia, C++, JavaScript  
+- **ML/DL Tools:** Scikit-learn, TensorFlow, PyTorch, XGBoost, LangChain  
+- **Cloud & Infra:** Azure, AWS, Docker, PySpark, Event Hubs  
+- **Data Viz:** Tableau, Power BI, matplotlib  
+- **Optimization:** OR-Tools, Gurobi, Integer Programming  
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 📫 Connect With Me
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- [LinkedIn](https://www.linkedin.com/in/singhai-sanshrit/)  
+- [Website](https://sanshrit-singhai.vercel.app/)  
+- [Email](mailto:singhai.sanshrit@live.com)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+> 💡 *This portfolio reflects both academic and industry work — combining research depth with production-ready data science.*  
