@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Github, Linkedin, Mail, ExternalLink } from 'lucide-react';
+import { Github, Linkedin, Mail, ExternalLink, X } from 'lucide-react';
 import GraphBackground from './GraphBackground';
-import { FaFileAlt } from 'react-icons/fa';
+import { FaFileAlt, FaNewspaper } from 'react-icons/fa';
+import blogPosts from './data/blogPosts.json';
 
 const Portfolio = () => {
   const [mounted, setMounted] = useState(false);
+  const [selectedPost, setSelectedPost] = useState(null);
+  const [showAllPosts, setShowAllPosts] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -30,6 +33,7 @@ const Portfolio = () => {
               <a href="#experience" className="text-sm font-mono text-zinc-400 hover:text-olive-500 transition-colors">Experience</a>
               <a href="#projects" className="text-sm font-mono text-zinc-400 hover:text-olive-500 transition-colors">Projects</a>
               <a href="#publications" className="text-sm font-mono text-zinc-400 hover:text-olive-500 transition-colors">Publications</a>
+              <a href="#blog" className="text-sm font-mono text-zinc-400 hover:text-olive-500 transition-colors">Blog</a>
             </div>
 
             <div className="flex space-x-4 pl-6 border-l border-zinc-700">
@@ -345,7 +349,7 @@ const Portfolio = () => {
         </section>
 
         {/* Publications */}
-        <section id="publications" className="scroll-mt-24">
+        <section id="publications" className="mb-32 scroll-mt-24">
           <h3 className="text-olive-500 font-mono text-lg mb-8">Publications</h3>
           <div className="space-y-8">
             <div className="group">
@@ -444,6 +448,279 @@ const Portfolio = () => {
             </div>
           </div>
         </section>
+
+        {/* Blog Section */}
+        <section id="blog" className="mb-32 scroll-mt-24">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => setShowAllPosts(true)}
+                className="text-olive-500 font-mono text-lg hover:underline cursor-pointer bg-transparent border-none flex items-center gap-2"
+              >
+                AI/ML Insights
+                {blogPosts.length > 2 && (
+                  <span className="text-xs text-zinc-500">({blogPosts.length} posts)</span>
+                )}
+              </button>
+              <span className="px-2 py-1 text-xs font-mono bg-olive-500/20 text-olive-500 rounded-full border border-olive-500/30">
+                🤖 Auto-curated
+              </span>
+            </div>
+            {blogPosts.length > 2 && (
+              <button
+                onClick={() => setShowAllPosts(true)}
+                className="text-olive-500 text-sm font-mono hover:underline cursor-pointer bg-transparent border-none"
+              >
+                View All →
+              </button>
+            )}
+          </div>
+          <p className="text-zinc-400 mb-8">Weekly updates on what's happening in AI, Data Science, and Optimization.</p>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {blogPosts.slice(0, 2).map((post) => (
+              <div key={post.id} className="bg-zinc-800/50 p-6 rounded-lg border border-zinc-700 hover:border-olive-500 hover:shadow-lg hover:shadow-olive-500/10 transition-all duration-300 group">
+                <div className="flex justify-between items-start mb-4">
+                  <div className="flex items-center text-olive-500 mb-2">
+                    <FaNewspaper className="mr-2" />
+                    <span className="text-xs font-mono">{post.date}</span>
+                  </div>
+                  <div className="flex gap-2">
+                    {post.tags.map(tag => (
+                      <span key={tag} className="text-xs bg-zinc-800 text-zinc-400 px-2 py-1 rounded font-mono">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <h4 className="text-xl font-bold text-zinc-100 mb-3 group-hover:text-olive-500 transition-colors">
+                  {post.title}
+                </h4>
+                <p className="text-zinc-400 mb-4 line-clamp-3">
+                  {post.summary}
+                </p>
+                <button
+                  onClick={() => setSelectedPost(post)}
+                  className="text-olive-500 text-sm font-mono hover:underline flex items-center cursor-pointer bg-transparent border-none"
+                >
+                  Read more <ExternalLink size={14} className="ml-2" />
+                </button>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* All Posts Modal */}
+        {showAllPosts && (
+          <div
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            onClick={() => setShowAllPosts(false)}
+          >
+            <div
+              className="bg-zinc-900 border border-zinc-700 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Modal Header */}
+              <div className="sticky top-0 bg-zinc-900/95 backdrop-blur-sm border-b border-zinc-800 p-6 flex justify-between items-center">
+                <div className="flex items-center gap-3">
+                  <h2 className="text-2xl font-bold text-zinc-100">AI/ML Insights</h2>
+                  <span className="px-2 py-1 text-xs font-mono bg-olive-500/20 text-olive-500 rounded-full border border-olive-500/30">
+                    {blogPosts.length} posts
+                  </span>
+                </div>
+                <button
+                  onClick={() => setShowAllPosts(false)}
+                  className="text-zinc-400 hover:text-zinc-100 transition-colors p-1"
+                >
+                  <X size={24} />
+                </button>
+              </div>
+
+              {/* All Posts Grid */}
+              <div className="p-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  {blogPosts.map((post) => (
+                    <div key={post.id} className="bg-zinc-800/50 p-5 rounded-lg border border-zinc-700 hover:border-olive-500 transition-colors group">
+                      <div className="flex justify-between items-start mb-3">
+                        <div className="flex items-center text-olive-500">
+                          <FaNewspaper className="mr-2" size={12} />
+                          <span className="text-xs font-mono">{post.date}</span>
+                        </div>
+                        <div className="flex gap-1">
+                          {post.tags.map(tag => (
+                            <span key={tag} className="text-xs bg-zinc-800 text-zinc-400 px-2 py-0.5 rounded font-mono">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      <h4 className="text-lg font-bold text-zinc-100 mb-2 group-hover:text-olive-500 transition-colors">
+                        {post.title}
+                      </h4>
+                      <p className="text-zinc-400 text-sm mb-3 line-clamp-2">
+                        {post.summary}
+                      </p>
+                      <button
+                        onClick={() => {
+                          setShowAllPosts(false);
+                          setSelectedPost(post);
+                        }}
+                        className="text-olive-500 text-sm font-mono hover:underline flex items-center cursor-pointer bg-transparent border-none"
+                      >
+                        Read more <ExternalLink size={12} className="ml-1" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Blog Post Modal */}
+        {selectedPost && (
+          <div
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            onClick={() => setSelectedPost(null)}
+          >
+            <div
+              className="bg-zinc-900 border border-zinc-700 rounded-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Modal Header */}
+              <div className="sticky top-0 bg-zinc-900/95 backdrop-blur-sm border-b border-zinc-800 p-6 flex justify-between items-start">
+                <div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <FaNewspaper className="text-olive-500" />
+                    <span className="text-xs font-mono text-olive-500">{selectedPost.date}</span>
+                    <div className="flex gap-2 ml-2">
+                      {selectedPost.tags.map(tag => (
+                        <span key={tag} className="text-xs bg-zinc-800 text-zinc-400 px-2 py-1 rounded font-mono">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <h2 className="text-2xl font-bold text-zinc-100">{selectedPost.title}</h2>
+                </div>
+                <button
+                  onClick={() => setSelectedPost(null)}
+                  className="text-zinc-400 hover:text-zinc-100 transition-colors p-1"
+                >
+                  <X size={24} />
+                </button>
+              </div>
+
+              {/* Modal Content */}
+              <div className="p-6">
+                {/* Summary */}
+                <div className="bg-olive-500/10 border border-olive-500/30 rounded-lg p-4 mb-6">
+                  <p className="text-zinc-300 italic">{selectedPost.summary}</p>
+                </div>
+
+                {/* Detailed Content */}
+                <div className="prose prose-invert max-w-none mb-8">
+                  {selectedPost.content ? (
+                    selectedPost.content.split('\n\n').map((block, idx) => {
+                      // Handle ## Headers
+                      if (block.startsWith('## ')) {
+                        return (
+                          <h2 key={idx} className="text-xl font-bold text-olive-500 mt-6 mb-3 border-b border-zinc-800 pb-2">
+                            {block.replace('## ', '')}
+                          </h2>
+                        );
+                      }
+                      // Handle ### Sub-headers
+                      if (block.startsWith('### ')) {
+                        return (
+                          <h3 key={idx} className="text-lg font-semibold text-zinc-100 mt-4 mb-2">
+                            {block.replace('### ', '')}
+                          </h3>
+                        );
+                      }
+                      // Handle bullet points
+                      if (block.includes('\n• ') || block.startsWith('• ')) {
+                        const items = block.split('\n').filter(line => line.startsWith('• '));
+                        return (
+                          <ul key={idx} className="space-y-2 mb-4 ml-4">
+                            {items.map((item, i) => (
+                              <li key={i} className="text-zinc-300 flex items-start">
+                                <span className="text-olive-500 mr-2">•</span>
+                                <span dangerouslySetInnerHTML={{
+                                  __html: item.replace('• ', '').replace(/\*\*(.*?)\*\*/g, '<strong class="text-zinc-100">$1</strong>')
+                                }} />
+                              </li>
+                            ))}
+                          </ul>
+                        );
+                      }
+                      // Handle numbered lists
+                      if (/^\d+\.\s/.test(block)) {
+                        const items = block.split('\n').filter(line => /^\d+\.\s/.test(line));
+                        return (
+                          <ol key={idx} className="space-y-2 mb-4 ml-4 list-decimal list-inside">
+                            {items.map((item, i) => (
+                              <li key={i} className="text-zinc-300">
+                                <span dangerouslySetInnerHTML={{
+                                  __html: item.replace(/^\d+\.\s/, '').replace(/\*\*(.*?)\*\*/g, '<strong class="text-zinc-100">$1</strong>')
+                                }} />
+                              </li>
+                            ))}
+                          </ol>
+                        );
+                      }
+                      // Regular paragraphs with bold text support
+                      return (
+                        <p key={idx} className="text-zinc-300 mb-4 leading-relaxed"
+                          dangerouslySetInnerHTML={{
+                            __html: block.replace(/\*\*(.*?)\*\*/g, '<strong class="text-zinc-100">$1</strong>')
+                          }}
+                        />
+                      );
+                    })
+                  ) : (
+                    <p className="text-zinc-400">Full content coming soon...</p>
+                  )}
+                </div>
+
+                {/* Sources */}
+                {selectedPost.sources && selectedPost.sources.length > 0 && (
+                  <div className="border-t border-zinc-800 pt-6">
+                    <h4 className="text-olive-500 font-mono text-sm mb-4">📚 Sources</h4>
+                    <div className="space-y-3">
+                      {selectedPost.sources.map((source, idx) => (
+                        <a
+                          key={idx}
+                          href={source.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-3 p-3 bg-zinc-800/50 rounded-lg border border-zinc-700 hover:border-olive-500 transition-colors group"
+                        >
+                          <ExternalLink size={16} className="text-olive-500 flex-shrink-0" />
+                          <span className="text-zinc-300 group-hover:text-olive-500 transition-colors text-sm">
+                            {source.title}
+                          </span>
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Primary Link */}
+                <div className="mt-6 pt-6 border-t border-zinc-800">
+                  <a
+                    href={selectedPost.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-olive-500 text-zinc-900 font-mono text-sm rounded-lg hover:bg-olive-400 transition-colors"
+                  >
+                    Read Full Article <ExternalLink size={14} />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </main>
 
       {/* Footer */}
