@@ -12,7 +12,7 @@ jobs:
     # 3. Commenter is the repo owner or has write access
     if: |
       contains(github.event.issue.labels.*.name, 'ai-news-pending') &&
-      contains(toUpper(github.event.comment.body), 'APPROVE') &&
+      (contains(github.event.comment.body, 'APPROVE') || contains(github.event.comment.body, 'approve') || contains(github.event.comment.body, 'Approve')) &&
       github.event.issue.state == 'open'
     
     runs-on: ubuntu-latest
