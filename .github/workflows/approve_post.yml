@@ -34,7 +34,6 @@ jobs:
       - name: Install dependencies
         run: |
           pip install requests
-        working-directory: portfolio
 
       - name: Run Publish Agent
         env:
@@ -43,7 +42,6 @@ jobs:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
         run: |
           python agent/publish_agent.py
-        working-directory: portfolio
 
       - name: Commit and Push Changes
         run: |
@@ -52,4 +50,3 @@ jobs:
           git add src/data/blogPosts.json
           git commit -m "📝 Published: $(date +%Y-%m-%d) AI News Update"
           git push
-        working-directory: portfolio
