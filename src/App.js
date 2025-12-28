@@ -318,13 +318,16 @@ const Portfolio = () => {
                   <a href="https://docbot-llm.streamlit.app" className="text-zinc-400 hover:text-primary-400 transition-colors"><ExternalLink size={20} /></a>
                 </div>
               </div>
-              <h4 className="text-xl font-bold text-white mb-2 group-hover:text-primary-400 transition-colors">Document Chatbot (RAG)</h4>
+              <h4 className="text-xl font-bold text-white mb-2 group-hover:text-primary-400 transition-colors">DocBot 2.0: AI PDF Assistant</h4>
               <ul className="list-disc space-y-2 text-zinc-400 flex-grow pl-4 text-sm mb-6 marker:text-primary-500">
-                <li>Built a RAG based document QA chatbot using FAISS, LangChain and embeddings for semantic retrieval and context-awareness.</li>
-                <li>Developed a Streamlit UI with PDF injection, caching, semantic search, & conversational memory for fast interactive Q&A.</li>
+                <li>Engineered a multimodal RAG assistant (Llama 3.3 70B via Groq) that utilizes Vision AI to analyze charts/graphs within PDFs.</li>
+                <li>Implemented 'Smart Expert Personas' and 'Deep Research Mode' for domain-specific context and deep reasoning.</li>
+                <li>Supports full local privacy with Ollama (Llama 3.2) and cloud speed with Groq LPU.</li>
               </ul>
               <div className="flex gap-3 text-xs font-mono text-primary-300/80">
-                <span>Llama 3.2</span>
+                <span>Llama 3.3</span>
+                <span>Groq</span>
+                <span>Ollama</span>
                 <span>LangChain</span>
                 <span>Streamlit</span>
               </div>
