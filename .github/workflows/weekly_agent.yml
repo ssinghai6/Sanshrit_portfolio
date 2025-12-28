@@ -30,7 +30,6 @@ jobs:
       - name: Run AI News Agent
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
-          SERPER_API_KEY: ${{ secrets.SERPER_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
