@@ -16,7 +16,9 @@ from typing import TypedDict, List, Optional
 # Load .env file for local testing
 try:
     from dotenv import load_dotenv
-    load_dotenv()
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    env_path = os.path.join(script_dir, ".env")
+    load_dotenv(env_path)
 except ImportError:
     pass  # dotenv not installed, use system env vars
 
@@ -42,54 +44,46 @@ class AgentState(TypedDict):
     generated_post: Optional[dict]
     issue_url: Optional[str]
     error: Optional[str]
+    query: Optional[str]
 
 
 # ============================================================================
 # Node Functions
 # ============================================================================
 
+
+from duckduckgo_search import DDGS
+
 def search_news_node(state: AgentState) -> AgentState:
     """
-    Node 1: Search for AI/ML news using Serper API.
-    Falls back to mock data if no API key is provided.
+    Node 1: Search for AI/ML news using DuckDuckGo.
+    Free and requires no API key.
     """
     print("🔍 Searching for AI/ML news...")
     
-    query = "AI Machine Learning news last week"
-    
-    if not SERPER_API_KEY:
-        print("⚠️  SERPER_API_KEY not found. Using mock data.")
-        state["news_items"] = [
-            {
-                "title": "OpenAI Releases GPT-5 Preview",
-                "snippet": "The latest model shows significant improvements in reasoning.",
-                "link": "https://example.com/gpt5"
-            },
-            {
-                "title": "Meta Open Sources New Llama Model",
-                "snippet": "Llama 3.2 brings multimodal capabilities to open source.",
-                "link": "https://example.com/llama"
-            },
-            {
-                "title": "Google DeepMind's AlphaFold 3 Released",
-                "snippet": "New version predicts protein structures with unprecedented accuracy.",
-                "link": "https://example.com/alphafold"
-            }
-        ]
-        return state
-
-    url = "https://google.serper.dev/search"
-    payload = json.dumps({"q": query, "tbs": "qdr:w"})  # qdr:w = past week
-    headers = {
-        "X-API-KEY": SERPER_API_KEY,
-        "Content-Type": "application/json"
-    }
+    # Use custom query if provided, otherwise default
+    custom_query = state.get("query")
+    base_query = custom_query if custom_query else "AI Machine Learning news last week"
     
     try:
-        response = requests.post(url, headers=headers, data=payload, timeout=10)
-        results = response.json()
-        state["news_items"] = results.get("organic", [])[:5]
+        print(f"👉 Querying DuckDuckGo: '{base_query}'")
+        
+        state["news_items"] = []
+        with DDGS() as ddgs:
+            # Fetch up to 5 news results
+            # Note: max_results for news() is typically 'max_results' or passed via keywords depending on version.
+            # safe assumption for 8.x is just iterating results
+            ddg_gen = ddgs.news(base_query, max_results=5)
+            
+            for item in ddg_gen:
+                state["news_items"].append({
+                    "title": item.get("title", ""),
+                    "snippet": item.get("body", ""),
+                    "link": item.get("url", "")
+                })
+            
         print(f"✅ Found {len(state['news_items'])} news items")
+        
     except Exception as e:
         print(f"❌ Error searching news: {e}")
         state["error"] = str(e)
@@ -134,7 +128,7 @@ def summarize_node(state: AgentState) -> AgentState:
         state["generated_post"] = {
             "title": f"Weekly AI Round-up - {datetime.date.today()}",
             "summary": "This week saw major developments in AI with new model releases and research breakthroughs.",
-            "content": "Key developments this week:\n\n• **Major Model Releases**: Several new AI models were announced.\n\n• **Research Breakthroughs**: New papers pushed the boundaries of what's possible.\n\n• **Industry Updates**: Major tech companies continue to invest heavily in AI.",
+            "content": "Key developments this week:\\n\\n• **Major Model Releases**: Several new AI models were announced.\\n\\n• **Research Breakthroughs**: New papers pushed the boundaries of what's possible.\\n\\n• **Industry Updates**: Major tech companies continue to invest heavily in AI.",
             "tags": ["AI", "LLMs", "Research"],
             "sources": [
                 {"title": state["news_items"][0].get("title", "Source 1"), "url": state["news_items"][0].get("link", "#")}
@@ -151,16 +145,20 @@ def summarize_node(state: AgentState) -> AgentState:
     )
     
     # Format news items for the prompt
-    news_text = "\n".join([
+    news_text = "\\n".join([
         f"- {item['title']}: {item.get('snippet', '')} ({item.get('link', '')})"
         for item in state["news_items"]
     ])
     
-    prompt = f"""You are an expert AI/ML journalist writing for a technical audience. Here are the top news stories from the past week:
+    context_str = "past week"
+    if state.get("query"):
+        context_str = "specified period"
+    
+    prompt = f"""You are an expert AI/ML journalist writing for a technical audience. Here are the top news stories from the {context_str}:
 
 {news_text}
 
-Write a comprehensive, well-structured blog post about this week's AI news.
+Write a comprehensive, well-structured blog post about these AI news stories.
 
 FORMAT YOUR CONTENT using this structure:
 - Use "## Section Title" for main sections (Overview, Key Developments, Why This Matters, Looking Ahead)
@@ -212,9 +210,9 @@ Respond ONLY with the JSON object, no other text."""
             # Extract what we can from the response
             response_text = response.content if 'response' in dir() else ""
             state["generated_post"] = {
-                "title": f"AI Weekly Update - {datetime.date.today()}",
-                "summary": "This week brought exciting developments in AI and machine learning.",
-                "content": "## Overview\n\nSeveral major AI developments occurred this week.\n\n## Key Developments\n\n• **Model Releases**: New AI models were announced.\n• **Research**: Important research papers were published.\n• **Industry**: Major tech companies continued AI investments.",
+                "title": f"AI Update - {datetime.date.today()}",
+                "summary": "This period brought exciting developments in AI and machine learning.",
+                "content": "## Overview\\n\\nSeveral major AI developments occurred.\\n\\n## Key Developments\\n\\n• **Model Releases**: New AI models were announced.\\n\\n• **Research**: Important research papers were published.\\n\\n• **Industry**: Major tech companies continued AI investments.",
                 "tags": ["AI", "LLMs"],
                 "sources": [{"title": s["title"], "url": s["link"]} for s in state.get("news_items", [])[:2]],
                 "link": state.get("news_items", [{}])[0].get("link", "#")
@@ -244,14 +242,14 @@ def create_issue_node(state: AgentState) -> AgentState:
     
     if not GITHUB_TOKEN:
         print("⚠️  GITHUB_TOKEN not found. Skipping issue creation.")
-        print(f"📄 Generated post preview:\n{json.dumps(state['generated_post'], indent=2)}")
+        print(f"📄 Generated post preview:\\n{json.dumps(state['generated_post'], indent=2)}")
         return state
 
     post = state["generated_post"]
     today = datetime.date.today()
     
     issue_title = f"🤖 Weekly AI News: {post['title']}"
-    issue_body = f"""## 📰 AI News Agent - Weekly Update
+    issue_body = f"""## 📰 AI News Agent - Update
 
 **Generated on:** {today}
 
@@ -347,8 +345,16 @@ def build_graph() -> StateGraph:
 
 def main():
     """Run the AI News Agent."""
+    import argparse
+    
+    parser = argparse.ArgumentParser(description="AI News Agent")
+    parser.add_argument("--query", type=str, help="Custom search query (e.g. specific date range). Overrides default 'last week' search.")
+    args = parser.parse_args()
+
     print("=" * 50)
     print("🚀 Starting AI News Agent (LangGraph + Groq)")
+    if args.query:
+        print(f"🔍 Custom Query: {args.query}")
     print("=" * 50)
     
     # Build and run the graph
@@ -359,13 +365,14 @@ def main():
         "news_items": [],
         "generated_post": None,
         "issue_url": None,
-        "error": None
+        "error": None,
+        "query": args.query # Add query to initial state
     }
     
     # Execute the workflow
     final_state = graph.invoke(initial_state)
     
-    print("\n" + "=" * 50)
+    print("\\n" + "=" * 50)
     if final_state.get("error"):
         print(f"❌ Agent completed with error: {final_state['error']}")
     elif final_state.get("issue_url"):

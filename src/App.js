@@ -1,736 +1,657 @@
 import React, { useState, useEffect } from 'react';
-import { Github, Linkedin, Mail, ExternalLink, X } from 'lucide-react';
+import { Github, Linkedin, Mail, ExternalLink, X, ChevronRight, Menu, Download, Database } from 'lucide-react';
 import GraphBackground from './GraphBackground';
-import { FaFileAlt, FaNewspaper } from 'react-icons/fa';
+import { FaFileAlt, FaNewspaper, FaGraduationCap } from 'react-icons/fa';
 import blogPosts from './data/blogPosts.json';
 
 const Portfolio = () => {
   const [mounted, setMounted] = useState(false);
   const [selectedPost, setSelectedPost] = useState(null);
   const [showAllPosts, setShowAllPosts] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [expandedExp, setExpandedExp] = useState({});
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  const NavLink = ({ href, children }) => (
+    <a
+      href={href}
+      className="text-sm font-mono text-zinc-400 hover:text-primary-400 transition-colors relative group"
+      onClick={() => setMobileMenuOpen(false)}
+    >
+      {children}
+      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-500 transition-all group-hover:w-full"></span>
+    </a>
+  );
+
+  const SocialLink = ({ href, icon: Icon }) => (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="p-2 text-zinc-400 hover:text-white hover:bg-white/10 rounded-full transition-all"
+    >
+      <Icon size={18} />
+    </a>
+  );
+
   return (
-    <div className="min-h-screen bg-zinc-900 text-zinc-300">
+    <div className="min-h-screen bg-background text-zinc-300 font-sans selection:bg-primary-500/30">
       {/* Background Component */}
-      <GraphBackground />
+      <div className="fixed inset-0 z-0 opacity-40">
+        <GraphBackground />
+      </div>
 
       {/* Navigation */}
-      <nav className="fixed w-full bg-zinc-900/90 backdrop-blur-sm z-50 border-b border-zinc-800">
+      <nav className="fixed w-full glass-nav z-50">
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
-            <a href="#" className="text-xl font-bold text-zinc-100 font-mono hover:text-olive-500 transition-colors">
-              SS
+            <a href="#" className="text-xl font-bold font-display tracking-tighter text-white">
+              SS<span className="text-primary-500">.</span>
             </a>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#about" className="text-sm font-mono text-zinc-400 hover:text-olive-500 transition-colors">About</a>
-              <a href="#skills" className="text-sm font-mono text-zinc-400 hover:text-olive-500 transition-colors">Skills</a>
-              <a href="#experience" className="text-sm font-mono text-zinc-400 hover:text-olive-500 transition-colors">Experience</a>
-              <a href="#projects" className="text-sm font-mono text-zinc-400 hover:text-olive-500 transition-colors">Projects</a>
-              <a href="#publications" className="text-sm font-mono text-zinc-400 hover:text-olive-500 transition-colors">Publications</a>
-              <a href="#blog" className="text-sm font-mono text-zinc-400 hover:text-olive-500 transition-colors">Blog</a>
+              <NavLink href="#about">About</NavLink>
+              <NavLink href="#skills">Skills</NavLink>
+              <NavLink href="#experience">Experience</NavLink>
+              <NavLink href="#projects">Projects</NavLink>
+              <NavLink href="#publications">Publications</NavLink>
+              <NavLink href="#education">Education</NavLink>
+              <NavLink href="#blog">Blog</NavLink>
             </div>
 
-            <div className="flex space-x-4 pl-6 border-l border-zinc-700">
+            <div className="hidden md:flex items-center space-x-2 pl-6 border-l border-white/10">
+              <SocialLink href="https://github.com/ssinghai6" icon={Github} />
+              <SocialLink href="https://www.linkedin.com/in/singhai-sanshrit" icon={Linkedin} />
+              <SocialLink href="mailto:singhai.sanshrit@live.com" icon={Mail} />
+              <div className="h-4 w-px bg-white/10 mx-2"></div>
               <a
-                href="https://github.com/ssinghai6"
+                href="https://1drv.ms/b/c/a9a13d4ed9947e83/IQCb0Lq-Ps0mTqblBJKtjRlQAdX_NuTn9t1I0b--yiFD4Fg?e=N9Zt95"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-zinc-400 hover:text-olive-500 transition-colors"
+                className="flex items-center gap-2 px-3 py-1.5 bg-white/5 hover:bg-white/10 rounded-full text-xs font-mono text-zinc-300 transition-colors border border-white/5"
               >
-                <Github size={18} />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/singhai-sanshrit"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-zinc-400 hover:text-olive-500 transition-colors"
-              >
-                <Linkedin size={18} />
-              </a>
-              <a
-                href="mailto:singhai.sanshrit@live.com"
-                className="text-zinc-400 hover:text-olive-500 transition-colors"
-              >
-                <Mail size={18} />
-              </a>
-              <a
-                href="https://1drv.ms/b/c/a9a13d4ed9947e83/EXS8G8zoBs5CowVwcGx9Gm4BFTw8WEO0aCnzWgSyY5SuKw?e=Gowt1P"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-zinc-400 hover:text-olive-500 transition-colors"
-              >
-                <FaFileAlt size={18} />
+                <Download size={12} />
+                <span>Resume</span>
               </a>
             </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              className="md:hidden text-zinc-400"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              <Menu size={24} />
+            </button>
           </div>
         </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden glass-nav border-t border-white/5 p-4 space-y-4 flex flex-col items-center animate-slide-up">
+            <NavLink href="#about">About</NavLink>
+            <NavLink href="#skills">Skills</NavLink>
+            <NavLink href="#experience">Experience</NavLink>
+            <NavLink href="#projects">Projects</NavLink>
+            <NavLink href="#publications">Publications</NavLink>
+            <NavLink href="#education">Education</NavLink>
+            <NavLink href="#blog">Blog</NavLink>
+            <div className="flex space-x-4 pt-4 border-t border-white/10 w-full justify-center">
+              <SocialLink href="https://github.com/ssinghai6" icon={Github} />
+              <SocialLink href="https://www.linkedin.com/in/singhai-sanshrit" icon={Linkedin} />
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Main Content */}
-      <main className="container mx-auto px-6 pt-32 pb-20">
+      <main className="container mx-auto px-6 pt-32 pb-20 relative z-10">
+
         {/* Hero Section */}
-        <section id="about" className="mb-32 pt-16">
-          <h1 className="text-5xl font-bold text-zinc-100 mb-6">
-            Sanshrit Singhai
+        <section id="about" className="mb-32 pt-20 min-h-[60vh] flex flex-col justify-center animate-fade-in">
+          <div className="flex flex-wrap gap-2 mb-6">
+            <div className="inline-block px-3 py-1 text-xs font-mono text-primary-400 bg-primary-500/10 border border-primary-500/20 rounded-full w-fit">
+              Available for Opportunities
+            </div>
+            <div className="inline-block px-3 py-1 text-xs font-mono text-secondary-400 bg-secondary-500/10 border border-secondary-500/20 rounded-full w-fit">
+              H1B (Transfer Eligible)
+            </div>
+            <div className="inline-block px-3 py-1 text-xs font-mono text-zinc-400 bg-white/5 border border-white/10 rounded-full w-fit">
+              Atlanta, GA
+            </div>
+          </div>
+
+          <h1 className="text-6xl md:text-8xl font-bold text-white mb-6 font-display tracking-tight leading-tight">
+            Sanshrit <br />
+            <span className="text-gradient">Singhai</span>
           </h1>
-          <h2 className="text-2xl text-olive-500 font-mono mb-6">
-            Data Scientist & ML Engineer
+          <h2 className="text-2xl md:text-3xl text-zinc-400 font-light mb-8 max-w-2xl">
+            Data Scientist & ML Engineer specializing in <span className="text-secondary-400">GenAI</span>, <span className="text-accent-400">Optimization</span> & <span className="text-primary-400">Scalable Systems</span>.
           </h2>
-          <p className="max-w-xl text-lg leading-relaxed">
-            Data Scientist (3+ years, Georgia Tech MS) delivering ML, statistical analysis, optimization, and GenAI systems at production scale.
-            Strong in PyTorch, TensorFlow, OR-Tools, LangChain, BigQuery, and cloud-scale pipelines. Experienced in experimentation, scalable system design, and partnering with engineering/product teams to drive measurable business impact.
+          <p className="max-w-xl text-lg text-zinc-500 leading-relaxed mb-10">
+            <p className="max-w-xl text-lg text-zinc-500 leading-relaxed mb-10">I’m a data scientist and ML engineer with ~3 years of industry experience building production-grade machine learning, optimization, and GenAI systems. I hold an MS in Computational Science & Engineering (Machine Learning) from Georgia Tech and have also worked on National Science Foundation–funded research, which shaped my approach to rigorous system design and experimentation.
+              I enjoy turning ambiguous, real-world problems into scalable, high-impact ML systems—working at the intersection of data, engineering, and product with a strong focus on ownership, clarity, and measurable outcomes.</p>
           </p>
+
+          <div className="flex gap-4">
+            <a href="#projects" className="px-6 py-3 bg-white text-black font-medium rounded-lg hover:bg-zinc-200 transition-colors">
+              View Work
+            </a>
+            <a href="mailto:singhai.sanshrit@live.com" className="px-6 py-3 glass-panel text-white font-medium rounded-lg hover:bg-white/10 transition-colors">
+              Contact Me
+            </a>
+          </div>
         </section>
 
         {/* Skills */}
         <section id="skills" className="mb-32 scroll-mt-24">
-          <h3 className="text-olive-500 font-mono text-lg mb-8">Skills & Tools</h3>
+          <h3 className="flex items-center text-primary-400 font-mono text-lg mb-8">
+            Technical Arsenal
+            <span className="h-px bg-zinc-800 flex-grow ml-4"></span>
+          </h3>
+
           <div className="grid md:grid-cols-2 gap-8">
-            <div>
-              <h4 className="text-zinc-100 mb-4">ML & GenAI</h4>
-              <p className="text-zinc-400 font-mono">
-                Python • PyTorch • TensorFlow • Scikit-learn
-                <br />
-                LLMs • LangChain • LangGraph • OpenCV • FAISS
-              </p>
+            <div className="glass-panel p-8 rounded-2xl relative overflow-hidden group">
+              <div className="absolute top-0 right-0 p-32 bg-primary-500/10 blur-[100px] rounded-full -mr-16 -mt-16 group-hover:bg-primary-500/20 transition-all duration-700"></div>
+              <h4 className="text-2xl text-white mb-6 relative flex items-center gap-2">
+                <div className="h-2 w-2 rounded-full bg-primary-500"></div> ML & GenAI
+              </h4>
+              <div className="flex flex-wrap gap-2 relative">
+                {['Python', 'PyTorch', 'TensorFlow', 'Scikit-learn', 'LLMs', 'LangChain', 'LangGraph', 'OpenCV', 'FAISS', 'Computer Vision'].map((skill) => (
+                  <span key={skill} className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm text-zinc-300 hover:border-primary-500/50 hover:text-primary-300 transition-colors cursor-default">
+                    {skill}
+                  </span>
+                ))}
+              </div>
             </div>
-            <div>
-              <h4 className="text-zinc-100 mb-4">Data, Cloud & Optimization</h4>
-              <p className="text-zinc-400 font-mono">
-                PySpark • Kafka • Azure • AWS • BigQuery • Redis
-                <br />
-                OR-Tools • Gurobi • TigerGraph • SQL • MATLAB
-              </p>
+
+            <div className="glass-panel p-8 rounded-2xl relative overflow-hidden group">
+              <div className="absolute top-0 right-0 p-32 bg-secondary-500/10 blur-[100px] rounded-full -mr-16 -mt-16 group-hover:bg-secondary-500/20 transition-all duration-700"></div>
+              <h4 className="text-2xl text-white mb-6 relative flex items-center gap-2">
+                <div className="h-2 w-2 rounded-full bg-secondary-500"></div> Data & Cloud
+              </h4>
+              <div className="flex flex-wrap gap-2 relative">
+                {['PySpark', 'Kafka', 'Azure', 'AWS', 'BigQuery', 'Redis', 'Docker', 'Git', 'FastAPI'].map((skill) => (
+                  <span key={skill} className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm text-zinc-300 hover:border-secondary-500/50 hover:text-secondary-300 transition-colors cursor-default">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="glass-panel p-8 rounded-2xl relative overflow-hidden group md:col-span-2">
+              <div className="absolute top-0 right-0 p-32 bg-accent-500/10 blur-[100px] rounded-full -mr-16 -mt-16 group-hover:bg-accent-500/20 transition-all duration-700"></div>
+              <h4 className="text-2xl text-white mb-6 relative flex items-center gap-2">
+                <div className="h-2 w-2 rounded-full bg-accent-500"></div> Optimization & Analytics
+              </h4>
+              <div className="flex flex-wrap gap-2 relative">
+                {['OR-Tools', 'Gurobi', 'TigerGraph', 'GSQL', 'SQL', 'Tableau', 'Power BI', 'MATLAB'].map((skill) => (
+                  <span key={skill} className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm text-zinc-300 hover:border-accent-500/50 hover:text-accent-300 transition-colors cursor-default">
+                    {skill}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </section>
 
         {/* Experience Section */}
         <section id="experience" className="mb-32 scroll-mt-24">
-          <h3 className="text-olive-500 font-mono text-lg mb-8">Experience</h3>
-          <div className="space-y-12">
-            <div className="group">
-              <div className="flex items-center mb-4">
-                <div className="w-24 text-zinc-500 font-mono">2023 — Present</div>
-                <div>
-                  <h4 className="text-zinc-100">Data Scientist <a
-                    href="https://www.enru.io/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-olive-500 hover:text-olive-400 transition-colors"
-                  ><strong>@ ENRU</strong>
+          <h3 className="flex items-center text-primary-400 font-mono text-lg mb-12">
+            Professional Experience
+            <span className="h-px bg-zinc-800 flex-grow ml-4"></span>
+          </h3>
 
-                  </a>
+          <div className="space-y-12 border-l border-zinc-800 ml-4 md:ml-0 md:border-none">
+            {/* ENRU */}
+            <div className="relative pl-8 md:pl-0 group">
+              <div className="md:grid md:grid-cols-4 md:gap-8">
+                <div className="mb-4 md:mb-0">
+                  <span className="font-mono text-sm text-zinc-500 block mb-1">Jun 2023 — Present</span>
+                  <span className="text-xs text-zinc-600 font-mono">Atlanta, GA</span>
+                  <div className="mt-1 md:hidden h-2 w-2 rounded-full bg-primary-500 absolute -left-[5px] top-1.5 ring-4 ring-background"></div>
+                </div>
+                <div className="md:col-span-3">
+                  <h4 className="text-xl text-white font-medium flex items-center gap-2 mb-2">
+                    Data Scientist <a href="https://www.enru.io/" target="_blank" rel="noopener noreferrer" className="text-primary-400 hover:text-primary-300 transition-colors">@ ENRU</a>
                   </h4>
-                  <p className="text-zinc-400">Logistics Optimization & Analytics</p>
+                  <p className="text-sm text-zinc-400 mb-2">ML/AI & Optimization – Developed models improving cost estimation by 40% and routing revenue by 25%.</p>
+                  <button onClick={() => setExpandedExp(prev => ({ ...prev, enru: !prev.enru }))} className="text-primary-400 hover:underline mb-2">
+                    {expandedExp.enru ? 'Hide' : 'Show'} details
+                  </button>
+                  {expandedExp.enru && (
+                    <ul className="list-disc leading-relaxed space-y-3 text-zinc-400 pl-4 marker:text-primary-500">
+                      <li>Developed ML & DL models (TensorFlow/PyTorch, ensembles) for multi-label classification and accessorial cost prediction, improving cost estimation accuracy by 40% for new locations.</li>
+                      <li>Built a RAG-based GenAI chatbot (LangChain & FAISS) to enable natural-language planning queries, reducing analyst lookup time by 60%.</li>
+                      <li>Engineered a profit-maximizing integer-programming optimizer (OR-Tools, Gurobi) that improved routing decisions and increased revenue per truck by 25%, while achieving a 10× speed improvement over legacy heuristics.</li>
+                      <li>Designed a real-time Azure EventHub pipeline that streams 3PL freight data and supports downstream ML systems.</li>
+                      <li>Built and optimized GSQL graph queries for journey verification and truck assignment, enabling robust logistics decision-making.</li>
+                    </ul>
+                  )}
                 </div>
-              </div>
-              <div className="pl-24">
-                <ul className="list-disc space-y-2 text-zinc-400">
-                  <li><strong>ML & DL models - </strong>Developed models (TensorFlow/PyTorch, ensembles) for multi-label classification and accessorial cost prediction, improving cost estimation accuracy by 40% for new locations.</li>
-                  <li><strong>RAG-based GenAI chatbot - </strong>Built a chatbot (LangChain & FAISS) to enable natural-language planning queries, reducing analyst lookup time by 60%.</li>
-                  <li><strong>Integer-programming optimizer - </strong>Engineered a profit-maximizing optimizer (OR-Tools, Gurobi) that improved routing decisions and increased revenue per truck by 25%, while achieving a 10× speed improvement.</li>
-                  <li><strong>Real-time Pipeline - </strong>Designed a pipeline on Azure EventHub that streams 3PL freight data and supports downstream ML systems.</li>
-                  <li><strong>Graph Queries - </strong>Built and optimized GSQL graph queries for journey verification and truck assignment, enabling robust logistics decision-making.</li>
-                </ul>
               </div>
             </div>
 
-            <div className="group">
-              <div className="flex items-center mb-4">
-                <div className="w-24 text-zinc-500 font-mono">2022 — 2023</div>
-                <div>
-                  <h4 className="text-zinc-100">Research Assistant <a
-                    href="https://www.gatech.edu"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-olive-500 hover:text-olive-400 transition-colors"
-                  ><strong>@ Georgia Tech</strong>
-
-                  </a></h4>
-                  <p className="text-zinc-400">NSF Funded Research</p>
+            {/* Georgia Tech */}
+            <div className="relative pl-8 md:pl-0 group">
+              <div className="md:grid md:grid-cols-4 md:gap-8">
+                <div className="mb-4 md:mb-0">
+                  <span className="font-mono text-sm text-zinc-500 block mb-1">Aug 2022 — May 2023</span>
+                  <span className="text-xs text-zinc-600 font-mono">Atlanta, GA</span>
+                  <div className="mt-1 md:hidden h-2 w-2 rounded-full bg-secondary-500 absolute -left-[5px] top-1.5 ring-4 ring-background"></div>
                 </div>
-              </div>
-              <div className="pl-24">
-                <ul className="list-disc space-y-2 text-zinc-400">
-                  <li>Proposed and refined an LSTM-RNN framework for multivariate time series forecasting to predict mechanical properties in the excavating domain, achieving a 30% result improvement.</li>
-                  <li>Developed an ANN surrogate for FEM simulations, reducing computation time 20x.</li>
-                </ul>
+                <div className="md:col-span-3">
+                  <h4 className="text-xl text-white font-medium flex items-center gap-2 mb-2">
+                    Graduate Research Assistant <a href="https://www.gatech.edu/" target="_blank" rel="noopener noreferrer" className="text-secondary-400 hover:text-secondary-300 transition-colors">@ Georgia Tech</a>
+                  </h4>
+                  <p className="text-zinc-500 mb-6 font-mono text-sm">NSF Funded Research</p>
+                  <ul className="list-disc leading-relaxed space-y-3 text-zinc-400 pl-4 marker:text-secondary-500">
+                    <li>Proposed and refined an LSTM-RNN framework for multivariate time series forecasting to predict mechanical properties in the excavating domain, achieving a 30% result improvement.</li>
+                    <li>Developed an ANN surrogate for FEM simulations, reducing computation time 20x.</li>
+                  </ul>
+                </div>
               </div>
             </div>
 
-            <div className="group">
-              <div className="flex items-center mb-4">
-                <div className="w-24 text-zinc-500 font-mono">Summer 2022</div>
-                <div>
-                  <h4 className="text-zinc-100">Machine Learning Intern <a
-                    href="https://www.itascacg.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-olive-500 hover:text-olive-400 transition-colors"
-                  ><strong>@ Itasca Consulting Group</strong>
-
-                  </a></h4>
-                  <p className="text-zinc-400">Deep Learning Model for Simulating Geomechanics Problem</p>
+            {/* Itasca */}
+            <div className="relative pl-8 md:pl-0 group">
+              <div className="md:grid md:grid-cols-4 md:gap-8">
+                <div className="mb-4 md:mb-0">
+                  <span className="font-mono text-sm text-zinc-500 block mb-1">May 2022 — Aug 2022</span>
+                  <span className="text-xs text-zinc-600 font-mono">Minneapolis, MN</span>
+                  <div className="mt-1 md:hidden h-2 w-2 rounded-full bg-zinc-600 absolute -left-[5px] top-1.5 ring-4 ring-background"></div>
                 </div>
-              </div>
-              <div className="pl-24">
-                <ul className="list-disc space-y-2 text-zinc-400">
-                  <li>Developed a deep learning tool using neural networks to predict velocity fields, bearing capacity, and failure depths for 230K cases, achieving an R2 score of 0.91.</li>
-                  <li>Built an advanced mesh generation tool for Rhino Griddle based on computational geometry for efficient meshing.</li>
-                </ul>
+                <div className="md:col-span-3">
+                  <h4 className="text-xl text-white font-medium flex items-center gap-2 mb-2">
+                    Machine Learning Intern <a href="https://www.itascainternational.com/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-zinc-200 transition-colors">@ Itasca Consulting</a>
+                  </h4>
+                  <ul className="list-disc leading-relaxed space-y-3 text-zinc-400 pl-4 marker:text-zinc-500">
+                    <li>Developed a deep learning tool using neural networks to predict velocity fields, bearing capacity, and failure depths for 230K cases, achieving an R2 score of 0.91.</li>
+                    <li>Built an advanced mesh generation tool for Rhino Griddle based on computational geometry for efficient meshing.</li>
+                  </ul>
+                </div>
               </div>
             </div>
 
-            <div className="group">
-              <div className="flex items-center mb-4">
-                <div className="w-24 text-zinc-500 font-mono">2019 - 2021</div>
-                <div>
-                  <h4 className="text-zinc-100">Research Associate <a
-                    href="https://snu.edu.in/home/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-olive-500 hover:text-olive-400 transition-colors"
-                  ><strong>@ Shiv Nadar University</strong>
-
-                  </a></h4>
-                  <p className="text-zinc-400">Stochastic Analysis and modeling random field</p>
+            {/* Shiv Nadar */}
+            <div className="relative pl-8 md:pl-0 group">
+              <div className="md:grid md:grid-cols-4 md:gap-8">
+                <div className="mb-4 md:mb-0">
+                  <span className="font-mono text-sm text-zinc-500 block mb-1">Jan 2020 — May 2021</span>
+                  <span className="text-xs text-zinc-600 font-mono">India</span>
+                  <div className="mt-1 md:hidden h-2 w-2 rounded-full bg-zinc-600 absolute -left-[5px] top-1.5 ring-4 ring-background"></div>
+                </div>
+                <div className="md:col-span-3">
+                  <h4 className="text-xl text-white font-medium flex items-center gap-2 mb-2">
+                    Research Associate <a href="https://snu.edu.in/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-zinc-200 transition-colors">@ Shiv Nadar University</a>
+                  </h4>
+                  <ul className="list-disc leading-relaxed space-y-3 text-zinc-400 pl-4 marker:text-zinc-500">
+                    <li>Modeled spatial variability of soil elastic modulus using random field theory & stochastic simulations.</li>
+                    <li>Ran Monte Carlo simulations and FEA workflows to analyze vertical stress and settlement behavior under varying conditions.</li>
+                  </ul>
                 </div>
               </div>
-              <div className="pl-24">
-                <ul className="list-disc space-y-2 text-zinc-400">
-                  <li>Modeled spatial variability of soil elastic modulus using random field theory & stochastic simulations.</li>
-                  <li>Ran Monte Carlo simulations and FEA workflows to analyze vertical stress and settlement behavior under varying conditions.</li>
-                </ul>
-              </div>
             </div>
+
           </div>
         </section>
 
         {/* Featured Projects */}
         <section id="projects" className="mb-32 scroll-mt-24">
-          <h3 className="text-olive-500 font-mono text-lg mb-8">Featured Projects</h3>
-          <div className="grid gap-12">
-            <div className="group">
-              <div className="flex justify-between items-start mb-4">
-                <div>
-                  <h4 className="text-zinc-100 group-hover:text-olive-500 transition-colors">
-                    Document Chatbot
-                  </h4>
-                  <p className="text-zinc-400">RAG Implementation with Llama 3.2</p>
+          <h3 className="flex items-center text-primary-400 font-mono text-lg mb-12">
+            Select Projects
+            <span className="h-px bg-zinc-800 flex-grow ml-4"></span>
+          </h3>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* PROJ 1 */}
+            <div className="glass-panel p-8 rounded-2xl hover:border-primary-500/30 transition-all duration-300 group flex flex-col">
+              <div className="flex justify-between items-start mb-6">
+                <div className="p-3 bg-primary-500/10 rounded-lg text-primary-400">
+                  <FaFileAlt size={24} />
                 </div>
-                <div className="flex space-x-4">
-                  <a
-                    href="https://github.com/ssinghai6/DocBot"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-zinc-400 hover:text-olive-500 transition-colors"
-                  >
-                    <Github size={20} />
-                  </a>
-                  <a
-                    href="https://docbot-llm.streamlit.app"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-zinc-400 hover:text-olive-500 transition-colors"
-                  >
-                    <ExternalLink size={20} />
-                  </a>
+                <div className="flex gap-4">
+                  <a href="https://github.com/ssinghai6/DocBot" className="text-zinc-400 hover:text-primary-400 transition-colors"><Github size={20} /></a>
+                  <a href="https://docbot-llm.streamlit.app" className="text-zinc-400 hover:text-primary-400 transition-colors"><ExternalLink size={20} /></a>
                 </div>
               </div>
-              <ul className="list-disc space-y-2 text-zinc-400 pl-4">
+              <h4 className="text-xl font-bold text-white mb-2 group-hover:text-primary-400 transition-colors">Document Chatbot (RAG)</h4>
+              <ul className="list-disc space-y-2 text-zinc-400 flex-grow pl-4 text-sm mb-6 marker:text-primary-500">
                 <li>Built a RAG based document QA chatbot using FAISS, LangChain and embeddings for semantic retrieval and context-awareness.</li>
                 <li>Developed a Streamlit UI with PDF injection, caching, semantic search, & conversational memory for fast interactive Q&A.</li>
               </ul>
+              <div className="flex gap-3 text-xs font-mono text-primary-300/80">
+                <span>Llama 3.2</span>
+                <span>LangChain</span>
+                <span>Streamlit</span>
+              </div>
             </div>
 
-            <div className="group">
-              <div className="flex justify-between items-start mb-4">
-                <div>
-                  <h4 className="text-zinc-100 group-hover:text-olive-500 transition-colors">
-                    ML Stress Field Predictor
-                  </h4>
-                  <p className="text-zinc-400">Neural Network Implementation</p>
+            {/* PROJ 2 */}
+            <div className="glass-panel p-8 rounded-2xl hover:border-secondary-500/30 transition-all duration-300 group flex flex-col">
+              <div className="flex justify-between items-start mb-6">
+                <div className="p-3 bg-secondary-500/10 rounded-lg text-secondary-400">
+                  <GraphBackground className="w-6 h-6" />
+                  <span className="font-bold">Fraud</span>
                 </div>
-                <div className="flex space-x-4">
-                  <a
-                    href="https://github.com/ssinghai6/Intelligent-Tunneling-Machine-Learning-based-Prediction-"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-zinc-400 hover:text-olive-500 transition-colors"
-                  >
-                    <Github size={20} />
-                  </a>
-                  <a
-                    href="https://ce.gatech.edu/news/researchers-receive-17-million-grant-build-robot-subsurface-soil-exploration"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-zinc-400 hover:text-olive-500 transition-colors"
-                  >
-                    <ExternalLink size={20} />
-                  </a>
+                <div className="flex gap-4">
+                  <a href="https://github.com/ssinghai6/Fraud_transactions" className="text-zinc-400 hover:text-secondary-400 transition-colors"><Github size={20} /></a>
+                  <a href="https://github.com/ssinghai6/Fraud_transactions" className="text-zinc-400 hover:text-secondary-400 transition-colors"><ExternalLink size={20} /></a>
                 </div>
               </div>
-              <p className="text-zinc-400">
-                Deep Learning Frameworks for bypassing FEM Simulation and predicting the stress responses based on mechanical properties of soil domain
-              </p>
-            </div>
-
-            <div className="group">
-              <div className="flex justify-between items-start mb-4">
-                <div>
-                  <h4 className="text-zinc-100 group-hover:text-olive-500 transition-colors">
-                    Credit Card Fraud Detection (ML Pipeline)
-                  </h4>
-                  <p className="text-zinc-400">XGBoost and Random Forest Implementation</p>
-                </div>
-                <div className="flex space-x-4">
-                  <a
-                    href="https://github.com/ssinghai6/Fraud_transactions"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-zinc-400 hover:text-olive-500 transition-colors"
-                  >
-                    <Github size={20} />
-                  </a>
-                  <a
-                    href="https://github.com/ssinghai6/Fraud_transactions"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-zinc-400 hover:text-olive-500 transition-colors"
-                  >
-                    <ExternalLink size={20} />
-                  </a>
-                </div>
-              </div>
-              <ul className="list-disc space-y-2 text-zinc-400 pl-4">
+              <h4 className="text-xl font-bold text-white mb-2 group-hover:text-secondary-400 transition-colors">Credit Card Fraud Pipeline</h4>
+              <ul className="list-disc space-y-2 text-zinc-400 flex-grow pl-4 text-sm mb-6 marker:text-secondary-500">
                 <li>Trained XGBoost and Random Forest models on imbalanced transaction data for fraud classification.</li>
                 <li>Engineered fraud-specific features (e.g., reversal detection, multi-swipe patterns) and handled class imbalance with SMOTE.</li>
               </ul>
+              <div className="flex gap-3 text-xs font-mono text-secondary-300/80">
+                <span>XGBoost</span>
+                <span>Random Forest</span>
+                <span>SMOTE</span>
+              </div>
             </div>
 
-            <div className="group">
-              <div className="flex justify-between items-start mb-4">
-                <div>
-                  <h4 className="text-zinc-100 group-hover:text-olive-500 transition-colors">
-                    Unveiling Patterns and Insights in Chicago's Criminal Activity through Advanced Data Analysis
-                  </h4>
-                  <p className="text-zinc-400">XGBoost Implementation and Dataset mining by using PySpark</p>
+            {/* PROJ 3 - ML Stress Field */}
+            <div className="glass-panel p-8 rounded-2xl hover:border-accent-500/30 transition-all duration-300 group flex flex-col">
+              <div className="flex justify-between items-start mb-6">
+                <div className="p-3 bg-accent-500/10 rounded-lg text-accent-400">
+                  <GraphBackground className="w-6 h-6" />
                 </div>
-                <div className="flex space-x-4">
-                  <a
-                    href="https://github.com/ssinghai6/CSE6242-DVA-Team007"
-                    className="text-zinc-400 hover:text-olive-500 transition-colors"
-                  >
-                    <Github size={20} />
-                  </a>
-                  <a
-                    href="https://public.tableau.com/app/profile/sanshrit.singhai8506/viz/Final_cse_visualization/Dashboard1"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-zinc-400 hover:text-olive-500 transition-colors"
-                  >
-                    <ExternalLink size={20} />
-                  </a>
+                <div className="flex gap-4">
+                  <a href="https://github.com/ssinghai6/Intelligent-Tunneling-Machine-Learning-based-Prediction-" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-accent-400 transition-colors"><Github size={20} /></a>
+                  <a href="https://ce.gatech.edu/news/researchers-receive-17-million-grant-build-robot-subsurface-soil-exploration" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-accent-400 transition-colors"><ExternalLink size={20} /></a>
                 </div>
               </div>
-              <ul className="list-disc space-y-2 text-zinc-400 pl-4">
+              <h4 className="text-xl font-bold text-white mb-2 group-hover:text-accent-400 transition-colors">ML Stress Field Predictor</h4>
+              <ul className="list-disc space-y-2 text-zinc-400 flex-grow pl-4 text-sm mb-6 marker:text-accent-500">
+                <li>Replaced FEM simulations with deep learning models (Autoencoders, ANN) to predict stress distribution in geotechnical domains.</li>
+                <li>Achieved significant computational speedup while maintaining high prediction accuracy.</li>
+              </ul>
+              <div className="flex gap-3 text-xs font-mono text-accent-300/80">
+                <span>TensorFlow</span>
+                <span>Autoencoders</span>
+                <span>ANN</span>
+              </div>
+            </div>
+
+            {/* PROJ 4 - DVA */}
+            <div className="glass-panel p-8 rounded-2xl hover:border-primary-500/30 transition-all duration-300 group flex flex-col">
+              <div className="flex justify-between items-start mb-6">
+                <div className="p-3 bg-primary-500/10 rounded-lg text-primary-400">
+                  <Database size={24} />
+                </div>
+                <div className="flex gap-4">
+                  <a href="https://github.com/ssinghai6/CSE6242-DVA-Team007" className="text-zinc-400 hover:text-primary-400 transition-colors"><Github size={20} /></a>
+                  <a href="https://public.tableau.com/app/profile/sanshrit.singhai8506/viz/Final_cse_visualization/Dashboard1" className="text-zinc-400 hover:text-primary-400 transition-colors"><ExternalLink size={20} /></a>
+                </div>
+              </div>
+              <h4 className="text-xl font-bold text-white mb-2 group-hover:text-primary-400 transition-colors">Chicago Crime Analytics</h4>
+              <ul className="list-disc space-y-2 text-zinc-400 flex-grow pl-4 text-sm mb-6 marker:text-primary-500">
                 <li>Analyzed 7M+ crime records using PySpark on AWS Data Lake; performed large-scale ETL and feature engineering.</li>
                 <li>Built and deployed an XGBoost model as a Flask API to predict crime risk by ZIP code.</li>
               </ul>
+              <div className="flex gap-3 text-xs font-mono text-primary-300/80">
+                <span>PySpark</span>
+                <span>AWS EMR</span>
+                <span>Tableau</span>
+                <span>Flask API</span>
+              </div>
             </div>
           </div>
         </section>
 
         {/* Publications */}
         <section id="publications" className="mb-32 scroll-mt-24">
-          <h3 className="text-olive-500 font-mono text-lg mb-8">Publications</h3>
-          <div className="space-y-8">
-            <div className="group">
-              <div className="flex justify-between items-start">
+          <h3 className="flex items-center text-primary-400 font-mono text-lg mb-12">
+            Publications
+            <span className="h-px bg-zinc-800 flex-grow ml-4"></span>
+          </h3>
+          <div className="space-y-6">
+            <div className="glass-panel p-6 rounded-xl hover:bg-white/5 transition-colors group">
+              <div className="flex justify-between items-start gap-4">
                 <div>
-                  <h4 className="text-zinc-100 group-hover:text-olive-500 transition-colors">
-                    Deep Learning models for subterranean navigation and soil characterization
+                  <h4 className="text-lg text-white font-medium group-hover:text-primary-400 transition-colors">
+                    Deep Learning Models for Subterranean Navigation and Soil Characterization
                   </h4>
-                  <p className="text-zinc-400">EMI 2023 at Georgia Tech | Atlanta, GA</p>
+                  <p className="text-zinc-500 text-sm mt-1">EMI 2023 at Georgia Tech | Atlanta, GA</p>
                 </div>
-                <a
-                  href="https://www.emi-conference.org/sites/emi-conference.org/2023/files/inline-files/ASCE-EMI2023-Program-web.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-zinc-400 hover:text-olive-500 transition-colors"
-                >
-                  <ExternalLink size={20} />
-                </a>
+                <a href="https://www.emi-conference.org/sites/emi-conference.org/2023/files/inline-files/ASCE-EMI2023-Program-web.pdf" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-primary-400 transition-colors"><ExternalLink size={18} /></a>
               </div>
             </div>
 
-            <div className="group">
-              <div className="flex justify-between items-start">
+            <div className="glass-panel p-6 rounded-xl hover:bg-white/5 transition-colors group">
+              <div className="flex justify-between items-start gap-4">
                 <div>
-                  <h4 className="text-zinc-100 group-hover:text-olive-500 transition-colors">
+                  <h4 className="text-lg text-white font-medium group-hover:text-primary-400 transition-colors">
                     Insights on 2D versus 3D Modeling of Strip Loading on Spatially Varying Random Soil Domain
                   </h4>
-                  <p className="text-zinc-400">Geo-Congress 2023 | Los Angeles, CA - USA</p>
+                  <p className="text-zinc-500 text-sm mt-1">Geo-Congress 2023 | Los Angeles, CA</p>
                 </div>
-                <a
-                  href="https://ascelibrary.org/doi/abs/10.1061/9780784484692.014"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-zinc-400 hover:text-olive-500 transition-colors"
-                >
-                  <ExternalLink size={20} />
-                </a>
+                <a href="https://ascelibrary.org/doi/abs/10.1061/9780784484692.014" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-primary-400 transition-colors"><ExternalLink size={18} /></a>
               </div>
             </div>
 
-            <div className="group">
-              <div className="flex justify-between items-start">
+            <div className="glass-panel p-6 rounded-xl hover:bg-white/5 transition-colors group">
+              <div className="flex justify-between items-start gap-4">
                 <div>
-                  <h4 className="text-zinc-100 group-hover:text-olive-500 transition-colors">
+                  <h4 className="text-lg text-white font-medium group-hover:text-primary-400 transition-colors">
                     Uncertainties in Vertical Stress Distribution in Spatially Varying Random Elastic Half Space
                   </h4>
-                  <p className="text-zinc-400">International Journal of Geomechanics, ASCE</p>
+                  <p className="text-zinc-500 text-sm mt-1">International Journal of Geomechanics, ASCE</p>
                 </div>
-                <a
-                  href="https://ascelibrary.org/doi/10.1061/%28ASCE%29GM.1943-5622.0002332"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-zinc-400 hover:text-olive-500 transition-colors"
-                >
-                  <ExternalLink size={20} />
-                </a>
+                <a href="https://ascelibrary.org/doi/10.1061/%28ASCE%29GM.1943-5622.0002332" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-primary-400 transition-colors"><ExternalLink size={18} /></a>
               </div>
             </div>
 
-            <div className="group">
-              <div className="flex justify-between items-start">
+            <div className="glass-panel p-6 rounded-xl hover:bg-white/5 transition-colors group">
+              <div className="flex justify-between items-start gap-4">
                 <div>
-                  <h4 className="text-zinc-100 group-hover:text-olive-500 transition-colors">
+                  <h4 className="text-lg text-white font-medium group-hover:text-primary-400 transition-colors">
                     Some Observations on Numerical Analysis of Lateral Response of Caisson Foundation
                   </h4>
-                  <p className="text-zinc-400">ICGRE'22 - 7th International Conference on Geotechnical Research and Engineering (ICGRE'22)</p>
+                  <p className="text-zinc-500 text-sm mt-1">ICGRE'22 - 7th International Conference on Geotechnical Research</p>
                 </div>
-                <a
-                  href="https://www.researchgate.net/publication/360283011_Some_Observations_on_Numerical_Analysis_of_Lateral_Response_of_Caisson_Foundation"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-zinc-400 hover:text-olive-500 transition-colors"
-                >
-                  <ExternalLink size={20} />
-                </a>
+                <a href="https://www.researchgate.net/publication/360283011_Some_Observations_on_Numerical_Analysis_of_Lateral_Response_of_Caisson_Foundation" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-primary-400 transition-colors"><ExternalLink size={18} /></a>
               </div>
             </div>
 
-            <div className="group">
-              <div className="flex justify-between items-start">
+            <div className="glass-panel p-6 rounded-xl hover:bg-white/5 transition-colors group">
+              <div className="flex justify-between items-start gap-4">
                 <div>
-                  <h4 className="text-zinc-100 group-hover:text-olive-500 transition-colors">
-                    Effect of Soil Spatial Variability on Lateral Response of Well Foundation Embedded in Linear Elastic Soil
+                  <h4 className="text-lg text-white font-medium group-hover:text-primary-400 transition-colors">
+                    Effect of Soil Spatial Variability on Lateral Response of Well Foundation
                   </h4>
-                  <p className="text-zinc-400">Conference: IACMAG Symposium2019 · Mar 1, 2019</p>
+                  <p className="text-zinc-500 text-sm mt-1">IACMAG Symposium 2019</p>
                 </div>
-                <a
-                  href="https://link.springer.com/chapter/10.1007/978-981-15-0886-8_35"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-zinc-400 hover:text-olive-500 transition-colors"
-                >
-                  <ExternalLink size={20} />
-                </a>
+                <a href="https://link.springer.com/chapter/10.1007/978-981-15-0886-8_35" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-primary-400 transition-colors"><ExternalLink size={18} /></a>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Education Section (New) */}
+        <section id="education" className="mb-32 scroll-mt-24">
+          <h3 className="flex items-center text-primary-400 font-mono text-lg mb-12">
+            Education
+            <span className="h-px bg-zinc-800 flex-grow ml-4"></span>
+          </h3>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="glass-panel p-8 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+              <div className="flex justify-between items-start mb-4">
+                <h4 className="text-xl font-bold text-white"><a href="https://www.gatech.edu/" target="_blank" rel="noopener noreferrer" className="hover:text-primary-400 transition-colors">Georgia Institute of Technology</a></h4>
+                <FaGraduationCap className="text-secondary-400" size={24} />
+              </div>
+              <p className="text-white font-medium mb-1">MS, Computational Science & Engineering</p>
+              <p className="text-zinc-500 mb-4 font-mono text-sm">May 2023 | Atlanta, GA</p>
+
+              <div className="mb-4">
+                <span className="text-xs font-mono text-primary-400 bg-primary-500/10 px-2 py-1 rounded">GPA: 3.9/4.0</span>
+              </div>
+
+              <p className="text-sm text-zinc-400">
+                <strong>Focus:</strong> Machine Learning, Computer Vision, AI, Data Analytics
+              </p>
+            </div>
+
+            <div className="glass-panel p-8 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+              <div className="flex justify-between items-start mb-4">
+                <h4 className="text-xl font-bold text-white"><a href="https://snu.edu.in/" target="_blank" rel="noopener noreferrer" className="hover:text-zinc-400 transition-colors">Shiv Nadar University</a></h4>
+                <FaGraduationCap className="text-zinc-600" size={24} />
+              </div>
+              <p className="text-white font-medium mb-1">B.Tech, Civil Engineering</p>
+              <p className="text-zinc-500 mb-4 font-mono text-sm">Jun 2020 | India</p>
+
+              <div className="mb-4">
+                <span className="text-xs font-mono text-zinc-500 bg-white/5 px-2 py-1 rounded">GPA: 8.6/10</span>
+              </div>
+
+              <p className="text-sm text-zinc-400">
+                <strong>Focus:</strong> Computational Mechanics
+              </p>
             </div>
           </div>
         </section>
 
         {/* Blog Section */}
         <section id="blog" className="mb-32 scroll-mt-24">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-3">
-              <button
-                onClick={() => setShowAllPosts(true)}
-                className="text-olive-500 font-mono text-lg hover:underline cursor-pointer bg-transparent border-none flex items-center gap-2"
-              >
-                AI/ML Insights
-                {blogPosts.length > 2 && (
-                  <span className="text-xs text-zinc-500">({blogPosts.length} posts)</span>
-                )}
-              </button>
-              <span className="px-2 py-1 text-xs font-mono bg-olive-500/20 text-olive-500 rounded-full border border-olive-500/30">
-                🤖 Auto-curated
-              </span>
-            </div>
-            {blogPosts.length > 2 && (
-              <button
-                onClick={() => setShowAllPosts(true)}
-                className="text-olive-500 text-sm font-mono hover:underline cursor-pointer bg-transparent border-none"
-              >
-                View All →
-              </button>
-            )}
+          <h3 className="flex items-center text-primary-400 font-mono text-lg mb-12">
+            Latest Insights
+            <span className="h-px bg-zinc-800 flex-grow ml-4"></span>
+          </h3>
+
+          <div className="flex items-center justify-between mb-8">
+            <p className="text-zinc-400">Weekly updates on AI, Data Science, and Optimization.</p>
+            <button
+              onClick={() => setShowAllPosts(true)}
+              className="text-primary-400 text-sm font-mono hover:text-primary-300 transition-colors flex items-center gap-2 group"
+            >
+              View Archive <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
+            </button>
           </div>
-          <p className="text-zinc-400 mb-8">Weekly updates on what's happening in AI, Data Science, and Optimization.</p>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {blogPosts.slice(0, 2).map((post) => (
-              <div key={post.id} className="bg-zinc-800/50 p-6 rounded-lg border border-zinc-700 hover:border-olive-500 hover:shadow-lg hover:shadow-olive-500/10 transition-all duration-300 group">
-                <div className="flex justify-between items-start mb-4">
-                  <div className="flex items-center text-olive-500 mb-2">
-                    <FaNewspaper className="mr-2" />
-                    <span className="text-xs font-mono">{post.date}</span>
-                  </div>
-                  <div className="flex gap-2">
-                    {post.tags.map(tag => (
-                      <span key={tag} className="text-xs bg-zinc-800 text-zinc-400 px-2 py-1 rounded font-mono">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <h4 className="text-xl font-bold text-zinc-100 mb-3 group-hover:text-olive-500 transition-colors">
-                  {post.title}
-                </h4>
-                <p className="text-zinc-400 mb-4 line-clamp-3">
-                  {post.summary}
-                </p>
-                <button
-                  onClick={() => setSelectedPost(post)}
-                  className="text-olive-500 text-sm font-mono hover:underline flex items-center cursor-pointer bg-transparent border-none"
-                >
-                  Read more <ExternalLink size={14} className="ml-2" />
-                </button>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* All Posts Modal */}
-        {showAllPosts && (
-          <div
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-            onClick={() => setShowAllPosts(false)}
-          >
-            <div
-              className="bg-zinc-900 border border-zinc-700 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Modal Header */}
-              <div className="sticky top-0 bg-zinc-900/95 backdrop-blur-sm border-b border-zinc-800 p-6 flex justify-between items-center">
-                <div className="flex items-center gap-3">
-                  <h2 className="text-2xl font-bold text-zinc-100">AI/ML Insights</h2>
-                  <span className="px-2 py-1 text-xs font-mono bg-olive-500/20 text-olive-500 rounded-full border border-olive-500/30">
-                    {blogPosts.length} posts
-                  </span>
-                </div>
-                <button
-                  onClick={() => setShowAllPosts(false)}
-                  className="text-zinc-400 hover:text-zinc-100 transition-colors p-1"
-                >
-                  <X size={24} />
-                </button>
-              </div>
-
-              {/* All Posts Grid */}
-              <div className="p-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  {blogPosts.map((post) => (
-                    <div key={post.id} className="bg-zinc-800/50 p-5 rounded-lg border border-zinc-700 hover:border-olive-500 transition-colors group">
-                      <div className="flex justify-between items-start mb-3">
-                        <div className="flex items-center text-olive-500">
-                          <FaNewspaper className="mr-2" size={12} />
-                          <span className="text-xs font-mono">{post.date}</span>
-                        </div>
-                        <div className="flex gap-1">
-                          {post.tags.map(tag => (
-                            <span key={tag} className="text-xs bg-zinc-800 text-zinc-400 px-2 py-0.5 rounded font-mono">
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                      <h4 className="text-lg font-bold text-zinc-100 mb-2 group-hover:text-olive-500 transition-colors">
-                        {post.title}
-                      </h4>
-                      <p className="text-zinc-400 text-sm mb-3 line-clamp-2">
-                        {post.summary}
-                      </p>
-                      <button
-                        onClick={() => {
-                          setShowAllPosts(false);
-                          setSelectedPost(post);
-                        }}
-                        className="text-olive-500 text-sm font-mono hover:underline flex items-center cursor-pointer bg-transparent border-none"
-                      >
-                        Read more <ExternalLink size={12} className="ml-1" />
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Blog Post Modal */}
-        {selectedPost && (
-          <div
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-            onClick={() => setSelectedPost(null)}
-          >
-            <div
-              className="bg-zinc-900 border border-zinc-700 rounded-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Modal Header */}
-              <div className="sticky top-0 bg-zinc-900/95 backdrop-blur-sm border-b border-zinc-800 p-6 flex justify-between items-start">
-                <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <FaNewspaper className="text-olive-500" />
-                    <span className="text-xs font-mono text-olive-500">{selectedPost.date}</span>
-                    <div className="flex gap-2 ml-2">
-                      {selectedPost.tags.map(tag => (
-                        <span key={tag} className="text-xs bg-zinc-800 text-zinc-400 px-2 py-1 rounded font-mono">
+            {blogPosts.slice(0, 2).map((post, idx) => (
+              <div key={post.id} className="glass-panel p-0 rounded-2xl overflow-hidden group hover:scale-[1.02] transition-all duration-500">
+                <div className={`h-2 w-full ${idx % 2 === 0 ? 'bg-gradient-to-r from-primary-500 to-secondary-500' : 'bg-gradient-to-r from-secondary-500 to-accent-500'}`}></div>
+                <div className="p-8">
+                  <div className="flex justify-between items-start mb-4">
+                    <span className="text-xs font-mono text-zinc-500 flex items-center gap-2">
+                      <FaNewspaper className="text-zinc-600" />
+                      {post.date}
+                    </span>
+                    <div className="flex gap-2">
+                      {post.tags.slice(0, 2).map(tag => (
+                        <span key={tag} className="text-[10px] uppercase tracking-wider bg-white/5 text-zinc-400 px-2 py-1 rounded border border-white/5">
                           {tag}
                         </span>
                       ))}
                     </div>
                   </div>
-                  <h2 className="text-2xl font-bold text-zinc-100">{selectedPost.title}</h2>
-                </div>
-                <button
-                  onClick={() => setSelectedPost(null)}
-                  className="text-zinc-400 hover:text-zinc-100 transition-colors p-1"
-                >
-                  <X size={24} />
-                </button>
-              </div>
-
-              {/* Modal Content */}
-              <div className="p-6">
-                {/* Summary */}
-                <div className="bg-olive-500/10 border border-olive-500/30 rounded-lg p-4 mb-6">
-                  <p className="text-zinc-300 italic">{selectedPost.summary}</p>
-                </div>
-
-                {/* Detailed Content */}
-                <div className="prose prose-invert max-w-none mb-8">
-                  {selectedPost.content ? (
-                    selectedPost.content.split('\n\n').map((block, idx) => {
-                      // Handle ## Headers
-                      if (block.startsWith('## ')) {
-                        return (
-                          <h2 key={idx} className="text-xl font-bold text-olive-500 mt-6 mb-3 border-b border-zinc-800 pb-2">
-                            {block.replace('## ', '')}
-                          </h2>
-                        );
-                      }
-                      // Handle ### Sub-headers
-                      if (block.startsWith('### ')) {
-                        return (
-                          <h3 key={idx} className="text-lg font-semibold text-zinc-100 mt-4 mb-2">
-                            {block.replace('### ', '')}
-                          </h3>
-                        );
-                      }
-                      // Handle bullet points
-                      if (block.includes('\n• ') || block.startsWith('• ')) {
-                        const items = block.split('\n').filter(line => line.startsWith('• '));
-                        return (
-                          <ul key={idx} className="space-y-2 mb-4 ml-4">
-                            {items.map((item, i) => (
-                              <li key={i} className="text-zinc-300 flex items-start">
-                                <span className="text-olive-500 mr-2">•</span>
-                                <span dangerouslySetInnerHTML={{
-                                  __html: item.replace('• ', '').replace(/\*\*(.*?)\*\*/g, '<strong class="text-zinc-100">$1</strong>')
-                                }} />
-                              </li>
-                            ))}
-                          </ul>
-                        );
-                      }
-                      // Handle numbered lists
-                      if (/^\d+\.\s/.test(block)) {
-                        const items = block.split('\n').filter(line => /^\d+\.\s/.test(line));
-                        return (
-                          <ol key={idx} className="space-y-2 mb-4 ml-4 list-decimal list-inside">
-                            {items.map((item, i) => (
-                              <li key={i} className="text-zinc-300">
-                                <span dangerouslySetInnerHTML={{
-                                  __html: item.replace(/^\d+\.\s/, '').replace(/\*\*(.*?)\*\*/g, '<strong class="text-zinc-100">$1</strong>')
-                                }} />
-                              </li>
-                            ))}
-                          </ol>
-                        );
-                      }
-                      // Regular paragraphs with bold text support
-                      return (
-                        <p key={idx} className="text-zinc-300 mb-4 leading-relaxed"
-                          dangerouslySetInnerHTML={{
-                            __html: block.replace(/\*\*(.*?)\*\*/g, '<strong class="text-zinc-100">$1</strong>')
-                          }}
-                        />
-                      );
-                    })
-                  ) : (
-                    <p className="text-zinc-400">Full content coming soon...</p>
-                  )}
-                </div>
-
-                {/* Sources */}
-                {selectedPost.sources && selectedPost.sources.length > 0 && (
-                  <div className="border-t border-zinc-800 pt-6">
-                    <h4 className="text-olive-500 font-mono text-sm mb-4">📚 Sources</h4>
-                    <div className="space-y-3">
-                      {selectedPost.sources.map((source, idx) => (
-                        <a
-                          key={idx}
-                          href={source.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-3 p-3 bg-zinc-800/50 rounded-lg border border-zinc-700 hover:border-olive-500 transition-colors group"
-                        >
-                          <ExternalLink size={16} className="text-olive-500 flex-shrink-0" />
-                          <span className="text-zinc-300 group-hover:text-olive-500 transition-colors text-sm">
-                            {source.title}
-                          </span>
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* Primary Link */}
-                <div className="mt-6 pt-6 border-t border-zinc-800">
-                  <a
-                    href={selectedPost.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 bg-olive-500 text-zinc-900 font-mono text-sm rounded-lg hover:bg-olive-400 transition-colors"
+                  <h4 className="text-xl font-bold text-white mb-3 group-hover:text-primary-400 transition-colors leading-tight">
+                    {post.title}
+                  </h4>
+                  <p className="text-zinc-400 mb-6 line-clamp-3 text-sm leading-relaxed">
+                    {post.summary}
+                  </p>
+                  <button
+                    onClick={() => setSelectedPost(post)}
+                    className="text-white text-sm font-medium flex items-center gap-2 hover:gap-3 transition-all"
                   >
-                    Read Full Article <ExternalLink size={14} />
-                  </a>
+                    Read Article <ChevronRight size={14} className="text-primary-500" />
+                  </button>
                 </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="text-center pb-8 border-t border-white/5 pt-8">
+          <p className="text-zinc-600 font-mono text-xs">
+            © {new Date().getFullYear()} Sanshrit Singhai.
+          </p>
+        </footer>
+      </main>
+
+      {/* Modals */}
+      {showAllPosts && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setShowAllPosts(false)}></div>
+          <div className="glass-panel w-full max-w-4xl max-h-[85vh] rounded-2xl overflow-hidden flex flex-col relative z-10 animate-blob">
+            <div className="p-6 border-b border-white/10 flex justify-between items-center bg-black/40">
+              <h2 className="text-2xl font-bold text-white">Archive</h2>
+              <button onClick={() => setShowAllPosts(false)} className="p-2 hover:bg-white/10 rounded-full transition-colors">
+                <X size={24} className="text-zinc-400" />
+              </button>
+            </div>
+            <div className="overflow-y-auto p-6 grid md:grid-cols-2 gap-4">
+              {blogPosts.map((post) => (
+                <div key={post.id}
+                  onClick={() => { setShowAllPosts(false); setSelectedPost(post); }}
+                  className="p-5 rounded-xl border border-white/5 bg-white/5 hover:border-primary-500/50 hover:bg-white/10 transition-all cursor-pointer group"
+                >
+                  <span className="text-xs font-mono text-zinc-500 mb-2 block">{post.date}</span>
+                  <h4 className="font-bold text-zinc-200 group-hover:text-primary-400 transition-colors mb-2">{post.title}</h4>
+                  <p className="text-sm text-zinc-500 line-clamp-2">{post.summary}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {selectedPost && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/90 backdrop-blur-md" onClick={() => setSelectedPost(null)}></div>
+          <div className="glass-panel w-full max-w-3xl max-h-[90vh] rounded-2xl overflow-hidden flex flex-col relative z-10 animate-slide-up bg-[#0f0f0f]">
+            <div className="sticky top-0 p-6 border-b border-white/10 flex justify-between items-start bg-[#0f0f0f]/95 backdrop-blur z-20">
+              <div>
+                <div className="flex gap-2 mb-3">
+                  {selectedPost.tags.map(tag => (
+                    <span key={tag} className="text-xs font-mono text-primary-400 bg-primary-500/10 px-2 py-1 rounded">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <h2 className="text-2xl md:text-3xl font-bold text-white leading-tight">{selectedPost.title}</h2>
+              </div>
+              <button onClick={() => setSelectedPost(null)} className="p-2 hover:bg-white/10 rounded-full transition-colors flex-shrink-0">
+                <X size={24} className="text-zinc-400" />
+              </button>
+            </div>
+
+            <div className="overflow-y-auto p-8 prose prose-invert max-w-none prose-headings:text-white prose-p:text-zinc-400 prose-strong:text-white prose-a:text-primary-400 hover:prose-a:text-primary-300">
+              {/* Content Rendering Logic (Same as before but styled) */}
+              {selectedPost.content ? (
+                selectedPost.content.split('\n\n').map((block, idx) => {
+                  if (block.startsWith('## ')) return <h2 key={idx} className="text-2xl font-bold mt-8 mb-4 text-white border-l-4 border-primary-500 pl-4">{block.replace('## ', '')}</h2>;
+                  if (block.startsWith('### ')) return <h3 key={idx} className="text-xl font-semibold mt-6 mb-3 text-secondary-100">{block.replace('### ', '')}</h3>;
+                  if (block.includes('\n• ') || block.startsWith('• ')) {
+                    return <ul key={idx} className="list-disc pl-5 space-y-2 mb-4 marker:text-primary-500">
+                      {block.split('\n').filter(l => l.startsWith('• ')).map((item, i) => (
+                        <li key={i} dangerouslySetInnerHTML={{ __html: item.replace('• ', '').replace(/\*\*(.*?)\*\*/g, '<strong class="text-white">$1</strong>') }} />
+                      ))}
+                    </ul>;
+                  }
+                  return <p key={idx} className="mb-4 leading-relaxed" dangerouslySetInnerHTML={{ __html: block.replace(/\*\*(.*?)\*\*/g, '<strong class="text-white">$1</strong>') }} />;
+                })
+              ) : <p>Loading...</p>}
+
+              {/* Links */}
+              <div className="mt-8 pt-8 border-t border-white/10 flex gap-4">
+                <a href={selectedPost.link} target="_blank" rel="noreferrer" className="px-6 py-3 bg-primary-600 hover:bg-primary-500 text-white font-medium rounded-lg transition-colors flex items-center gap-2">
+                  Read Source <ExternalLink size={16} />
+                </a>
               </div>
             </div>
           </div>
-        )}
-      </main>
-
-      {/* Footer */}
-      <footer className="bg-zinc-900 border-t border-zinc-800">
-        <div className="container mx-auto px-6 py-8 text-center">
-          <p className="text-zinc-500 font-mono text-sm">
-            © {new Date().getFullYear()} Sanshrit Singhai. Built with React & Tailwind CSS.
-          </p>
         </div>
-      </footer>
+      )}
+
     </div>
   );
 };

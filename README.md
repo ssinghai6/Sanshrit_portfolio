@@ -14,7 +14,7 @@ This repository showcases a curated collection of my projects spanning supervise
 | [🧠 RAG-based Document Chatbot](https://github.com/ssinghai6/DocBot) | Built a Retrieval-Augmented Generation (RAG) chatbot using LangChain, LLaMA 3.2, and FAISS for intelligent document querying. | LangChain, LLaMA 3.2, FAISS, Streamlit |
 | [🚛 Logistics Optimization Solver] | Developed integer programming models to optimize fleet-wide truck assignment based on profit, integrated with OR-Tools and Gurobi. | Python, OR-Tools, Gurobi, optimization |
 | [📈 Chicago Crime Prediction](https://github.com/ssinghai6/CSE6242-DVA-Team007) | Analyzed 7M+ crime records and built predictive models to forecast crime likelihood across ZIP codes. | PySpark, AWS, Tableau, Flask, XGBoost |
-| [🔬 Stress Field Prediction](https://github.com/ssinghai6/Intelligent-Tunneling-Machine-Learning-based-Prediction-) | Replaced FEM simulations with deep learning models (Autoencoders, ANN) to predict stress distribution in geotechnical domains. | TensorFlow, Autoencoders, ANN |
+| [🔬 ML Stress Field Predictor](https://github.com/ssinghai6/Intelligent-Tunneling-Machine-Learning-based-Prediction-) [🔗](https://ce.gatech.edu/news/researchers-receive-17-million-grant-build-robot-subsurface-soil-exploration) | Replaced FEM simulations with deep learning models (Autoencoders, ANN) to predict stress distribution in geotechnical domains; part of a $17M NSF-funded initiative. | TensorFlow, Autoencoders, ANN |
 
 ---
 
@@ -33,6 +33,13 @@ This repository showcases a curated collection of my projects spanning supervise
 - [LinkedIn](https://www.linkedin.com/in/singhai-sanshrit/)  
 - [Website](https://sanshrit-singhai.vercel.app/)  
 - [Email](mailto:singhai.sanshrit@live.com)
+
+---
+## ✨ Key Features
+
+- **Interactive Experience Timeline**: Collapsible role details with "at-a-glance" summaries and tech tags.
+- **Dynamic Blog System**: Automated AI news curation with manual "view archive" controls.
+- **Optimized Performance**: Glassmorphism UI with fast load times and clean, responsive layout.
 
 ---
 
