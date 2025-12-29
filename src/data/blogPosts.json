@@ -1,79 +1,80 @@
 [
-  {
-    "id": 4,
-    "title": "Weekly AI Round-up - 2025-12-29",
-    "date": "2025-12-29",
-    "summary": "This week saw major developments in AI with new model releases and research breakthroughs.",
-    "tags": [
-      "AI",
-      "LLMs",
-      "Research"
-    ],
-    "link": "https://www.msn.com/en-us/sports/nfl/self-learning-ai-releases-nfl-picks-score-predictions-every-week-17-game/ar-AA1SY3fa"
-  },
-  {
-    "id": 3,
-    "title": "AI Breakthroughs: GPT-5, Llama 3.2, and AlphaFold 3 Revolutionize the Field",
-    "date": "2025-12-27",
-    "summary": "This week, OpenAI, Meta, and Google DeepMind unveiled significant advancements in AI, including GPT-5, Llama 3.2, and AlphaFold 3, which demonstrate substantial improvements in reasoning, multimodal capabilities, and protein structure prediction. These developments have far-reaching implications for various industries and research fields. The releases showcase the rapid progress being made in AI research and development.",
-    "content": "## Overview\n\nThis week has marked a pivotal moment in artificial intelligence with major announcements from three industry giants: OpenAI, Meta, and Google DeepMind. The simultaneous unveiling of GPT-5, Llama 3.2, and AlphaFold 3 signals a new era of capability in reasoning, multimodal processing, and scientific discovery.\n\n## Key Releases\n\n### OpenAI GPT-5\nOpenAI's latest frontier model, GPT-5, pushes the boundaries of reasoning and reliability. Early benchmarks suggest:\n\n\u2022 **Enhanced Reasoning**: Significant improvements in complex problem-solving and multi-step logic.\n\u2022 **Personalization**: Deeper ability to adapt to user context and preferences over long conversations.\n\n### Meta Llama 3.2\nMeta continues to lead in open weights with Llama 3.2, focusing on efficiency and multimodal integration:\n\n\u2022 **Vision Capabilities**: Native support for image understanding and analysis.\n\u2022 **Edge Performance**: Optimized variants designed to run locally on mobile leverage NPU acceleration.\n\n### Google DeepMind AlphaFold 3\nDeepMind's AlphaFold 3 extends its revolutionary protein structure prediction to a broader range of biomolecules:\n\n\u2022 **Broad Applicability**: Can now model DNA, RNA, and ligand interactions with high accuracy.\n\u2022 **Drug Discovery**: Accelerates the pipeline for identifying potential therapeutic targets.\n\n## Implications\n\nThese advancements collectively demonstrate that the pace of AI innovation is accelerating. From foundational reasoning models to specialized scientific tools, the impact of these technologies will be felt across healthcare, software engineering, and creative industries in the coming months.",
-    "tags": [
-      "GenAI",
-      "ProteinStructurePrediction",
-      "MultimodalLearning"
-    ],
-    "link": "https://example.com/gpt5"
-  },
-  {
-    "id": 1,
-    "title": "The Rise of Small Language Models",
-    "date": "2025-12-23",
-    "summary": "Recent weeks have seen a surge in efficient, smaller language models like Phi-2 and Gemini Nano, challenging the notion that bigger is always better.",
-    "content": "## Overview\n\nThe AI landscape is witnessing a significant paradigm shift. For years, the prevailing wisdom was clear: bigger models meant better performance. However, recent developments are challenging this assumption in meaningful ways.\n\n## Key Developments\n\n### Microsoft Phi-2\nWith just 2.7 billion parameters, Phi-2 has demonstrated performance that rivals models 25 times its size on complex reasoning tasks. This achievement stems from:\n\n\u2022 **Curated Training Data**: High-quality, textbook-style data rather than raw web scrapes\n\u2022 **Novel Architecture**: Efficient attention mechanisms that reduce computational overhead\n\u2022 **Knowledge Distillation**: Learning from larger teacher models\n\n### Google Gemini Nano\nDesigned for on-device applications, Gemini Nano runs entirely on mobile processors without cloud connectivity. Key benefits include:\n\n\u2022 **Privacy Preservation**: Data never leaves the device\n\u2022 **Reduced Latency**: No network round-trips required\n\u2022 **Offline Capability**: Works without internet connection\n\n## Why This Matters\n\nThe shift toward smaller, efficient models has profound implications:\n\n1. **Democratization of AI**: Powerful models can now run on consumer hardware\n2. **Environmental Impact**: Reduced energy consumption per inference\n3. **Edge Computing**: Enables AI in IoT devices, cars, and mobile phones\n4. **Cost Reduction**: Lower cloud compute costs for businesses\n\n## Looking Ahead\n\nThis trend suggests the future of AI isn't just about scaling up\u2014it's about doing more with less. Expect to see continued innovation in model compression, quantization, and efficient architectures throughout 2025.",
-    "tags": [
-      "GenAI",
-      "LLMs"
-    ],
-    "sources": [
-      {
-        "title": "Phi-2: The surprising power of small language models - Microsoft Research",
-        "url": "https://www.microsoft.com/en-us/research/blog/phi-2-the-surprising-power-of-small-language-models/"
-      },
-      {
-        "title": "Introducing Gemini: Google's Most Capable AI Model",
-        "url": "https://blog.google/technology/ai/google-gemini-ai/"
-      },
-      {
-        "title": "The Efficiency Era: How Small Models Are Beating Giants",
-        "url": "https://arxiv.org/abs/2312.11420"
-      }
-    ],
-    "link": "https://www.microsoft.com/en-us/research/blog/phi-2-the-surprising-power-of-small-language-models/"
-  },
-  {
-    "id": 2,
-    "title": "Graph Neural Networks in Logistics",
-    "date": "2025-12-16",
-    "summary": "How GNNs are transforming supply chain optimization by modeling complex relationships between entities in shipping networks.",
-    "content": "## Overview\n\nGraph Neural Networks (GNNs) are revolutionizing logistics and supply chain optimization. Unlike traditional models that treat data points independently, GNNs naturally capture the interconnected relationships inherent in shipping networks.\n\n## Real-World Applications\n\n### Route Optimization\nGNNs process entire transportation networks simultaneously, considering:\n\n\u2022 **Dynamic Traffic Patterns**: Real-time congestion data\n\u2022 **Weather Conditions**: Impact on delivery times and safety\n\u2022 **Capacity Constraints**: Vehicle and warehouse limitations\n\u2022 **Multi-stop Planning**: Optimizing sequences across dozens of stops\n\n### Demand Forecasting\nBy modeling relationships between locations as a graph, GNNs capture:\n\n\u2022 **Spatial Dependencies**: How demand in one area affects nearby regions\n\u2022 **Supplier-Retailer Relationships**: Upstream supply constraints\n\u2022 **Seasonal Patterns**: Geographic variations in demand cycles\n\n### Fleet Management\nMajor companies are achieving significant results:\n\n\u2022 **Amazon**: 15% reduction in empty miles through GNN-based truck assignment\n\u2022 **UPS**: Improved package routing efficiency by 12%\n\u2022 **FedEx**: Real-time network reoptimization during disruptions\n\n## Technical Deep Dive\n\nGNNs work by:\n\n1. **Message Passing**: Each node aggregates information from neighbors\n2. **Iterative Updates**: Multiple rounds of message passing capture long-range dependencies\n3. **Prediction**: Final node/edge representations used for optimization decisions\n\n## Future Directions\n\nThe combination of GNNs with reinforcement learning is particularly promising. These hybrid systems can:\n\n\u2022 Learn optimal policies through simulation\n\u2022 Adapt to changing network conditions\n\u2022 Handle uncertainty in demand and supply\n\nExpect significant adoption across logistics, telecommunications, and urban planning in the coming year.",
-    "tags": [
-      "Optimization",
-      "Graph Learning"
-    ],
-    "sources": [
-      {
-        "title": "Graph Neural Networks for Combinatorial Optimization - arXiv",
-        "url": "https://arxiv.org/abs/2110.09563"
-      },
-      {
-        "title": "How Amazon Uses AI in Its Operations",
-        "url": "https://www.aboutamazon.com/news/operations/how-amazon-uses-ai-in-its-operations"
-      },
-      {
-        "title": "DeepMind's Vehicle Routing with Graph Networks",
-        "url": "https://www.deepmind.com/research/publications/learning-to-solve-vehicle-routing-problems-with-graph-neural-networks"
-      }
-    ],
-    "link": "https://arxiv.org/abs/2110.09563"
-  }
+    {
+        "id": 4,
+        "title": "Weekly AI Round-up - 2025-12-29",
+        "date": "2025-12-29",
+        "summary": "This week saw major developments in AI with new model releases and research breakthroughs.",
+        "content": "## Overview\n\nThis week brought exciting developments in AI and machine learning, with major players continuing to push the boundaries of what's possible.\n\n## Key Developments\n\n### Model Releases\n• **New AI Models**: Several cutting-edge models were announced this week, demonstrating improved reasoning and multimodal capabilities.\n• **Open Source Progress**: The open source community continues to make strides in democratizing AI access.\n\n### Research Breakthroughs\n• **Efficiency Gains**: New research papers focused on making models more efficient without sacrificing performance.\n• **Novel Architectures**: Innovative approaches to model design are emerging from both academia and industry.\n\n## Why This Matters\n\nThese developments signal continued rapid progress in AI capabilities, with implications across:\n\n1. **Enterprise Applications**: More powerful tools for business automation\n2. **Consumer Products**: Enhanced AI assistants and creative tools\n3. **Scientific Research**: Accelerated discovery in fields like drug development and materials science\n\n## Looking Ahead\n\nExpect continued innovation as we head into 2026, with a focus on:\n\n• Agent-based systems and autonomous AI\n• Multimodal understanding and generation\n• Edge deployment and efficiency improvements",
+        "tags": [
+            "AI",
+            "LLMs",
+            "Research"
+        ],
+        "link": "https://www.msn.com/en-us/sports/nfl/self-learning-ai-releases-nfl-picks-score-predictions-every-week-17-game/ar-AA1SY3fa"
+    },
+    {
+        "id": 3,
+        "title": "AI Breakthroughs: GPT-5, Llama 3.2, and AlphaFold 3 Revolutionize the Field",
+        "date": "2025-12-27",
+        "summary": "This week, OpenAI, Meta, and Google DeepMind unveiled significant advancements in AI, including GPT-5, Llama 3.2, and AlphaFold 3, which demonstrate substantial improvements in reasoning, multimodal capabilities, and protein structure prediction. These developments have far-reaching implications for various industries and research fields. The releases showcase the rapid progress being made in AI research and development.",
+        "content": "## Overview\n\nThis week has marked a pivotal moment in artificial intelligence with major announcements from three industry giants: OpenAI, Meta, and Google DeepMind. The simultaneous unveiling of GPT-5, Llama 3.2, and AlphaFold 3 signals a new era of capability in reasoning, multimodal processing, and scientific discovery.\n\n## Key Releases\n\n### OpenAI GPT-5\nOpenAI's latest frontier model, GPT-5, pushes the boundaries of reasoning and reliability. Early benchmarks suggest:\n\n\u2022 **Enhanced Reasoning**: Significant improvements in complex problem-solving and multi-step logic.\n\u2022 **Personalization**: Deeper ability to adapt to user context and preferences over long conversations.\n\n### Meta Llama 3.2\nMeta continues to lead in open weights with Llama 3.2, focusing on efficiency and multimodal integration:\n\n\u2022 **Vision Capabilities**: Native support for image understanding and analysis.\n\u2022 **Edge Performance**: Optimized variants designed to run locally on mobile leverage NPU acceleration.\n\n### Google DeepMind AlphaFold 3\nDeepMind's AlphaFold 3 extends its revolutionary protein structure prediction to a broader range of biomolecules:\n\n\u2022 **Broad Applicability**: Can now model DNA, RNA, and ligand interactions with high accuracy.\n\u2022 **Drug Discovery**: Accelerates the pipeline for identifying potential therapeutic targets.\n\n## Implications\n\nThese advancements collectively demonstrate that the pace of AI innovation is accelerating. From foundational reasoning models to specialized scientific tools, the impact of these technologies will be felt across healthcare, software engineering, and creative industries in the coming months.",
+        "tags": [
+            "GenAI",
+            "ProteinStructurePrediction",
+            "MultimodalLearning"
+        ],
+        "link": "https://example.com/gpt5"
+    },
+    {
+        "id": 1,
+        "title": "The Rise of Small Language Models",
+        "date": "2025-12-23",
+        "summary": "Recent weeks have seen a surge in efficient, smaller language models like Phi-2 and Gemini Nano, challenging the notion that bigger is always better.",
+        "content": "## Overview\n\nThe AI landscape is witnessing a significant paradigm shift. For years, the prevailing wisdom was clear: bigger models meant better performance. However, recent developments are challenging this assumption in meaningful ways.\n\n## Key Developments\n\n### Microsoft Phi-2\nWith just 2.7 billion parameters, Phi-2 has demonstrated performance that rivals models 25 times its size on complex reasoning tasks. This achievement stems from:\n\n\u2022 **Curated Training Data**: High-quality, textbook-style data rather than raw web scrapes\n\u2022 **Novel Architecture**: Efficient attention mechanisms that reduce computational overhead\n\u2022 **Knowledge Distillation**: Learning from larger teacher models\n\n### Google Gemini Nano\nDesigned for on-device applications, Gemini Nano runs entirely on mobile processors without cloud connectivity. Key benefits include:\n\n\u2022 **Privacy Preservation**: Data never leaves the device\n\u2022 **Reduced Latency**: No network round-trips required\n\u2022 **Offline Capability**: Works without internet connection\n\n## Why This Matters\n\nThe shift toward smaller, efficient models has profound implications:\n\n1. **Democratization of AI**: Powerful models can now run on consumer hardware\n2. **Environmental Impact**: Reduced energy consumption per inference\n3. **Edge Computing**: Enables AI in IoT devices, cars, and mobile phones\n4. **Cost Reduction**: Lower cloud compute costs for businesses\n\n## Looking Ahead\n\nThis trend suggests the future of AI isn't just about scaling up\u2014it's about doing more with less. Expect to see continued innovation in model compression, quantization, and efficient architectures throughout 2025.",
+        "tags": [
+            "GenAI",
+            "LLMs"
+        ],
+        "sources": [
+            {
+                "title": "Phi-2: The surprising power of small language models - Microsoft Research",
+                "url": "https://www.microsoft.com/en-us/research/blog/phi-2-the-surprising-power-of-small-language-models/"
+            },
+            {
+                "title": "Introducing Gemini: Google's Most Capable AI Model",
+                "url": "https://blog.google/technology/ai/google-gemini-ai/"
+            },
+            {
+                "title": "The Efficiency Era: How Small Models Are Beating Giants",
+                "url": "https://arxiv.org/abs/2312.11420"
+            }
+        ],
+        "link": "https://www.microsoft.com/en-us/research/blog/phi-2-the-surprising-power-of-small-language-models/"
+    },
+    {
+        "id": 2,
+        "title": "Graph Neural Networks in Logistics",
+        "date": "2025-12-16",
+        "summary": "How GNNs are transforming supply chain optimization by modeling complex relationships between entities in shipping networks.",
+        "content": "## Overview\n\nGraph Neural Networks (GNNs) are revolutionizing logistics and supply chain optimization. Unlike traditional models that treat data points independently, GNNs naturally capture the interconnected relationships inherent in shipping networks.\n\n## Real-World Applications\n\n### Route Optimization\nGNNs process entire transportation networks simultaneously, considering:\n\n\u2022 **Dynamic Traffic Patterns**: Real-time congestion data\n\u2022 **Weather Conditions**: Impact on delivery times and safety\n\u2022 **Capacity Constraints**: Vehicle and warehouse limitations\n\u2022 **Multi-stop Planning**: Optimizing sequences across dozens of stops\n\n### Demand Forecasting\nBy modeling relationships between locations as a graph, GNNs capture:\n\n\u2022 **Spatial Dependencies**: How demand in one area affects nearby regions\n\u2022 **Supplier-Retailer Relationships**: Upstream supply constraints\n\u2022 **Seasonal Patterns**: Geographic variations in demand cycles\n\n### Fleet Management\nMajor companies are achieving significant results:\n\n\u2022 **Amazon**: 15% reduction in empty miles through GNN-based truck assignment\n\u2022 **UPS**: Improved package routing efficiency by 12%\n\u2022 **FedEx**: Real-time network reoptimization during disruptions\n\n## Technical Deep Dive\n\nGNNs work by:\n\n1. **Message Passing**: Each node aggregates information from neighbors\n2. **Iterative Updates**: Multiple rounds of message passing capture long-range dependencies\n3. **Prediction**: Final node/edge representations used for optimization decisions\n\n## Future Directions\n\nThe combination of GNNs with reinforcement learning is particularly promising. These hybrid systems can:\n\n\u2022 Learn optimal policies through simulation\n\u2022 Adapt to changing network conditions\n\u2022 Handle uncertainty in demand and supply\n\nExpect significant adoption across logistics, telecommunications, and urban planning in the coming year.",
+        "tags": [
+            "Optimization",
+            "Graph Learning"
+        ],
+        "sources": [
+            {
+                "title": "Graph Neural Networks for Combinatorial Optimization - arXiv",
+                "url": "https://arxiv.org/abs/2110.09563"
+            },
+            {
+                "title": "How Amazon Uses AI in Its Operations",
+                "url": "https://www.aboutamazon.com/news/operations/how-amazon-uses-ai-in-its-operations"
+            },
+            {
+                "title": "DeepMind's Vehicle Routing with Graph Networks",
+                "url": "https://www.deepmind.com/research/publications/learning-to-solve-vehicle-routing-problems-with-graph-neural-networks"
+            }
+        ],
+        "link": "https://arxiv.org/abs/2110.09563"
+    }
 ]
