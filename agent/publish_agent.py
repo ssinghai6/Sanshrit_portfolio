@@ -76,7 +76,9 @@ def update_blog_data(post_data: dict) -> None:
         "title": post_data.get("title", f"AI Update {datetime.date.today()}"),
         "date": str(datetime.date.today()),
         "summary": post_data.get("summary", ""),
+        "content": post_data.get("content", ""),
         "tags": post_data.get("tags", ["AI", "News"]),
+        "sources": post_data.get("sources", []),
         "link": post_data.get("link", "#")
     }
     
