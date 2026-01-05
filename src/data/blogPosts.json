@@ -1,29 +1,34 @@
 [
     {
-        "id": 4,
-        "title": "Weekly AI Round-up - 2025-12-29",
-        "date": "2025-12-29",
-        "summary": "This week saw major developments in AI with new model releases and research breakthroughs.",
-        "content": "## Overview\n\nThis week brought exciting developments in AI and machine learning, with major players continuing to push the boundaries of what's possible.\n\n## Key Developments\n\n### Model Releases\n• **New AI Models**: Several cutting-edge models were announced this week, demonstrating improved reasoning and multimodal capabilities.\n• **Open Source Progress**: The open source community continues to make strides in democratizing AI access.\n\n### Research Breakthroughs\n• **Efficiency Gains**: New research papers focused on making models more efficient without sacrificing performance.\n• **Novel Architectures**: Innovative approaches to model design are emerging from both academia and industry.\n\n## Why This Matters\n\nThese developments signal continued rapid progress in AI capabilities, with implications across:\n\n1. **Enterprise Applications**: More powerful tools for business automation\n2. **Consumer Products**: Enhanced AI assistants and creative tools\n3. **Scientific Research**: Accelerated discovery in fields like drug development and materials science\n\n## Looking Ahead\n\nExpect continued innovation as we head into 2026, with a focus on:\n\n• Agent-based systems and autonomous AI\n• Multimodal understanding and generation\n• Edge deployment and efficiency improvements",
-        "tags": [
-            "AI",
-            "LLMs",
-            "Research"
-        ],
-        "link": "https://www.msn.com/en-us/sports/nfl/self-learning-ai-releases-nfl-picks-score-predictions-every-week-17-game/ar-AA1SY3fa"
-    },
-    {
-        "id": 3,
-        "title": "AI Breakthroughs: GPT-5, Llama 3.2, and AlphaFold 3 Revolutionize the Field",
-        "date": "2025-12-27",
-        "summary": "This week, OpenAI, Meta, and Google DeepMind unveiled significant advancements in AI, including GPT-5, Llama 3.2, and AlphaFold 3, which demonstrate substantial improvements in reasoning, multimodal capabilities, and protein structure prediction. These developments have far-reaching implications for various industries and research fields. The releases showcase the rapid progress being made in AI research and development.",
-        "content": "## Overview\n\nThis week has marked a pivotal moment in artificial intelligence with major announcements from three industry giants: OpenAI, Meta, and Google DeepMind. The simultaneous unveiling of GPT-5, Llama 3.2, and AlphaFold 3 signals a new era of capability in reasoning, multimodal processing, and scientific discovery.\n\n## Key Releases\n\n### OpenAI GPT-5\nOpenAI's latest frontier model, GPT-5, pushes the boundaries of reasoning and reliability. Early benchmarks suggest:\n\n\u2022 **Enhanced Reasoning**: Significant improvements in complex problem-solving and multi-step logic.\n\u2022 **Personalization**: Deeper ability to adapt to user context and preferences over long conversations.\n\n### Meta Llama 3.2\nMeta continues to lead in open weights with Llama 3.2, focusing on efficiency and multimodal integration:\n\n\u2022 **Vision Capabilities**: Native support for image understanding and analysis.\n\u2022 **Edge Performance**: Optimized variants designed to run locally on mobile leverage NPU acceleration.\n\n### Google DeepMind AlphaFold 3\nDeepMind's AlphaFold 3 extends its revolutionary protein structure prediction to a broader range of biomolecules:\n\n\u2022 **Broad Applicability**: Can now model DNA, RNA, and ligand interactions with high accuracy.\n\u2022 **Drug Discovery**: Accelerates the pipeline for identifying potential therapeutic targets.\n\n## Implications\n\nThese advancements collectively demonstrate that the pace of AI innovation is accelerating. From foundational reasoning models to specialized scientific tools, the impact of these technologies will be felt across healthcare, software engineering, and creative industries in the coming months.",
+        "id": 5,
+        "title": "Advancing AI Capabilities: Global Expansion, Technical Breakthroughs, and New Career Paths",
+        "date": "2026-01-05",
+        "summary": "The AI landscape is rapidly evolving with Global Mofy AI Limited establishing a U.S. subsidiary, significant technical breakthroughs in 2025, and the introduction of new AI and machine learning career paths. These developments underscore the growing importance of AI in various industries and its increasing adoption. As AI continues to advance, it's crucial to understand the implications and future directions of these technologies.",
+        "content": " ## Overview The field of Artificial Intelligence (AI) has witnessed significant developments over the past week, ranging from global expansions of AI companies to groundbreaking research and the introduction of new career paths in AI and machine learning. These advancements highlight the rapid growth and integration of AI across different sectors. **Generative AI**, in particular, is playing a crucial role in shaping the future of digital content production and beyond.  ## Key Developments ### Global Expansion of AI Companies \u2022 **Global Mofy AI Limited**: Establishes U.S. subsidiary Eaglepoint AI, advancing global AI training and data engineering capabilities. This move signifies the company's commitment to expanding its reach and improving its services in the global market. ### Technical Breakthroughs \u2022 **DeepSeek-R1 to Ghibli Art**: 5 significant technical breakthroughs in 2025 that have changed the AI landscape, including advancements in reasoning, multimodality, model efficiency, and AI hardware. These breakthroughs demonstrate the incredible pace of innovation in the AI sector. ### New Career Paths in AI 1. The Army is introducing a new career path for officers focusing on AI and machine learning, marking a significant shift towards embracing cutting-edge technology and autonomous warfare. 2. This development is expected to enhance the Army's capabilities in leveraging AI for strategic and tactical advantages.  ## Why This Matters The recent developments in AI have profound implications for various industries and society as a whole. The establishment of Global Mofy AI Limited's U.S. subsidiary and the introduction of new AI career paths indicate a growing recognition of AI's potential and its increasing integration into mainstream professional development. Furthermore, the technical breakthroughs achieved in 2025 pave the way for more sophisticated and efficient AI applications, which can transform industries such as content production, healthcare, and finance.  ## Looking Ahead As AI technology continues to evolve, it's essential to monitor its progression and the challenges that come with its adoption. **Ethical considerations**, **regulatory frameworks**, and **public awareness** will play crucial roles in shaping the future of AI. With the pace of innovation showing no signs of slowing, the coming years are likely to see even more significant advancements in AI capabilities and applications. ",
         "tags": [
             "GenAI",
-            "ProteinStructurePrediction",
-            "MultimodalLearning"
+            "AI Career Paths",
+            "Technical Breakthroughs"
         ],
-        "link": "https://example.com/gpt5"
+        "sources": [
+            {
+                "title": "Global Mofy AI Limited Establishes U.S. Subsidiary Eaglepoint AI",
+                "url": "https://www.manilatimes.net/2026/01/05/tmt-newswire/globenewswire/global-mofy-ai-limited-establishes-us-subsidiary-eaglepoint-ai-advancing-global-ai-training-and-data-engineering-capabilities/2252857"
+            },
+            {
+                "title": "ChatGPT Glossary: 61 AI Terms Everyone Should Know",
+                "url": "https://www.cnet.com/tech/services-and-software/chatgpt-glossary/"
+            },
+            {
+                "title": "From DeepSeek-R1 to Ghibli art: 5 technical breakthroughs that changed AI in 2025",
+                "url": "https://indianexpress.com/article/technology/artificial-intelligence/deepseek-ghibli-art-5-biggest-ai-breakthroughs-2025-10448067/"
+            },
+            {
+                "title": "Army to ring in new year with new AI and machine learning career path for officers",
+                "url": "https://www.stripes.com/branches/army/2025-12-31/artificial-intelligence-machine-learning-officer-20257219.html"
+            }
+        ],
+        "link": "https://www.manilatimes.net/2026/01/05/tmt-newswire/globenewswire/global-mofy-ai-limited-establishes-us-subsidiary-eaglepoint-ai-advancing-global-ai-training-and-data-engineering-capabilities/2252857"
     },
     {
         "id": 1,
