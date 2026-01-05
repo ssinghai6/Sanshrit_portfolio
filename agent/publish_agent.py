@@ -13,6 +13,15 @@ import re
 import datetime
 import requests
 
+# Load .env file for local testing
+try:
+    from dotenv import load_dotenv
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    env_path = os.path.join(script_dir, ".env")
+    load_dotenv(env_path)
+except ImportError:
+    pass  # dotenv not installed, use system env vars
+
 # Configuration
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 GITHUB_REPO = os.getenv("GITHUB_REPOSITORY", "ssinghai6/personal_website_portfolio")

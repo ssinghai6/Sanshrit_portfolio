@@ -32,6 +32,64 @@ SERPER_API_KEY = os.getenv("SERPER_API_KEY")
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 GITHUB_REPO = os.getenv("GITHUB_REPOSITORY", "ssinghai6/personal_website_portfolio")
 
+# AI/ML keywords for filtering relevant news
+AI_KEYWORDS = [
+    'ai', 'artificial intelligence', 'machine learning', 'ml', 'llm', 
+    'gpt', 'gemini', 'claude', 'neural', 'deep learning', 'openai', 
+    'anthropic', 'model', 'transformer', 'chatbot', 'nlp', 'computer vision',
+    'generative', 'diffusion', 'robotics', 'automation', 'data science'
+]
+
+# Trusted tech news domains for AI/ML content
+TRUSTED_DOMAINS = [
+    'techcrunch.com', 'theverge.com', 'wired.com', 'venturebeat.com',
+    'arstechnica.com', 'thenextweb.com', 'zdnet.com', 'engadget.com',
+    'towardsdatascience.com', 'medium.com', 'arxiv.org', 'openai.com',
+    'anthropic.com', 'deepmind.com', 'ai.meta.com', 'huggingface.co',
+    'mit.edu', 'stanford.edu', 'reuters.com', 'bloomberg.com'
+]
+
+# Domains to exclude (sports, entertainment, etc.)
+EXCLUDED_PATTERNS = [
+    '/sports/', '/nfl/', '/nba/', '/mlb/', '/entertainment/',
+    '/celebrity/', '/gossip/', '/fashion/'
+]
+
+
+def is_ai_relevant(title: str, snippet: str, link: str) -> bool:
+    """Check if a news item is AI/ML relevant based on keywords."""
+    text = (title + " " + snippet).lower()
+    link_lower = link.lower()
+    
+    # Check for excluded patterns in URL
+    for pattern in EXCLUDED_PATTERNS:
+        if pattern in link_lower:
+            return False
+    
+    # Check for AI keywords in title or snippet
+    for keyword in AI_KEYWORDS:
+        if keyword in text:
+            return True
+    
+    return False
+
+
+def get_best_link(news_items: list) -> str:
+    """Get the most relevant link from news items, preferring trusted domains."""
+    # First try to find a link from a trusted domain
+    for item in news_items:
+        link = item.get('link', '')
+        for domain in TRUSTED_DOMAINS:
+            if domain in link:
+                return link
+    
+    # Fallback to first item's link if available
+    if news_items and news_items[0].get('link'):
+        return news_items[0]['link']
+    
+    # Last resort fallback
+    return "https://news.ycombinator.com/news"
+
 
 
 # ============================================================================
@@ -61,28 +119,40 @@ def search_news_node(state: AgentState) -> AgentState:
     """
     print("🔍 Searching for AI/ML news...")
     
-    # Use custom query if provided, otherwise default
+    # Use custom query if provided, otherwise use improved default
     custom_query = state.get("query")
-    base_query = custom_query if custom_query else "AI Machine Learning news last week"
+    if custom_query:
+        base_query = custom_query
+    else:
+        # Improved query targeting AI/ML content specifically
+        base_query = '"artificial intelligence" OR "machine learning" OR "LLM" OR "GPT" news'
     
     try:
         print(f"👉 Querying DuckDuckGo: '{base_query}'")
         
-        state["news_items"] = []
+        raw_results = []
         with DDGS() as ddgs:
-            # Fetch up to 5 news results
-            # Note: max_results for news() is typically 'max_results' or passed via keywords depending on version.
-            # safe assumption for 8.x is just iterating results
-            ddg_gen = ddgs.news(base_query, max_results=5)
+            # Fetch more results initially to filter down to relevant ones
+            ddg_gen = ddgs.news(base_query, max_results=15, timelimit='w')  # 'w' = past week
             
             for item in ddg_gen:
-                state["news_items"].append({
+                raw_results.append({
                     "title": item.get("title", ""),
                     "snippet": item.get("body", ""),
                     "link": item.get("url", "")
                 })
-            
-        print(f"✅ Found {len(state['news_items'])} news items")
+        
+        print(f"📥 Retrieved {len(raw_results)} raw results, filtering for AI/ML relevance...")
+        
+        # Filter results for AI/ML relevance
+        state["news_items"] = []
+        for item in raw_results:
+            if is_ai_relevant(item["title"], item["snippet"], item["link"]):
+                state["news_items"].append(item)
+                if len(state["news_items"]) >= 5:  # Keep top 5 relevant results
+                    break
+        
+        print(f"✅ Found {len(state['news_items'])} AI/ML relevant news items")
         
     except Exception as e:
         print(f"❌ Error searching news: {e}")
@@ -91,7 +161,7 @@ def search_news_node(state: AgentState) -> AgentState:
     
     # Fallback to mock data if no results
     if not state["news_items"]:
-        print("⚠️  No search results. Using mock data.")
+        print("⚠️  No relevant search results. Using mock data.")
         state["news_items"] = [
             {
                 "title": "OpenAI Releases GPT-5 Preview",
@@ -125,15 +195,19 @@ def summarize_node(state: AgentState) -> AgentState:
     
     if not GROQ_API_KEY:
         print("⚠️  GROQ_API_KEY not found. Using mock summary.")
+        # Generate a more descriptive title from actual news
+        first_title = state["news_items"][0].get("title", "AI Developments")
+        dynamic_title = f"AI News: {first_title[:50]}..." if len(first_title) > 50 else f"AI News: {first_title}"
+        
         state["generated_post"] = {
-            "title": f"Weekly AI Round-up - {datetime.date.today()}",
-            "summary": "This week saw major developments in AI with new model releases and research breakthroughs.",
-            "content": "Key developments this week:\\n\\n• **Major Model Releases**: Several new AI models were announced.\\n\\n• **Research Breakthroughs**: New papers pushed the boundaries of what's possible.\\n\\n• **Industry Updates**: Major tech companies continue to invest heavily in AI.",
+            "title": dynamic_title,
+            "summary": f"This week's highlights include: {first_title}. Stay updated on the latest AI and machine learning developments.",
+            "content": f"## Overview\n\nThis week brought exciting developments in AI and machine learning.\n\n## Key Developments\n\n### {state['news_items'][0].get('title', 'Latest News')}\n\n{state['news_items'][0].get('snippet', 'Major AI developments occurred this week.')}\n\n## Why This Matters\n\nThese developments signal continued rapid progress in AI capabilities.\n\n## Looking Ahead\n\nExpect continued innovation in AI research and applications.",
             "tags": ["AI", "LLMs", "Research"],
             "sources": [
-                {"title": state["news_items"][0].get("title", "Source 1"), "url": state["news_items"][0].get("link", "#")}
+                {"title": item.get("title", "Source"), "url": item.get("link", "#")} for item in state["news_items"][:3]
             ],
-            "link": state["news_items"][0].get("link", "#")
+            "link": get_best_link(state["news_items"])
         }
         return state
 
@@ -209,13 +283,18 @@ Respond ONLY with the JSON object, no other text."""
         try:
             # Extract what we can from the response
             response_text = response.content if 'response' in dir() else ""
+            # Generate dynamic title from news items
+            news_items = state.get("news_items", [])
+            first_title = news_items[0].get("title", "AI Developments") if news_items else "AI Developments"
+            dynamic_title = f"AI News: {first_title[:50]}..." if len(first_title) > 50 else f"AI News: {first_title}"
+            
             state["generated_post"] = {
-                "title": f"AI Update - {datetime.date.today()}",
-                "summary": "This period brought exciting developments in AI and machine learning.",
-                "content": "## Overview\\n\\nSeveral major AI developments occurred.\\n\\n## Key Developments\\n\\n• **Model Releases**: New AI models were announced.\\n\\n• **Research**: Important research papers were published.\\n\\n• **Industry**: Major tech companies continued AI investments.",
+                "title": dynamic_title,
+                "summary": f"This period brought exciting developments including: {first_title}.",
+                "content": "## Overview\n\nSeveral major AI developments occurred.\n\n## Key Developments\n\n• **Model Releases**: New AI models were announced.\n\n• **Research**: Important research papers were published.\n\n• **Industry**: Major tech companies continued AI investments.",
                 "tags": ["AI", "LLMs"],
-                "sources": [{"title": s["title"], "url": s["link"]} for s in state.get("news_items", [])[:2]],
-                "link": state.get("news_items", [{}])[0].get("link", "#")
+                "sources": [{"title": s["title"], "url": s["link"]} for s in news_items[:2]],
+                "link": get_best_link(news_items)
             }
             print(f"✅ Created fallback post: {state['generated_post']['title']}")
         except:
