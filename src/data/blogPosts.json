@@ -1,98 +1,125 @@
 [
-    {
-        "id": 6,
-        "title": "Advancing AI Frontiers: Global Expansion, Technical Breakthroughs, and New Career Paths",
-        "date": "2026-01-05",
-        "summary": "The AI landscape is rapidly evolving with Global Mofy AI Limited establishing a U.S. subsidiary, significant technical breakthroughs in 2025, and the introduction of new AI and machine learning career paths for Army officers. These developments underscore the growing importance of AI in various sectors. As AI continues to advance, its applications and implications are becoming increasingly diverse and profound.",
-        "content": "## Overview\n\nThe field of Artificial Intelligence (AI) has witnessed significant advancements in recent weeks, with developments ranging from global expansions by key players to breakthroughs in AI technology and the introduction of new career paths. These moves not only reflect the growing relevance of AI in the global economy but also highlight its potential to transform various industries. The expansion of AI capabilities is poised to impact everything from content creation to military operations.\n\n## Key Developments\n\n### Global Expansion of AI Services\n\u2022 **Global Mofy AI Expansion**: Global Mofy AI Limited has established a U.S. subsidiary named Eaglepoint AI, aiming to enhance its global AI training and data engineering capabilities. This move indicates a strategic push into the U.S. market, leveraging the country's robust technology infrastructure and talent pool.\n\u2022 **Enhanced Capabilities**: The establishment of Eaglepoint AI is expected to bolster Global Mofy's position in the AI-driven technology solutions market, particularly in virtual content production and 3D digital assets development.\n\n### Technical Breakthroughs\n\u2022 **DeepSeek-R1 and Ghibli Art**: 2025 has been marked by several groundbreaking research achievements in AI, including the development of DeepSeek-R1 and advancements in Ghibli art, which demonstrate significant leaps in reasoning, multimodality, model efficiency, and AI hardware. These breakthroughs are pivotal for the future of AI, enabling more sophisticated and efficient applications.\n\n### Career Path Developments\n\u2022 **Army's AI and Machine Learning Career Path**: The Army has introduced a new career path for officers focusing on AI and machine learning, symbolizing the military's embrace of cutting-edge technology and autonomous warfare. This development underscores the strategic importance of AI in modern military operations and planning.\n\n## Why This Matters\n\nThe recent developments in AI have profound implications for various sectors, from technology and entertainment to defense. The **global expansion of AI services** and **technical breakthroughs** are set to enhance the capabilities of AI systems, making them more integral to business operations, content creation, and military strategy. Furthermore, the introduction of **AI-focused career paths** indicates a recognition of the need for specialized expertise in AI, which will be crucial for the development and ethical deployment of AI technologies.\n\n## Looking Ahead\n\nAs AI continues to evolve, several key areas will be worth watching:\n\n1. **Integration of AI in Mainstream Industries**: How AI is adopted and integrated into various industries will be a critical factor in determining its impact.\n2. **Ethical Considerations and Regulations**: The development of ethical guidelines and regulatory frameworks for AI will be essential to ensure that its benefits are realized while minimizing its risks.\n3. **Talent Development and Acquisition**: The competition for AI talent is expected to intensify, with organizations seeking professionals with expertise in AI and machine learning to drive their innovation and growth strategies.",
-        "tags": [
-            "GenAI",
-            "AI Career Paths",
-            "Technical Breakthroughs"
-        ],
-        "sources": [
-            {
-                "title": "Global Mofy AI Limited Establishes U.S. Subsidiary Eaglepoint AI",
-                "url": "https://www.manilatimes.net/2026/01/05/tmt-newswire/globenewswire/global-mofy-ai-limited-establishes-us-subsidiary-eaglepoint-ai-advancing-global-ai-training-and-data-engineering-capabilities/2252857"
-            },
-            {
-                "title": "ChatGPT Glossary: 61 AI Terms Everyone Should Know",
-                "url": "https://www.cnet.com/tech/services-and-software/chatgpt-glossary/"
-            },
-            {
-                "title": "From DeepSeek-R1 to Ghibli art: 5 technical breakthroughs that changed AI in 2025",
-                "url": "https://indianexpress.com/article/technology/artificial-intelligence/deepseek-ghibli-art-5-biggest-ai-breakthroughs-2025-10448067/"
-            },
-            {
-                "title": "Army to ring in new year with new AI and machine learning career path for officers",
-                "url": "https://www.stripes.com/branches/army/2025-12-31/artificial-intelligence-machine-learning-officer-20257219.html"
-            }
-        ],
-        "link": "https://www.manilatimes.net/2026/01/05/tmt-newswire/globenewswire/global-mofy-ai-limited-establishes-us-subsidiary-eaglepoint-ai-advancing-global-ai-training-and-data-engineering-capabilities/2252857"
-    },
-    {
-        "id": 3,
-        "title": "AI Breakthroughs: GPT-5, Llama 3.2, and AlphaFold 3 Revolutionize the Field",
-        "date": "2025-12-27",
-        "summary": "This week, OpenAI, Meta, and Google DeepMind unveiled significant advancements in AI, including GPT-5, Llama 3.2, and AlphaFold 3, which demonstrate substantial improvements in reasoning, multimodal capabilities, and protein structure prediction. These developments have far-reaching implications for various industries and research fields. The releases showcase the rapid progress being made in AI research and development.",
-        "content": "## Overview\n\nThis week has marked a pivotal moment in artificial intelligence with major announcements from three industry giants: OpenAI, Meta, and Google DeepMind. The simultaneous unveiling of GPT-5, Llama 3.2, and AlphaFold 3 signals a new era of capability in reasoning, multimodal processing, and scientific discovery.\n\n## Key Releases\n\n### OpenAI GPT-5\nOpenAI's latest frontier model, GPT-5, pushes the boundaries of reasoning and reliability. Early benchmarks suggest:\n\n\u2022 **Enhanced Reasoning**: Significant improvements in complex problem-solving and multi-step logic.\n\u2022 **Personalization**: Deeper ability to adapt to user context and preferences over long conversations.\n\n### Meta Llama 3.2\nMeta continues to lead in open weights with Llama 3.2, focusing on efficiency and multimodal integration:\n\n\u2022 **Vision Capabilities**: Native support for image understanding and analysis.\n\u2022 **Edge Performance**: Optimized variants designed to run locally on mobile leverage NPU acceleration.\n\n### Google DeepMind AlphaFold 3\nDeepMind's AlphaFold 3 extends its revolutionary protein structure prediction to a broader range of biomolecules:\n\n\u2022 **Broad Applicability**: Can now model DNA, RNA, and ligand interactions with high accuracy.\n\u2022 **Drug Discovery**: Accelerates the pipeline for identifying potential therapeutic targets.\n\n## Implications\n\nThese advancements collectively demonstrate that the pace of AI innovation is accelerating. From foundational reasoning models to specialized scientific tools, the impact of these technologies will be felt across healthcare, software engineering, and creative industries in the coming months.",
-        "tags": [
-            "GenAI",
-            "ProteinStructurePrediction",
-            "MultimodalLearning"
-        ],
-        "link": "https://example.com/gpt5"
-    },
-    {
-        "id": 1,
-        "title": "The Rise of Small Language Models",
-        "date": "2025-12-23",
-        "summary": "Recent weeks have seen a surge in efficient, smaller language models like Phi-2 and Gemini Nano, challenging the notion that bigger is always better.",
-        "content": "## Overview\n\nThe AI landscape is witnessing a significant paradigm shift. For years, the prevailing wisdom was clear: bigger models meant better performance. However, recent developments are challenging this assumption in meaningful ways.\n\n## Key Developments\n\n### Microsoft Phi-2\nWith just 2.7 billion parameters, Phi-2 has demonstrated performance that rivals models 25 times its size on complex reasoning tasks. This achievement stems from:\n\n\u2022 **Curated Training Data**: High-quality, textbook-style data rather than raw web scrapes\n\u2022 **Novel Architecture**: Efficient attention mechanisms that reduce computational overhead\n\u2022 **Knowledge Distillation**: Learning from larger teacher models\n\n### Google Gemini Nano\nDesigned for on-device applications, Gemini Nano runs entirely on mobile processors without cloud connectivity. Key benefits include:\n\n\u2022 **Privacy Preservation**: Data never leaves the device\n\u2022 **Reduced Latency**: No network round-trips required\n\u2022 **Offline Capability**: Works without internet connection\n\n## Why This Matters\n\nThe shift toward smaller, efficient models has profound implications:\n\n1. **Democratization of AI**: Powerful models can now run on consumer hardware\n2. **Environmental Impact**: Reduced energy consumption per inference\n3. **Edge Computing**: Enables AI in IoT devices, cars, and mobile phones\n4. **Cost Reduction**: Lower cloud compute costs for businesses\n\n## Looking Ahead\n\nThis trend suggests the future of AI isn't just about scaling up\u2014it's about doing more with less. Expect to see continued innovation in model compression, quantization, and efficient architectures throughout 2025.",
-        "tags": [
-            "GenAI",
-            "LLMs"
-        ],
-        "sources": [
-            {
-                "title": "Phi-2: The surprising power of small language models - Microsoft Research",
-                "url": "https://www.microsoft.com/en-us/research/blog/phi-2-the-surprising-power-of-small-language-models/"
-            },
-            {
-                "title": "Introducing Gemini: Google's Most Capable AI Model",
-                "url": "https://blog.google/technology/ai/google-gemini-ai/"
-            },
-            {
-                "title": "The Efficiency Era: How Small Models Are Beating Giants",
-                "url": "https://arxiv.org/abs/2312.11420"
-            }
-        ],
-        "link": "https://www.microsoft.com/en-us/research/blog/phi-2-the-surprising-power-of-small-language-models/"
-    },
-    {
-        "id": 2,
-        "title": "Graph Neural Networks in Logistics",
-        "date": "2025-12-16",
-        "summary": "How GNNs are transforming supply chain optimization by modeling complex relationships between entities in shipping networks.",
-        "content": "## Overview\n\nGraph Neural Networks (GNNs) are revolutionizing logistics and supply chain optimization. Unlike traditional models that treat data points independently, GNNs naturally capture the interconnected relationships inherent in shipping networks.\n\n## Real-World Applications\n\n### Route Optimization\nGNNs process entire transportation networks simultaneously, considering:\n\n\u2022 **Dynamic Traffic Patterns**: Real-time congestion data\n\u2022 **Weather Conditions**: Impact on delivery times and safety\n\u2022 **Capacity Constraints**: Vehicle and warehouse limitations\n\u2022 **Multi-stop Planning**: Optimizing sequences across dozens of stops\n\n### Demand Forecasting\nBy modeling relationships between locations as a graph, GNNs capture:\n\n\u2022 **Spatial Dependencies**: How demand in one area affects nearby regions\n\u2022 **Supplier-Retailer Relationships**: Upstream supply constraints\n\u2022 **Seasonal Patterns**: Geographic variations in demand cycles\n\n### Fleet Management\nMajor companies are achieving significant results:\n\n\u2022 **Amazon**: 15% reduction in empty miles through GNN-based truck assignment\n\u2022 **UPS**: Improved package routing efficiency by 12%\n\u2022 **FedEx**: Real-time network reoptimization during disruptions\n\n## Technical Deep Dive\n\nGNNs work by:\n\n1. **Message Passing**: Each node aggregates information from neighbors\n2. **Iterative Updates**: Multiple rounds of message passing capture long-range dependencies\n3. **Prediction**: Final node/edge representations used for optimization decisions\n\n## Future Directions\n\nThe combination of GNNs with reinforcement learning is particularly promising. These hybrid systems can:\n\n\u2022 Learn optimal policies through simulation\n\u2022 Adapt to changing network conditions\n\u2022 Handle uncertainty in demand and supply\n\nExpect significant adoption across logistics, telecommunications, and urban planning in the coming year.",
-        "tags": [
-            "Optimization",
-            "Graph Learning"
-        ],
-        "sources": [
-            {
-                "title": "Graph Neural Networks for Combinatorial Optimization - arXiv",
-                "url": "https://arxiv.org/abs/2110.09563"
-            },
-            {
-                "title": "How Amazon Uses AI in Its Operations",
-                "url": "https://www.aboutamazon.com/news/operations/how-amazon-uses-ai-in-its-operations"
-            },
-            {
-                "title": "DeepMind's Vehicle Routing with Graph Networks",
-                "url": "https://www.deepmind.com/research/publications/learning-to-solve-vehicle-routing-problems-with-graph-neural-networks"
-            }
-        ],
-        "link": "https://arxiv.org/abs/2110.09563"
-    }
+  {
+    "id": 7,
+    "title": "AI News: Unearthing experimental materials data buried in s...",
+    "date": "2026-01-13",
+    "summary": "This week's highlights include: Unearthing experimental materials data buried in scientific papers using LLMs. Stay updated on the latest AI and machine learning developments.",
+    "content": "## Overview\n\nThis week brought exciting developments in AI and machine learning.\n\n## Key Developments\n\n### Unearthing experimental materials data buried in scientific papers using LLMs\n\nTechnologies that underpin modern society, such as smartphones and automobiles, rely on a diverse range of functional materials. Materials scientists are therefore working to develop and improve new materials,\n\n## Why This Matters\n\nThese developments signal continued rapid progress in AI capabilities.\n\n## Looking Ahead\n\nExpect continued innovation in AI research and applications.",
+    "tags": [
+      "AI",
+      "LLMs",
+      "Research"
+    ],
+    "sources": [
+      {
+        "title": "Unearthing experimental materials data buried in scientific papers using LLMs",
+        "url": "https://www.msn.com/en-us/news/technology/unearthing-experimental-materials-data-buried-in-scientific-papers-using-llms/ar-AA1TLvOe"
+      },
+      {
+        "title": "Multi-agent, domain-specific and governed models will define healthcare genAI in 2026",
+        "url": "https://www.cio.com/article/4114606/multi-agent-domain-specific-and-governed-models-will-define-healthcare-genai-in-2026.html"
+      },
+      {
+        "title": "Global Mofy AI Limited Establishes U.S. Subsidiary Eaglepoint AI, Advancing Global AI Training and Data Engineering Capabilities",
+        "url": "https://markets.businessinsider.com/news/stocks/global-mofy-ai-limited-establishes-u-s-subsidiary-eaglepoint-ai-advancing-global-ai-training-and-data-engineering-capabilities-1035682603"
+      }
+    ],
+    "link": "https://www.msn.com/en-us/news/technology/unearthing-experimental-materials-data-buried-in-scientific-papers-using-llms/ar-AA1TLvOe"
+  },
+  {
+    "id": 6,
+    "title": "Advancing AI Frontiers: Global Expansion, Technical Breakthroughs, and New Career Paths",
+    "date": "2026-01-05",
+    "summary": "The AI landscape is rapidly evolving with Global Mofy AI Limited establishing a U.S. subsidiary, significant technical breakthroughs in 2025, and the introduction of new AI and machine learning career paths for Army officers. These developments underscore the growing importance of AI in various sectors. As AI continues to advance, its applications and implications are becoming increasingly diverse and profound.",
+    "content": "## Overview\n\nThe field of Artificial Intelligence (AI) has witnessed significant advancements in recent weeks, with developments ranging from global expansions by key players to breakthroughs in AI technology and the introduction of new career paths. These moves not only reflect the growing relevance of AI in the global economy but also highlight its potential to transform various industries. The expansion of AI capabilities is poised to impact everything from content creation to military operations.\n\n## Key Developments\n\n### Global Expansion of AI Services\n\u2022 **Global Mofy AI Expansion**: Global Mofy AI Limited has established a U.S. subsidiary named Eaglepoint AI, aiming to enhance its global AI training and data engineering capabilities. This move indicates a strategic push into the U.S. market, leveraging the country's robust technology infrastructure and talent pool.\n\u2022 **Enhanced Capabilities**: The establishment of Eaglepoint AI is expected to bolster Global Mofy's position in the AI-driven technology solutions market, particularly in virtual content production and 3D digital assets development.\n\n### Technical Breakthroughs\n\u2022 **DeepSeek-R1 and Ghibli Art**: 2025 has been marked by several groundbreaking research achievements in AI, including the development of DeepSeek-R1 and advancements in Ghibli art, which demonstrate significant leaps in reasoning, multimodality, model efficiency, and AI hardware. These breakthroughs are pivotal for the future of AI, enabling more sophisticated and efficient applications.\n\n### Career Path Developments\n\u2022 **Army's AI and Machine Learning Career Path**: The Army has introduced a new career path for officers focusing on AI and machine learning, symbolizing the military's embrace of cutting-edge technology and autonomous warfare. This development underscores the strategic importance of AI in modern military operations and planning.\n\n## Why This Matters\n\nThe recent developments in AI have profound implications for various sectors, from technology and entertainment to defense. The **global expansion of AI services** and **technical breakthroughs** are set to enhance the capabilities of AI systems, making them more integral to business operations, content creation, and military strategy. Furthermore, the introduction of **AI-focused career paths** indicates a recognition of the need for specialized expertise in AI, which will be crucial for the development and ethical deployment of AI technologies.\n\n## Looking Ahead\n\nAs AI continues to evolve, several key areas will be worth watching:\n\n1. **Integration of AI in Mainstream Industries**: How AI is adopted and integrated into various industries will be a critical factor in determining its impact.\n2. **Ethical Considerations and Regulations**: The development of ethical guidelines and regulatory frameworks for AI will be essential to ensure that its benefits are realized while minimizing its risks.\n3. **Talent Development and Acquisition**: The competition for AI talent is expected to intensify, with organizations seeking professionals with expertise in AI and machine learning to drive their innovation and growth strategies.",
+    "tags": [
+      "GenAI",
+      "AI Career Paths",
+      "Technical Breakthroughs"
+    ],
+    "sources": [
+      {
+        "title": "Global Mofy AI Limited Establishes U.S. Subsidiary Eaglepoint AI",
+        "url": "https://www.manilatimes.net/2026/01/05/tmt-newswire/globenewswire/global-mofy-ai-limited-establishes-us-subsidiary-eaglepoint-ai-advancing-global-ai-training-and-data-engineering-capabilities/2252857"
+      },
+      {
+        "title": "ChatGPT Glossary: 61 AI Terms Everyone Should Know",
+        "url": "https://www.cnet.com/tech/services-and-software/chatgpt-glossary/"
+      },
+      {
+        "title": "From DeepSeek-R1 to Ghibli art: 5 technical breakthroughs that changed AI in 2025",
+        "url": "https://indianexpress.com/article/technology/artificial-intelligence/deepseek-ghibli-art-5-biggest-ai-breakthroughs-2025-10448067/"
+      },
+      {
+        "title": "Army to ring in new year with new AI and machine learning career path for officers",
+        "url": "https://www.stripes.com/branches/army/2025-12-31/artificial-intelligence-machine-learning-officer-20257219.html"
+      }
+    ],
+    "link": "https://www.manilatimes.net/2026/01/05/tmt-newswire/globenewswire/global-mofy-ai-limited-establishes-us-subsidiary-eaglepoint-ai-advancing-global-ai-training-and-data-engineering-capabilities/2252857"
+  },
+  {
+    "id": 3,
+    "title": "AI Breakthroughs: GPT-5, Llama 3.2, and AlphaFold 3 Revolutionize the Field",
+    "date": "2025-12-27",
+    "summary": "This week, OpenAI, Meta, and Google DeepMind unveiled significant advancements in AI, including GPT-5, Llama 3.2, and AlphaFold 3, which demonstrate substantial improvements in reasoning, multimodal capabilities, and protein structure prediction. These developments have far-reaching implications for various industries and research fields. The releases showcase the rapid progress being made in AI research and development.",
+    "content": "## Overview\n\nThis week has marked a pivotal moment in artificial intelligence with major announcements from three industry giants: OpenAI, Meta, and Google DeepMind. The simultaneous unveiling of GPT-5, Llama 3.2, and AlphaFold 3 signals a new era of capability in reasoning, multimodal processing, and scientific discovery.\n\n## Key Releases\n\n### OpenAI GPT-5\nOpenAI's latest frontier model, GPT-5, pushes the boundaries of reasoning and reliability. Early benchmarks suggest:\n\n\u2022 **Enhanced Reasoning**: Significant improvements in complex problem-solving and multi-step logic.\n\u2022 **Personalization**: Deeper ability to adapt to user context and preferences over long conversations.\n\n### Meta Llama 3.2\nMeta continues to lead in open weights with Llama 3.2, focusing on efficiency and multimodal integration:\n\n\u2022 **Vision Capabilities**: Native support for image understanding and analysis.\n\u2022 **Edge Performance**: Optimized variants designed to run locally on mobile leverage NPU acceleration.\n\n### Google DeepMind AlphaFold 3\nDeepMind's AlphaFold 3 extends its revolutionary protein structure prediction to a broader range of biomolecules:\n\n\u2022 **Broad Applicability**: Can now model DNA, RNA, and ligand interactions with high accuracy.\n\u2022 **Drug Discovery**: Accelerates the pipeline for identifying potential therapeutic targets.\n\n## Implications\n\nThese advancements collectively demonstrate that the pace of AI innovation is accelerating. From foundational reasoning models to specialized scientific tools, the impact of these technologies will be felt across healthcare, software engineering, and creative industries in the coming months.",
+    "tags": [
+      "GenAI",
+      "ProteinStructurePrediction",
+      "MultimodalLearning"
+    ],
+    "link": "https://example.com/gpt5"
+  },
+  {
+    "id": 1,
+    "title": "The Rise of Small Language Models",
+    "date": "2025-12-23",
+    "summary": "Recent weeks have seen a surge in efficient, smaller language models like Phi-2 and Gemini Nano, challenging the notion that bigger is always better.",
+    "content": "## Overview\n\nThe AI landscape is witnessing a significant paradigm shift. For years, the prevailing wisdom was clear: bigger models meant better performance. However, recent developments are challenging this assumption in meaningful ways.\n\n## Key Developments\n\n### Microsoft Phi-2\nWith just 2.7 billion parameters, Phi-2 has demonstrated performance that rivals models 25 times its size on complex reasoning tasks. This achievement stems from:\n\n\u2022 **Curated Training Data**: High-quality, textbook-style data rather than raw web scrapes\n\u2022 **Novel Architecture**: Efficient attention mechanisms that reduce computational overhead\n\u2022 **Knowledge Distillation**: Learning from larger teacher models\n\n### Google Gemini Nano\nDesigned for on-device applications, Gemini Nano runs entirely on mobile processors without cloud connectivity. Key benefits include:\n\n\u2022 **Privacy Preservation**: Data never leaves the device\n\u2022 **Reduced Latency**: No network round-trips required\n\u2022 **Offline Capability**: Works without internet connection\n\n## Why This Matters\n\nThe shift toward smaller, efficient models has profound implications:\n\n1. **Democratization of AI**: Powerful models can now run on consumer hardware\n2. **Environmental Impact**: Reduced energy consumption per inference\n3. **Edge Computing**: Enables AI in IoT devices, cars, and mobile phones\n4. **Cost Reduction**: Lower cloud compute costs for businesses\n\n## Looking Ahead\n\nThis trend suggests the future of AI isn't just about scaling up\u2014it's about doing more with less. Expect to see continued innovation in model compression, quantization, and efficient architectures throughout 2025.",
+    "tags": [
+      "GenAI",
+      "LLMs"
+    ],
+    "sources": [
+      {
+        "title": "Phi-2: The surprising power of small language models - Microsoft Research",
+        "url": "https://www.microsoft.com/en-us/research/blog/phi-2-the-surprising-power-of-small-language-models/"
+      },
+      {
+        "title": "Introducing Gemini: Google's Most Capable AI Model",
+        "url": "https://blog.google/technology/ai/google-gemini-ai/"
+      },
+      {
+        "title": "The Efficiency Era: How Small Models Are Beating Giants",
+        "url": "https://arxiv.org/abs/2312.11420"
+      }
+    ],
+    "link": "https://www.microsoft.com/en-us/research/blog/phi-2-the-surprising-power-of-small-language-models/"
+  },
+  {
+    "id": 2,
+    "title": "Graph Neural Networks in Logistics",
+    "date": "2025-12-16",
+    "summary": "How GNNs are transforming supply chain optimization by modeling complex relationships between entities in shipping networks.",
+    "content": "## Overview\n\nGraph Neural Networks (GNNs) are revolutionizing logistics and supply chain optimization. Unlike traditional models that treat data points independently, GNNs naturally capture the interconnected relationships inherent in shipping networks.\n\n## Real-World Applications\n\n### Route Optimization\nGNNs process entire transportation networks simultaneously, considering:\n\n\u2022 **Dynamic Traffic Patterns**: Real-time congestion data\n\u2022 **Weather Conditions**: Impact on delivery times and safety\n\u2022 **Capacity Constraints**: Vehicle and warehouse limitations\n\u2022 **Multi-stop Planning**: Optimizing sequences across dozens of stops\n\n### Demand Forecasting\nBy modeling relationships between locations as a graph, GNNs capture:\n\n\u2022 **Spatial Dependencies**: How demand in one area affects nearby regions\n\u2022 **Supplier-Retailer Relationships**: Upstream supply constraints\n\u2022 **Seasonal Patterns**: Geographic variations in demand cycles\n\n### Fleet Management\nMajor companies are achieving significant results:\n\n\u2022 **Amazon**: 15% reduction in empty miles through GNN-based truck assignment\n\u2022 **UPS**: Improved package routing efficiency by 12%\n\u2022 **FedEx**: Real-time network reoptimization during disruptions\n\n## Technical Deep Dive\n\nGNNs work by:\n\n1. **Message Passing**: Each node aggregates information from neighbors\n2. **Iterative Updates**: Multiple rounds of message passing capture long-range dependencies\n3. **Prediction**: Final node/edge representations used for optimization decisions\n\n## Future Directions\n\nThe combination of GNNs with reinforcement learning is particularly promising. These hybrid systems can:\n\n\u2022 Learn optimal policies through simulation\n\u2022 Adapt to changing network conditions\n\u2022 Handle uncertainty in demand and supply\n\nExpect significant adoption across logistics, telecommunications, and urban planning in the coming year.",
+    "tags": [
+      "Optimization",
+      "Graph Learning"
+    ],
+    "sources": [
+      {
+        "title": "Graph Neural Networks for Combinatorial Optimization - arXiv",
+        "url": "https://arxiv.org/abs/2110.09563"
+      },
+      {
+        "title": "How Amazon Uses AI in Its Operations",
+        "url": "https://www.aboutamazon.com/news/operations/how-amazon-uses-ai-in-its-operations"
+      },
+      {
+        "title": "DeepMind's Vehicle Routing with Graph Networks",
+        "url": "https://www.deepmind.com/research/publications/learning-to-solve-vehicle-routing-problems-with-graph-neural-networks"
+      }
+    ],
+    "link": "https://arxiv.org/abs/2110.09563"
+  }
 ]
