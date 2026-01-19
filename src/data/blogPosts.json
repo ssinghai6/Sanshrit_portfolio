@@ -1,5 +1,32 @@
 [
   {
+    "id": 8,
+    "title": "AI News: AGI? GPUs? Learn the definitions of the most commo...",
+    "date": "2026-01-19",
+    "summary": "This week's highlights include: AGI? GPUs? Learn the definitions of the most common AI terms to enter our vocabulary. Stay updated on the latest AI and machine learning developments.",
+    "content": "## Overview\n\nThis week brought exciting developments in AI and machine learning.\n\n## Key Developments\n\n### AGI? GPUs? Learn the definitions of the most common AI terms to enter our vocabulary\n\nThe rise of AI has given us an entirely new vocabulary. Here's a list of the top AI terms you need to learn, in alphabetical order.\n\n## Why This Matters\n\nThese developments signal continued rapid progress in AI capabilities.\n\n## Looking Ahead\n\nExpect continued innovation in AI research and applications.",
+    "tags": [
+      "AI",
+      "LLMs",
+      "Research"
+    ],
+    "sources": [
+      {
+        "title": "AGI? GPUs? Learn the definitions of the most common AI terms to enter our vocabulary",
+        "url": "https://www.msn.com/en-us/news/technology/agi-gpus-learn-the-definitions-of-the-most-common-ai-terms-to-enter-our-vocabulary/ar-AA1UruCD"
+      },
+      {
+        "title": "Edge AI: The future of AI inference is smarter local compute",
+        "url": "https://www.infoworld.com/article/4117620/edge-ai-the-future-of-ai-inference-is-smarter-local-compute.html"
+      },
+      {
+        "title": "Five top innovative AI research labs worth knowing about in 2026",
+        "url": "https://www.msn.com/en-za/technology/artificial-intelligence/five-top-innovative-ai-research-labs-worth-knowing-about-in-2026/ar-AA1UukY1"
+      }
+    ],
+    "link": "https://www.msn.com/en-us/news/technology/agi-gpus-learn-the-definitions-of-the-most-common-ai-terms-to-enter-our-vocabulary/ar-AA1UruCD"
+  },
+  {
     "id": 7,
     "title": "AI News: Unearthing experimental materials data buried in s...",
     "date": "2026-01-13",
