@@ -1,5 +1,32 @@
 [
   {
+    "id": 9,
+    "title": "AI News: The quant shop \u2014 AI lab convergence",
+    "date": "2026-01-27",
+    "summary": "This week's highlights include: The quant shop \u2014 AI lab convergence. Stay updated on the latest AI and machine learning developments.",
+    "content": "## Overview\n\nThis week brought exciting developments in AI and machine learning.\n\n## Key Developments\n\n### The quant shop \u2014 AI lab convergence\n\nWhy is a Chinese quant shop behind one of the world's strongest open-weight LLMs? It turns out that modern quantitative investing and frontier AI labs are converging on the same institutional machine: large-scale learning systems attached to balance sheets.\n\n## Why This Matters\n\nThese developments signal continued rapid progress in AI capabilities.\n\n## Looking Ahead\n\nExpect continued innovation in AI research and applications.",
+    "tags": [
+      "AI",
+      "LLMs",
+      "Research"
+    ],
+    "sources": [
+      {
+        "title": "The quant shop \u2014 AI lab convergence",
+        "url": "https://www.ft.com/content/18313a5f-ae6e-44e9-a26a-4a81cd3190bf"
+      },
+      {
+        "title": "An Introduction To Vertex AI",
+        "url": "https://www.unite.ai/an-introduction-to-vertex-ai/"
+      },
+      {
+        "title": "Google, OpenAI, and Anthropic are competing to see whose AI can play Pok\u00e9mon the best \u2014 Twitch streams of beloved RPG game test the models' true might",
+        "url": "https://www.msn.com/en-us/technology/artificial-intelligence/google-openai-and-anthropic-are-competing-to-see-whose-ai-can-play-pok\u00e9mon-the-best-twitch-streams-of-beloved-rpg-game-test-the-models-true-might/ar-AA1USZP7"
+      }
+    ],
+    "link": "https://www.ft.com/content/18313a5f-ae6e-44e9-a26a-4a81cd3190bf"
+  },
+  {
     "id": 8,
     "title": "AI News: AGI? GPUs? Learn the definitions of the most commo...",
     "date": "2026-01-19",
