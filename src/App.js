@@ -11,6 +11,34 @@ const Portfolio = () => {
   const [showAllPosts, setShowAllPosts] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [expandedExp, setExpandedExp] = useState({});
+  const [showContactModal, setShowContactModal] = useState(false);
+  const [formStatus, setFormStatus] = useState({ submitting: false, succeeded: false, error: null });
+
+  const handleContactSubmit = async (e) => {
+    e.preventDefault();
+    setFormStatus({ submitting: true, succeeded: false, error: null });
+
+    const formData = new FormData(e.target);
+
+    try {
+      const response = await fetch('https://formspree.io/f/mlglwejy', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        setFormStatus({ submitting: false, succeeded: true, error: null });
+        e.target.reset();
+      } else {
+        throw new Error('Form submission failed');
+      }
+    } catch (error) {
+      setFormStatus({ submitting: false, succeeded: false, error: 'Failed to send. Please try again.' });
+    }
+  };
 
 
 
@@ -139,9 +167,9 @@ const Portfolio = () => {
             <a href="#projects" className="px-6 py-3 bg-white text-black font-medium rounded-lg hover:bg-zinc-200 transition-colors">
               View Work
             </a>
-            <a href="mailto:singhai.sanshrit@live.com" className="px-6 py-3 glass-panel text-white font-medium rounded-lg hover:bg-white/10 transition-colors">
+            <button onClick={() => setShowContactModal(true)} className="px-6 py-3 glass-panel text-white font-medium rounded-lg hover:bg-white/10 transition-colors">
               Contact Me
-            </a>
+            </button>
           </div>
         </section>
 
@@ -653,8 +681,8 @@ const Portfolio = () => {
                       let bodyContent = fullContent;
                       let whyItMatters = '';
 
-                      // Try to match Key Takeaways block (handles both **Key Takeaways**: and ### Key Takeaways)
-                      const takeawaysPattern = /(\*\*Key Takeaways\*\*:?|### Key Takeaways)\s*([\s\S]*?)(\*\*Why It Matters\*\*|### Why It Matters)/i;
+                      // Try to match Key Takeaways block (handles both **Key Takeaways:** and ### Key Takeaways)
+                      const takeawaysPattern = /(\*\*Key Takeaways:?\*\*:?|### Key Takeaways:?)\s*([\s\S]*?)(\*\*Why It Matters:?\*\*:?|### Why It Matters:?)/i;
                       const takeawaysMatch = fullContent.match(takeawaysPattern);
 
                       if (takeawaysMatch) {
@@ -791,6 +819,104 @@ const Portfolio = () => {
                     ))}
                   </div>
                 </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Contact Form Modal */}
+      {showContactModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => { setShowContactModal(false); setFormStatus({ submitting: false, succeeded: false, error: null }); }}></div>
+          <div className="glass-panel w-full max-w-md rounded-2xl overflow-hidden relative z-10 animate-slide-up bg-[#0f0f0f]">
+            <div className="p-6 border-b border-white/10 flex justify-between items-center bg-black/40">
+              <h2 className="text-2xl font-bold text-white">Get In Touch</h2>
+              <button onClick={() => { setShowContactModal(false); setFormStatus({ submitting: false, succeeded: false, error: null }); }} className="p-2 hover:bg-white/10 rounded-full transition-colors">
+                <X size={24} className="text-zinc-400" />
+              </button>
+            </div>
+
+            <div className="p-6">
+              {formStatus.succeeded ? (
+                <div className="text-center py-8">
+                  <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-2">Message Sent!</h3>
+                  <p className="text-zinc-400">Details sent to singhai.sanshrit@live.com</p>
+                  <button
+                    onClick={() => { setShowContactModal(false); setFormStatus({ submitting: false, succeeded: false, error: null }); }}
+                    className="mt-6 px-6 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors"
+                  >
+                    Close
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleContactSubmit} className="space-y-4">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-zinc-300 mb-2">Name</label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:border-primary-500 transition-colors"
+                      placeholder="Your name"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-zinc-300 mb-2">Email</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:border-primary-500 transition-colors"
+                      placeholder="your@email.com"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-medium text-zinc-300 mb-2">Message</label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      required
+                      rows={4}
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:border-primary-500 transition-colors resize-none"
+                      placeholder="Your message..."
+                    ></textarea>
+                  </div>
+
+                  {formStatus.error && (
+                    <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-sm">
+                      {formStatus.error}
+                    </div>
+                  )}
+
+                  <button
+                    type="submit"
+                    disabled={formStatus.submitting}
+                    className="w-full py-3 bg-gradient-to-r from-primary-500 to-secondary-500 text-white font-medium rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  >
+                    {formStatus.submitting ? (
+                      <>
+                        <svg className="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Mail size={18} />
+                        Send Message
+                      </>
+                    )}
+                  </button>
+                </form>
               )}
             </div>
           </div>
