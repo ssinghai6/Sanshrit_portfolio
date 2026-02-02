@@ -1,20 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Github, Linkedin, Mail, ExternalLink, X, ChevronRight, Menu, Download, Database } from 'lucide-react';
 import GraphBackground from './GraphBackground';
 import { FaFileAlt, FaNewspaper, FaGraduationCap } from 'react-icons/fa';
 import blogPosts from './data/blogPosts.json';
-import ReactMarkdown from 'react-markdown';
 
 const Portfolio = () => {
-  const [mounted, setMounted] = useState(false);
+
   const [selectedPost, setSelectedPost] = useState(null);
   const [showAllPosts, setShowAllPosts] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [expandedExp, setExpandedExp] = useState({});
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+
 
   const NavLink = ({ href, children }) => (
     <a
@@ -49,7 +46,7 @@ const Portfolio = () => {
       <nav className="fixed w-full glass-nav z-50">
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
-            <a href="#" className="text-xl font-bold font-display tracking-tighter text-white">
+            <a href="#about" className="text-xl font-bold font-display tracking-tighter text-white">
               SS<span className="text-primary-500">.</span>
             </a>
 
