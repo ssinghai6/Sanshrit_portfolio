@@ -46,13 +46,15 @@ TRUSTED_DOMAINS = [
     'arstechnica.com', 'thenextweb.com', 'zdnet.com', 'engadget.com',
     'towardsdatascience.com', 'medium.com', 'arxiv.org', 'openai.com',
     'anthropic.com', 'deepmind.com', 'ai.meta.com', 'huggingface.co',
-    'mit.edu', 'stanford.edu', 'reuters.com', 'bloomberg.com'
+    'mit.edu', 'stanford.edu', 'reuters.com', 'bloomberg.com',
+    'techxplore.com', 'blog.google', 'therundown.ai', 'artificialintelligence-news.com'
 ]
 
-# Domains to exclude (sports, entertainment, etc.)
+# Domains to exclude (sports, entertainment, aggregators)
 EXCLUDED_PATTERNS = [
     '/sports/', '/nfl/', '/nba/', '/mlb/', '/entertainment/',
-    '/celebrity/', '/gossip/', '/fashion/'
+    '/celebrity/', '/gossip/', '/fashion/',
+    'msn.com', 'yahoo.com', 'aol.com', 'marketwatch.com'
 ]
 
 
@@ -133,7 +135,7 @@ def search_news_node(state: AgentState) -> AgentState:
         raw_results = []
         with DDGS() as ddgs:
             # Fetch more results initially to filter down to relevant ones
-            ddg_gen = ddgs.news(base_query, max_results=15, timelimit='w')  # 'w' = past week
+            ddg_gen = ddgs.news(base_query, max_results=25, timelimit='w')  # 'w' = past week
             
             for item in ddg_gen:
                 raw_results.append({
@@ -195,19 +197,16 @@ def summarize_node(state: AgentState) -> AgentState:
     
     if not GROQ_API_KEY:
         print("⚠️  GROQ_API_KEY not found. Using mock summary.")
-        # Generate a more descriptive title from actual news
         first_title = state["news_items"][0].get("title", "AI Developments")
-        dynamic_title = f"AI News: {first_title[:50]}..." if len(first_title) > 50 else f"AI News: {first_title}"
+        dynamic_title = f"AI Weekly: {first_title[:30]}... and more"
         
         state["generated_post"] = {
             "title": dynamic_title,
-            "summary": f"This week's highlights include: {first_title}. Stay updated on the latest AI and machine learning developments.",
-            "content": f"## Overview\n\nThis week brought exciting developments in AI and machine learning.\n\n## Key Developments\n\n### {state['news_items'][0].get('title', 'Latest News')}\n\n{state['news_items'][0].get('snippet', 'Major AI developments occurred this week.')}\n\n## Why This Matters\n\nThese developments signal continued rapid progress in AI capabilities.\n\n## Looking Ahead\n\nExpect continued innovation in AI research and applications.",
-            "tags": ["AI", "LLMs", "Research"],
-            "sources": [
-                {"title": item.get("title", "Source"), "url": item.get("link", "#")} for item in state["news_items"][:3]
-            ],
-            "link": get_best_link(state["news_items"])
+            "summary": "This week's AI digest covers major updates.",
+            "content": "## Section 1\n\nContent...\n\n---\n\n## Section 2\n\nContent...",
+            "tags": ["AI", "News"],
+            "sources": [{"title": "Source", "url": "#"}],
+            "link": "#"
         }
         return state
 
@@ -228,36 +227,50 @@ def summarize_node(state: AgentState) -> AgentState:
     if state.get("query"):
         context_str = "specified period"
     
-    prompt = f"""You are an expert AI/ML journalist writing for a technical audience. Here are the top news stories from the {context_str}:
+    prompt = f"""You are an expert AI/ML journalist. Here are the top news stories from the {context_str}:
 
 {news_text}
 
-Write a comprehensive, well-structured blog post about these AI news stories.
+Task: Create a SINGLE comprehensive "Weekly Digest" blog post covering the top 3-5 stories.
 
-FORMAT YOUR CONTENT using this structure:
-- Use "## Section Title" for main sections (Overview, Key Developments, Why This Matters, Looking Ahead)
-- Use "### Sub-heading" for sub-sections within Key Developments
-- Use "• **Bold Label**: Description" for bullet points
-- Use numbered lists (1. 2. 3.) for sequential steps or rankings
-- Use **bold** to emphasize key terms
+CRITICAL FORMATTING RULES:
+1. Use DOUBLE NEWLINES (\\n\\n) between ALL sections, paragraphs, and elements.
+2. Each story MUST follow this EXACT structure:
 
-REQUIRED SECTIONS in the content field:
-1. ## Overview - 2-3 sentences introducing the topic
-2. ## Key Developments - Multiple ### sub-sections covering each major story
-3. ## Why This Matters - Implications and impact analysis
-4. ## Looking Ahead - Future predictions and what to watch
+## [Story Title]
 
-Format your response as a JSON object with these keys:
-- title: A catchy, specific title (not generic like "This Week in AI")
-- summary: A 2-3 sentence executive summary of the key highlights
-- content: The full article content using the markdown structure above. Separate sections with double newlines.
-- tags: A list of 2-3 relevant tags (e.g., ["GenAI", "Robotics"])
-- sources: An array of objects with "title" and "url" for each news source
-- link: The link to the most important story
+[Paragraph 1 - 2-3 sentences about the story]
 
-Make the content insightful, educational, and professionally written.
+[Paragraph 2 - 2-3 sentences with more detail]
 
-Respond ONLY with the JSON object, no other text."""
+[Paragraph 3 - Technical implications]
+
+### Key Takeaways
+
+- First key point
+- Second key point  
+- Third key point
+
+### Why It Matters
+
+[1-2 paragraphs explaining significance]
+
+---
+
+3. Start with "## Weekly Overview" section.
+4. End with "## Looking Ahead" section.
+5. Use `---` horizontal rules between story sections.
+
+OUTPUT FORMAT:
+Return a JSON object with these exact keys:
+- "title": Engaging headline (no prefixes like "AI Weekly:")
+- "summary": 2-3 sentence executive summary
+- "content": Full markdown content with PROPER NEWLINES
+- "tags": Array of relevant tags
+- "sources": Array of {{"title": "...", "url": "..."}} objects
+- "link": Primary source URL
+
+Respond ONLY with the JSON object, no markdown code blocks."""
 
     try:
         response = llm.invoke([HumanMessage(content=prompt)])
@@ -269,37 +282,14 @@ Respond ONLY with the JSON object, no other text."""
             if content.startswith("json"):
                 content = content[4:]
         
-        # Clean up control characters that break JSON parsing
         content = content.strip()
-        # Replace problematic characters
         import re
         content = re.sub(r'[\x00-\x1f\x7f-\x9f]', ' ', content)
         
-        state["generated_post"] = json.loads(content)
-        print(f"✅ Generated detailed post: {state['generated_post']['title']}")
-    except json.JSONDecodeError as e:
-        print(f"⚠️  JSON parsing error, using simplified parsing...")
-        # Try to extract fields manually
-        try:
-            # Extract what we can from the response
-            response_text = response.content if 'response' in dir() else ""
-            # Generate dynamic title from news items
-            news_items = state.get("news_items", [])
-            first_title = news_items[0].get("title", "AI Developments") if news_items else "AI Developments"
-            dynamic_title = f"AI News: {first_title[:50]}..." if len(first_title) > 50 else f"AI News: {first_title}"
-            
-            state["generated_post"] = {
-                "title": dynamic_title,
-                "summary": f"This period brought exciting developments including: {first_title}.",
-                "content": "## Overview\n\nSeveral major AI developments occurred.\n\n## Key Developments\n\n• **Model Releases**: New AI models were announced.\n\n• **Research**: Important research papers were published.\n\n• **Industry**: Major tech companies continued AI investments.",
-                "tags": ["AI", "LLMs"],
-                "sources": [{"title": s["title"], "url": s["link"]} for s in news_items[:2]],
-                "link": get_best_link(news_items)
-            }
-            print(f"✅ Created fallback post: {state['generated_post']['title']}")
-        except:
-            state["error"] = str(e)
-            state["generated_post"] = None
+        data = json.loads(content)
+        state["generated_post"] = data
+        print(f"✅ Generated detailed digest: {state['generated_post']['title']}")
+
     except Exception as e:
         print(f"❌ Error generating summary: {e}")
         state["error"] = str(e)
@@ -315,7 +305,7 @@ def create_issue_node(state: AgentState) -> AgentState:
     """
     print("📝 Creating GitHub Issue for review...")
     
-    if not state["generated_post"]:
+    if not state.get("generated_post"):
         state["error"] = "No generated post to create issue for"
         return state
     
@@ -327,28 +317,30 @@ def create_issue_node(state: AgentState) -> AgentState:
     post = state["generated_post"]
     today = datetime.date.today()
     
-    issue_title = f"🤖 Weekly AI News: {post['title']}"
-    issue_body = f"""## 📰 AI News Agent - Update
-
+    issue_title = f"🤖 AI Digest: {post['title']}"
+    # Format sources list
+    sources_list = "\n".join([f"- [{s.get('title', 'Link')}]({s.get('url', '#')})" for s in post.get('sources', [])])
+    
+    issue_body = f"""## 📰 AI News Agent - Weekly Digest
+    
 **Generated on:** {today}
 
 ---
 
-### Preview
+# {post['title']}
 
-**Title:** {post['title']}
+{post.get('content', 'No content generated.')}
 
-**Summary:** {post['summary']}
+---
 
-**Tags:** {', '.join(post.get('tags', []))}
-
-**Source:** {post.get('link', 'N/A')}
+### Sources
+{sources_list}
 
 ---
 
 ### 📧 How to Approve
 
-**Reply to this email with `APPROVE` to publish this post to your blog.**
+**Reply to this email with `APPROVE` to publish this digest to your blog.**
 
 Or comment `APPROVE` directly on this issue.
 
@@ -458,9 +450,10 @@ def main():
         print(f"✅ Agent completed successfully!")
         print(f"📧 Check your email for the review request.")
         print(f"🔗 Issue URL: {final_state['issue_url']}")
+        print(f"📄 Digest Title: {final_state.get('generated_post', {}).get('title', 'N/A')}")
     else:
         print("✅ Agent completed (dry run - no issue created)")
-        print(f"📄 Generated: {final_state.get('generated_post', {}).get('title', 'N/A')}")
+        print(f"📄 Digest: {final_state.get('generated_post', {}).get('title', 'N/A')}")
     print("=" * 50)
 
 
