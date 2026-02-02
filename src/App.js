@@ -131,7 +131,7 @@ const Portfolio = () => {
             Data Scientist & ML Engineer specializing in <span className="text-secondary-400">GenAI</span>, <span className="text-accent-400">Optimization</span> & <span className="text-primary-400">Scalable Systems</span>.
           </h2>
           <p className="max-w-xl text-lg text-zinc-500 leading-relaxed mb-10">
-            <p className="max-w-xl text-lg text-zinc-500 leading-relaxed mb-10">I’m a data scientist and ML engineer with ~3 years of industry experience building production-grade machine learning, optimization, and GenAI systems. I hold an MS in Computational Science & Engineering (Machine Learning) from Georgia Tech and have also worked on National Science Foundation–funded research, which shaped my approach to rigorous system design and experimentation.
+            <p className="max-w-xl text-lg text-zinc-500 leading-relaxed mb-10">I’m a Lead Data scientist and ML engineer with ~3 years of industry experience building production-grade machine learning, optimization, and GenAI systems. I hold an MS in Computational Science & Engineering (Machine Learning) from Georgia Tech and have also worked on National Science Foundation–funded research, which shaped my approach to rigorous system design and experimentation.
               I enjoy turning ambiguous, real-world problems into scalable, high-impact ML systems—working at the intersection of data, engineering, and product with a strong focus on ownership, clarity, and measurable outcomes.</p>
           </p>
 
@@ -215,7 +215,7 @@ const Portfolio = () => {
                 </div>
                 <div className="md:col-span-3">
                   <h4 className="text-xl text-white font-medium flex items-center gap-2 mb-2">
-                    Data Scientist <a href="https://www.enru.io/" target="_blank" rel="noopener noreferrer" className="text-primary-400 hover:text-primary-300 transition-colors">@ ENRU</a>
+                    Lead Data Scientist <a href="https://www.enru.io/" target="_blank" rel="noopener noreferrer" className="text-primary-400 hover:text-primary-300 transition-colors">@ ENRU</a>
                   </h4>
                   <p className="text-sm text-zinc-400 mb-2">ML/AI & Optimization – Developed models improving cost estimation by 40% and routing revenue by 25%.</p>
                   <button onClick={() => setExpandedExp(prev => ({ ...prev, enru: !prev.enru }))} className="text-primary-400 hover:underline mb-2">
