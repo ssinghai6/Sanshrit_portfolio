@@ -3,6 +3,7 @@ import { Github, Linkedin, Mail, ExternalLink, X, ChevronRight, Menu, Download, 
 import GraphBackground from './GraphBackground';
 import { FaFileAlt, FaNewspaper, FaGraduationCap } from 'react-icons/fa';
 import blogPosts from './data/blogPosts.json';
+import { Analytics } from '@vercel/analytics/react';
 
 const Portfolio = () => {
 
@@ -796,6 +797,7 @@ const Portfolio = () => {
         </div>
       )}
 
+      <Analytics />
     </div>
   );
 };
