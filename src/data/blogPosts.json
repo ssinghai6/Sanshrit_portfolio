@@ -1,23 +1,5 @@
 [
   {
-    "id": 11,
-    "title": "AI Weekly: Building Intelligent Agents wi... and more",
-    "date": "2026-02-02",
-    "summary": "This week's AI digest covers major updates.",
-    "content": "## Section 1\n\nContent...\n\n---\n\n## Section 2\n\nContent...",
-    "tags": [
-      "AI",
-      "News"
-    ],
-    "sources": [
-      {
-        "title": "Source",
-        "url": "#"
-      }
-    ],
-    "link": "#"
-  },
-  {
     "id": 10,
     "title": "AI Weekly: Convergence of Quant Shops and AI Labs, Neuro-Symbolic Concepts, and AI Creativity",
     "date": "2026-02-01",
