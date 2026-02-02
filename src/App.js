@@ -3,6 +3,7 @@ import { Github, Linkedin, Mail, ExternalLink, X, ChevronRight, Menu, Download, 
 import GraphBackground from './GraphBackground';
 import { FaFileAlt, FaNewspaper, FaGraduationCap } from 'react-icons/fa';
 import blogPosts from './data/blogPosts.json';
+import ReactMarkdown from 'react-markdown';
 
 const Portfolio = () => {
   const [mounted, setMounted] = useState(false);
@@ -627,29 +628,172 @@ const Portfolio = () => {
               </button>
             </div>
 
-            <div className="overflow-y-auto p-8 prose prose-invert max-w-none prose-headings:text-white prose-p:text-zinc-400 prose-strong:text-white prose-a:text-primary-400 hover:prose-a:text-primary-300">
-              {/* Content Rendering Logic (Same as before but styled) */}
+            <div className="overflow-y-auto p-8 md:p-12">
+              {/* Content Rendering with ReactMarkdown */}
+              {/* Content Rendering with ReactMarkdown */}
               {selectedPost.content ? (
-                selectedPost.content.split('\n\n').map((block, idx) => {
-                  if (block.startsWith('## ')) return <h2 key={idx} className="text-2xl font-bold mt-8 mb-4 text-white border-l-4 border-primary-500 pl-4">{block.replace('## ', '')}</h2>;
-                  if (block.startsWith('### ')) return <h3 key={idx} className="text-xl font-semibold mt-6 mb-3 text-secondary-100">{block.replace('### ', '')}</h3>;
-                  if (block.includes('\n• ') || block.startsWith('• ')) {
-                    return <ul key={idx} className="list-disc pl-5 space-y-2 mb-4 marker:text-primary-500">
-                      {block.split('\n').filter(l => l.startsWith('• ')).map((item, i) => (
-                        <li key={i} dangerouslySetInnerHTML={{ __html: item.replace('• ', '').replace(/\*\*(.*?)\*\*/g, '<strong class="text-white">$1</strong>') }} />
-                      ))}
-                    </ul>;
-                  }
-                  return <p key={idx} className="mb-4 leading-relaxed" dangerouslySetInnerHTML={{ __html: block.replace(/\*\*(.*?)\*\*/g, '<strong class="text-white">$1</strong>') }} />;
-                })
+                <div className="space-y-8">
+                  {(() => {
+                    // Split content by ## headers (sections start with \n## or at beginning)
+                    const sections = selectedPost.content.split(/\n(?=## )/).filter(s => s.trim());
+
+                    return sections.map((section, idx) => {
+                      // Extract title
+                      const titleMatch = section.match(/^## (.+?)(?:\s{2,}|\n|$)/);
+                      let title = titleMatch ? titleMatch[1].trim() : (idx === 0 ? "Overview" : `Section ${idx + 1}`);
+
+                      // Clean up title (remove trailing # or other artifacts)
+                      title = title.replace(/\s*#\s*$/, '').trim();
+
+                      // Get everything after the title
+                      let fullContent = titleMatch ? section.replace(titleMatch[0], '').trim() : section.trim();
+
+                      // Extract Key Takeaways section
+                      // Format: **Key Takeaways**:\n\n- item1\n- item2\n\n**Why It Matters**
+                      // OR: ### Key Takeaways\n\n- item1\n- item2\n\n### Why It Matters
+                      let takeaways = [];
+                      let bodyContent = fullContent;
+                      let whyItMatters = '';
+
+                      // Try to match Key Takeaways block (handles both **Key Takeaways**: and ### Key Takeaways)
+                      const takeawaysPattern = /(\*\*Key Takeaways\*\*:?|### Key Takeaways)\s*([\s\S]*?)(\*\*Why It Matters\*\*|### Why It Matters)/i;
+                      const takeawaysMatch = fullContent.match(takeawaysPattern);
+
+                      if (takeawaysMatch) {
+                        // Extract takeaways list
+                        const takeawaysBlock = takeawaysMatch[2];
+                        takeaways = takeawaysBlock
+                          .split('\n')
+                          .map(line => line.replace(/^[-*•]\s*/, '').trim())
+                          .filter(line => line.length > 0);
+
+                        // Get body content (before Key Takeaways)
+                        const beforeTakeaways = fullContent.split(takeawaysMatch[1])[0].trim();
+
+                        // Get Why It Matters content (after the marker)
+                        const afterWhy = fullContent.split(takeawaysMatch[3])[1];
+                        if (afterWhy) {
+                          whyItMatters = afterWhy.replace(/^:?\s*/, '').trim();
+                        }
+
+                        bodyContent = beforeTakeaways;
+                      }
+
+                      // Clean up stray artifacts (like trailing # from LLM output)
+                      bodyContent = bodyContent.replace(/\s*#\s*$/, '').trim();
+
+                      // Find matching source by fuzzy title match
+                      const matchedSource = selectedPost.sources?.find(s => {
+                        if (!s.title || !title) return false;
+                        const sourceTitleLower = s.title.toLowerCase();
+                        const sectionTitleLower = title.toLowerCase();
+                        // Check if titles share significant words
+                        const sourceWords = sourceTitleLower.split(/\s+/).filter(w => w.length > 3);
+                        const sectionWords = sectionTitleLower.split(/\s+/).filter(w => w.length > 3);
+                        return sourceWords.some(w => sectionTitleLower.includes(w)) ||
+                          sectionWords.some(w => sourceTitleLower.includes(w));
+                      });
+
+                      // Skip sections that are just separators or empty
+                      if (title === '---' || (!bodyContent && takeaways.length === 0)) {
+                        return null;
+                      }
+
+                      return (
+                        <div key={idx} className="bg-zinc-900/50 border border-zinc-800 rounded-2xl p-6 md:p-8">
+                          {/* Story Title */}
+                          <h2 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-6">
+                            {title}
+                          </h2>
+
+                          {/* Story Content */}
+                          {bodyContent && (
+                            <div className="text-gray-300 leading-relaxed text-lg mb-6 space-y-4">
+                              {bodyContent.split(/\s{2,}/).map((paragraph, pIdx) => (
+                                paragraph.trim() && (
+                                  <p key={pIdx} className="text-gray-300">
+                                    {paragraph.trim()}
+                                  </p>
+                                )
+                              ))}
+                            </div>
+                          )}
+
+                          {/* Key Takeaways Box */}
+                          {takeaways.length > 0 && (
+                            <div className="bg-blue-500/10 border-l-4 border-blue-500 rounded-r-xl p-5 mb-6">
+                              <h4 className="text-white font-bold mb-3 flex items-center gap-2">
+                                <span className="w-2 h-2 rounded-full bg-blue-500"></span>
+                                Key Takeaways
+                              </h4>
+                              <ul className="space-y-2">
+                                {takeaways.map((t, i) => (
+                                  <li key={i} className="flex items-start gap-2 text-gray-300">
+                                    <span className="text-blue-400 mt-1">•</span>
+                                    <span>{t}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+
+                          {/* Why It Matters */}
+                          {whyItMatters && (
+                            <div className="bg-purple-500/10 border-l-4 border-purple-500 rounded-r-xl p-5 mb-6">
+                              <h4 className="text-white font-bold mb-3 flex items-center gap-2">
+                                <span className="w-2 h-2 rounded-full bg-purple-500"></span>
+                                Why It Matters
+                              </h4>
+                              <p className="text-gray-300">{whyItMatters}</p>
+                            </div>
+                          )}
+
+                          {/* Source Link for this story */}
+                          {matchedSource && (
+                            <div className="pt-4 border-t border-zinc-800 flex justify-end">
+                              <a
+                                href={matchedSource.url}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="inline-flex items-center gap-2 text-sm font-medium text-blue-400 hover:text-blue-300 bg-blue-500/10 px-4 py-2 rounded-lg border border-blue-500/20"
+                              >
+                                Read Source <ExternalLink size={14} />
+                              </a>
+                            </div>
+                          )}
+                        </div>
+                      );
+                    }).filter(Boolean);
+                  })()}
+                </div>
               ) : <p>Loading...</p>}
 
-              {/* Links */}
-              <div className="mt-8 pt-8 border-t border-white/10 flex gap-4">
-                <a href={selectedPost.link} target="_blank" rel="noreferrer" className="px-6 py-3 bg-primary-600 hover:bg-primary-500 text-white font-medium rounded-lg transition-colors flex items-center gap-2">
-                  Read Source <ExternalLink size={16} />
-                </a>
-              </div>
+              {/* All Sources Reference Section */}
+              {selectedPost.sources && selectedPost.sources.length > 0 && (
+                <div className="mt-12 pt-8 border-t border-white/10">
+                  <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                    <FaNewspaper className="text-primary-400" /> All Sources
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {selectedPost.sources.map((source, idx) => (
+                      <a
+                        key={idx}
+                        href={source.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex items-center gap-3 p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-primary-500/30 transition-all group"
+                      >
+                        <div className="w-10 h-10 rounded-full bg-primary-500/10 flex items-center justify-center text-primary-400 group-hover:scale-110 transition-transform flex-shrink-0">
+                          <ExternalLink size={18} />
+                        </div>
+                        <span className="text-sm font-medium text-zinc-300 group-hover:text-white line-clamp-2">
+                          {source.title || source.url}
+                        </span>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -660,3 +804,4 @@ const Portfolio = () => {
 };
 
 export default Portfolio;
+
