@@ -82,13 +82,13 @@ def update_blog_data(post_data: dict) -> None:
     
     entry = {
         "id": new_id,
-        "title": post_data.get("title", f"AI Update {datetime.date.today()}"),
+        "title": post_data.get("title") or f"AI Update {datetime.date.today()}",
         "date": str(datetime.date.today()),
-        "summary": post_data.get("summary", ""),
-        "content": post_data.get("content", ""),
-        "tags": post_data.get("tags", ["AI", "News"]),
-        "sources": post_data.get("sources", []),
-        "link": post_data.get("link", "#")
+        "summary": post_data.get("summary") or "",
+        "content": post_data.get("content") or "",
+        "tags": post_data.get("tags") or ["AI", "News"],
+        "sources": post_data.get("sources") or [],
+        "link": post_data.get("link") or "#"
     }
     
     # Prepend the new post (most recent first)

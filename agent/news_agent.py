@@ -161,26 +161,11 @@ def search_news_node(state: AgentState) -> AgentState:
         state["error"] = str(e)
         state["news_items"] = []
     
-    # Fallback to mock data if no results
+    # Fail clearly if no results — do NOT fall back to mock data
     if not state["news_items"]:
-        print("⚠️  No relevant search results. Using mock data.")
-        state["news_items"] = [
-            {
-                "title": "OpenAI Releases GPT-5 Preview",
-                "snippet": "The latest model shows significant improvements in reasoning and multimodal capabilities.",
-                "link": "https://openai.com/blog"
-            },
-            {
-                "title": "Meta Open Sources Llama 3.2",
-                "snippet": "Llama 3.2 brings multimodal capabilities to open source with vision and text understanding.",
-                "link": "https://ai.meta.com/llama/"
-            },
-            {
-                "title": "Google DeepMind's Gemini 2.0 Announced",
-                "snippet": "Next generation AI model with improved reasoning and agentic capabilities.",
-                "link": "https://deepmind.google/technologies/gemini/"
-            }
-        ]
+        error_msg = "No AI/ML relevant news found. DuckDuckGo may be rate-limiting. Try again in a few minutes."
+        print(f"❌ {error_msg}")
+        state["error"] = error_msg
     
     return state
 
@@ -231,50 +216,48 @@ def summarize_node(state: AgentState) -> AgentState:
 
 {news_text}
 
-Task: Create a SINGLE comprehensive "Weekly Digest" blog post covering the top 3-5 stories.
+Task: Create a SINGLE comprehensive "Weekly Digest" blog post covering EXACTLY 4 to 5 stories. You MUST cover at least 4 distinct stories.
 
 CRITICAL FORMATTING RULES:
 1. Use DOUBLE NEWLINES (\\n\\n) between ALL sections, paragraphs, and elements.
-2. Each story MUST follow this EXACT structure:
+2. Start with "## Weekly Overview" — a 2-paragraph summary of the week's themes.
+3. Each of the 4-5 stories MUST follow this EXACT structure:
 
-## [Story Title]
+## [Story Headline]
 
-[Paragraph 1 - 2-3 sentences about the story]
+[Paragraph 1 — 3-4 sentences introducing the story and its significance]
 
-[Paragraph 2 - 2-3 sentences with more detail]
+[Paragraph 2 — 3-4 sentences with deeper detail, specifics, or technical context]
 
-[Paragraph 3 - Technical implications]
+**Key Takeaways:**
 
-### Key Takeaways
+- [Concrete takeaway 1]
+- [Concrete takeaway 2]
+- [Concrete takeaway 3]
 
-- First key point
-- Second key point  
-- Third key point
+**Why It Matters:** [1-2 paragraphs explaining broader significance and future implications]
 
-### Why It Matters
-
-[1-2 paragraphs explaining significance]
-
----
-
-3. Start with "## Weekly Overview" section.
-4. End with "## Looking Ahead" section.
-5. Use `---` horizontal rules between story sections.
+4. End with "## Looking Ahead" — a 1-2 paragraph section on future trends.
+5. Use NO horizontal rules (---) between sections. Use only ## headings to separate stories.
+6. Do NOT use ### sub-headings. Use **Bold Text:** for Key Takeaways and Why It Matters labels.
 
 OUTPUT FORMAT:
 Return a JSON object with these exact keys:
-- "title": Engaging headline (no prefixes like "AI Weekly:")
-- "summary": 2-3 sentence executive summary
+- "title": Engaging, descriptive headline that names the key topics (e.g. "Convergence of Quant Shops and AI Labs, Neuro-Symbolic Concepts, and AI Creativity")
+- "summary": 3-4 sentence executive summary mentioning all covered stories
 - "content": Full markdown content with PROPER NEWLINES
-- "tags": Array of relevant tags
-- "sources": Array of {{"title": "...", "url": "..."}} objects
-- "link": Primary source URL
+- "tags": Array of 3-5 relevant tags
+- "sources": Array of {{"title": "...", "url": "..."}} objects for each story
+- "link": Primary source URL (from the most important story)
 
 Respond ONLY with the JSON object, no markdown code blocks."""
 
     try:
         response = llm.invoke([HumanMessage(content=prompt)])
         content = response.content.strip()
+        
+        # Log raw content for debugging
+        print(f"📝 Raw LLM Response:\n{content}\n" + "-"*30)
         
         # Parse JSON from response
         if content.startswith("```"):
@@ -286,7 +269,25 @@ Respond ONLY with the JSON object, no markdown code blocks."""
         import re
         content = re.sub(r'[\x00-\x1f\x7f-\x9f]', ' ', content)
         
-        data = json.loads(content)
+        try:
+            data = json.loads(content)
+        except json.JSONDecodeError as je:
+            print(f"❌ JSON Decode Error: {je}")
+            state["error"] = f"Failed to parse JSON: {je}. Raw content: {content[:100]}..."
+            state["generated_post"] = None
+            return state
+
+        # Validate required fields
+        required_fields = ["title", "summary", "content"]
+        missing_fields = [field for field in required_fields if not data.get(field)]
+        
+        if missing_fields:
+            error_msg = f"Generated JSON missing required fields or has null values: {missing_fields}"
+            print(f"❌ {error_msg}")
+            state["error"] = error_msg
+            state["generated_post"] = None
+            return state
+            
         state["generated_post"] = data
         print(f"✅ Generated detailed digest: {state['generated_post']['title']}")
 
