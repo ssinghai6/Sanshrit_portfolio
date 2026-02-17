@@ -268,6 +268,8 @@ Respond ONLY with the JSON object, no markdown code blocks."""
         content = content.strip()
         import re
         content = re.sub(r'[\x00-\x1f\x7f-\x9f]', ' ', content)
+        # Fix common JSON errors from LLMs
+        content = content.replace("\\'", "'")  # Replace \' with ' (invalid in JSON)
         
         try:
             data = json.loads(content)
