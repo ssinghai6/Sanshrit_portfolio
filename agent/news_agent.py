@@ -112,7 +112,7 @@ class AgentState(TypedDict):
 # ============================================================================
 
 
-from duckduckgo_search import DDGS
+from ddgs import DDGS
 
 def search_news_node(state: AgentState) -> AgentState:
     """
