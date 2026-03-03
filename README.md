@@ -47,6 +47,10 @@ This repository showcases a curated collection of my projects spanning supervise
 
 This portfolio includes an **automated AI News Agent** built with LangGraph that curates weekly AI/ML news for the blog section. It features email-based approval - just reply "APPROVE" to publish!
 
+### 🎙️ Elevator Pitch
+
+My portfolio features a fully autonomous **'AI Journalist'** agent built with LangGraph and Llama 3. Every week, it independently researches the latest AI news using DuckDuckGo (Serper API), filters for high-quality technical sources, and synthesizes a formatted newsletter draft. It queues this draft for my review via a GitHub Issue, and with a single **"APPROVE"** comment, a secondary event-driven agent automatically updates my portfolio's backend data and publishes the article to my live site. It demonstrates end-to-end agentic data pipelines, LLM orchestration, and safe Human-in-the-Loop deployment.
+
 ### ✨ Features
 
 - 🔄 **Automated Weekly Updates**: Runs every Monday at 9 AM UTC
