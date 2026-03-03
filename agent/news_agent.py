@@ -181,6 +181,13 @@ def summarize_node(state: AgentState) -> AgentState:
         return state
     
     if not GROQ_API_KEY:
+        if os.getenv("GITHUB_ACTIONS") == "true":
+            error_msg = "GROQ_API_KEY not found in GitHub Actions environment. Please check repository secrets."
+            print(f"❌ {error_msg}")
+            state["error"] = error_msg
+            state["generated_post"] = None
+            return state
+            
         print("⚠️  GROQ_API_KEY not found. Using mock summary.")
         first_title = state["news_items"][0].get("title", "AI Developments")
         dynamic_title = f"AI Weekly: {first_title[:30]}... and more"
