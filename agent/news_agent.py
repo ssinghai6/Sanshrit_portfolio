@@ -455,7 +455,9 @@ def main():
     
     print("\\n" + "=" * 50)
     if final_state.get("error"):
+        import sys
         print(f"❌ Agent completed with error: {final_state['error']}")
+        sys.exit(1)
     elif final_state.get("issue_url"):
         print(f"✅ Agent completed successfully!")
         print(f"📧 Check your email for the review request.")
