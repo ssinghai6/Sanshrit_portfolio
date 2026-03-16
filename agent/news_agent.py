@@ -546,16 +546,33 @@ def search_news_node(state: AgentState) -> AgentState:
         print(f"👉 Querying DuckDuckGo: '{base_query}'")
         
         raw_results = []
-        with DDGS() as ddgs:
-            # Fetch more results initially to filter down to relevant ones
-            ddg_gen = ddgs.news(base_query, max_results=30, timelimit='w')  # 'w' = past week
-            
-            for item in ddg_gen:
-                raw_results.append({
-                    "title": item.get("title", ""),
-                    "snippet": item.get("body", ""),
-                    "link": item.get("url", "")
-                })
+        try:
+            with DDGS() as ddgs:
+                # Fetch more results initially to filter down to relevant ones
+                ddg_gen = ddgs.news(base_query, max_results=30, timelimit='w')  # 'w' = past week
+                
+                for item in ddg_gen:
+                    raw_results.append({
+                        "title": item.get("title", ""),
+                        "snippet": item.get("body", ""),
+                        "link": item.get("url", "")
+                    })
+        except Exception as e:
+            print(f"⚠️ DuckDuckGo news search failed: {e}")
+            print("🔄 Trying text search as fallback...")
+            try:
+                with DDGS() as ddgs:
+                    ddg_gen = ddgs.text(base_query, max_results=30)
+                    for item in ddg_gen:
+                        raw_results.append({
+                            "title": item.get("title", ""),
+                            "snippet": item.get("body", ""),
+                            "link": item.get("href", "")
+                        })
+            except Exception as e2:
+                print(f"⚠️ DuckDuckGo text search also failed: {e2}")
+                # Fall back to empty results - will show error message
+                raw_results = []
         
         print(f"📥 Retrieved {len(raw_results)} raw results, filtering for AI/ML relevance...")
         
