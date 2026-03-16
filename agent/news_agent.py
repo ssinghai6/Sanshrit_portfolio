@@ -539,8 +539,8 @@ def search_news_node(state: AgentState) -> AgentState:
     if custom_query:
         base_query = custom_query
     else:
-        # Query prioritizing major company news + trending topics
-        base_query = 'site:openai.com OR site:anthropic.com OR site:deepmind.com OR site:ai.meta.com OR site:developer.microsoft.com OR site:huggingface.co OR (artificial intelligence news) OR (AI breakthrough OR AI launch OR AI announcement) -filter'
+        # Simplified query - DuckDuckGo handles these better
+        base_query = 'artificial intelligence OR LLM OR GPT OR AI news this week'
     
     try:
         print(f"👉 Querying DuckDuckGo: '{base_query}'")
@@ -548,7 +548,7 @@ def search_news_node(state: AgentState) -> AgentState:
         raw_results = []
         with DDGS() as ddgs:
             # Fetch more results initially to filter down to relevant ones
-            ddg_gen = ddgs.news(base_query, max_results=25, timelimit='w')  # 'w' = past week
+            ddg_gen = ddgs.news(base_query, max_results=30, timelimit='w')  # 'w' = past week
             
             for item in ddg_gen:
                 raw_results.append({
