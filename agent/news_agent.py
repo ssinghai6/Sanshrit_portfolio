@@ -848,7 +848,10 @@ Respond ONLY with the JSON object, no markdown code blocks."""
         
         # Post-process content formatting
         if data.get("content"):
-            data["content"] = format_newsletter_content(data["content"])
+            try:
+                data["content"] = format_newsletter_content(data["content"])
+            except Exception as fmt_err:
+                print(f"⚠️  Content formatting warning: {fmt_err}")
         
         state["generated_post"] = data
         print(f"✅ Generated detailed digest: {state['generated_post']['title']}")
