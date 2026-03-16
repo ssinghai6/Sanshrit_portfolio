@@ -351,22 +351,43 @@ def format_newsletter_content(content: str) -> str:
     for line in lines:
         stripped = line.strip()
         
-        # Add blank line before ## headings
+        # Fix: Remove leading spaces from headings (e.g., " ## Heading" -> "## Heading")
         if stripped.startswith('## '):
+            line = '## ' + stripped[3:]  # Remove leading spaces
             if formatted_lines and formatted_lines[-1].strip() != '':
                 formatted_lines.append('')
             formatted_lines.append(line)
         # Add blank line after bold labels
         elif stripped == '**Key Takeaways:**' or stripped == '**Why It Matters:**':
+            if stripped == '**Key Takeaways:**':
+                line = '**Key Takeaways:**'
+            else:
+                line = '**Why It Matters:**'
             formatted_lines.append(line)
             formatted_lines.append('')
-        # Ensure bullet points are on separate lines
-        elif stripped.startswith('- '):
-            prev_stripped = formatted_lines[-1].strip() if formatted_lines else ''
-            if prev_stripped.startswith('- ') and len(formatted_lines) >= 2:
-                if formatted_lines[-2].strip() != '':
-                    formatted_lines.append('')
-            formatted_lines.append(line)
+        # Fix run-on bullet points - when bullet points are on same line after **Key Takeaways:**
+        elif '**Key Takeaways:**' in line and ' - ' in line:
+            # Split "**Key Takeaways:** - item1 - item2 - item3" into separate lines
+            parts = line.split(' - ')
+            if len(parts) > 1:
+                formatted_lines.append(parts[0])
+                formatted_lines.append('')
+                for part in parts[1:]:
+                    if part.strip():
+                        formatted_lines.append('- ' + part.strip())
+            else:
+                formatted_lines.append(line)
+        # Fix run-on bullet points in "Why It Matters:" section too
+        elif '**Why It Matters:**' in line and ' - ' in line:
+            parts = line.split(' - ')
+            if len(parts) > 1:
+                formatted_lines.append(parts[0])
+                formatted_lines.append('')
+                for part in parts[1:]:
+                    if part.strip():
+                        formatted_lines.append('- ' + part.strip())
+            else:
+                formatted_lines.append(line)
         else:
             formatted_lines.append(line)
     
