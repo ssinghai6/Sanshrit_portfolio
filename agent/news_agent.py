@@ -340,6 +340,39 @@ def validate_sources(sources: list) -> list:
     return validated
 
 
+def format_newsletter_content(content: str) -> str:
+    """Post-process newsletter content to fix formatting issues."""
+    if not content:
+        return content
+    
+    lines = content.split('\n')
+    formatted_lines = []
+    
+    for line in lines:
+        stripped = line.strip()
+        
+        # Add blank line before ## headings
+        if stripped.startswith('## '):
+            if formatted_lines and formatted_lines[-1].strip() != '':
+                formatted_lines.append('')
+            formatted_lines.append(line)
+        # Add blank line after bold labels
+        elif stripped == '**Key Takeaways:**' or stripped == '**Why It Matters:**':
+            formatted_lines.append(line)
+            formatted_lines.append('')
+        # Ensure bullet points are on separate lines
+        elif stripped.startswith('- '):
+            prev_stripped = formatted_lines[-1].strip() if formatted_lines else ''
+            if prev_stripped.startswith('- ') and len(formatted_lines) >= 2:
+                if formatted_lines[-2].strip() != '':
+                    formatted_lines.append('')
+            formatted_lines.append(line)
+        else:
+            formatted_lines.append(line)
+    
+    return '\n'.join(formatted_lines)
+
+
 def validate_and_enhance_sources(generated_post: dict, news_items: list) -> dict:
     """
     Validate and enhance sources in the generated post.
@@ -791,6 +824,10 @@ Respond ONLY with the JSON object, no markdown code blocks."""
         
         # Validate and enhance sources with quality metadata
         data = validate_and_enhance_sources(data, state["news_items"])
+        
+        # Post-process content formatting
+        if data.get("content"):
+            data["content"] = format_newsletter_content(data["content"])
         
         state["generated_post"] = data
         print(f"✅ Generated detailed digest: {state['generated_post']['title']}")
