@@ -684,6 +684,8 @@ SOURCE QUALITY PRIORITIES (use these for your sources list):
 ⚠️  USE SPARINGLY (Academic): Nature, Science, arXiv preprints
 
 AVOID using: Regional news (local newspapers), aggregators (Yahoo, MSN), opinion/analysis sites, business opinion sites (Motley Fool, Business Insider), or low-authority sites.
+
+CRITICAL: ONLY include AI-related stories. Do NOT include economic/political news unless directly related to AI.
 """
     
     prompt = f"""You are an expert AI/ML journalist. Here are the top news stories from the {context_str}, ranked by source quality and diversity:
@@ -692,7 +694,13 @@ AVOID using: Regional news (local newspapers), aggregators (Yahoo, MSN), opinion
 
 {source_guidance}
 
-Task: Create a SINGLE comprehensive "Weekly Digest" blog post covering EXACTLY 4 to 5 stories. You MUST cover at least 4 distinct stories.
+Task: Create a SINGLE comprehensive "Weekly Digest" blog post covering EXACTLY 4 to 5 stories about ARTIFICIAL INTELLIGENCE. You MUST cover at least 4 distinct AI-focused stories.
+
+CRITICAL CONTENT RULES:
+1. ONLY write about AI/ML topics - exclude economic/political news unless directly tied to AI
+2. Each story MUST have specific details: numbers, dates, product names, company names
+3. Avoid generic phrases like "significant developments", "notable achievements" - be specific
+4. Write like a professional journalist, not a template
 
 CRITICAL SOURCE REQUIREMENT:
 - You MUST include AT LEAST 4-5 DIFFERENT sources in the "sources" array - one for EACH story
@@ -700,9 +708,7 @@ CRITICAL SOURCE REQUIREMENT:
 - DO NOT use the same source for multiple stories
 - The "sources" array MUST have at least 4 items with unique URLs
 
-{news_text}
-
-Task: Create a SINGLE comprehensive "Weekly Digest" blog post covering EXACTLY 4 to 5 stories. You MUST cover at least 4 distinct stories.
+Task: Create a SINGLE comprehensive "Weekly Digest" blog post covering EXACTLY 4 to 5 AI stories.
 
 CRITICAL FORMATTING RULES:
 1. Use DOUBLE NEWLINES (\\n\\n) between ALL sections, paragraphs, and elements.
@@ -717,29 +723,31 @@ CRITICAL FORMATTING RULES:
 
 **Key Takeaways:**
 
-- [Concrete takeaway 1]
-- [Concrete takeaway 2]
-- [Concrete takeaway 3]
+- [Concrete takeaway 1 - with specific details]
+- [Concrete takeaway 2 - with specific details]
+- [Concrete takeaway 3 - with specific details]
 
 **Why It Matters:** [1-2 paragraphs explaining broader significance and future implications]
 
 4. End with "## Looking Ahead" — a 1-2 paragraph section on future trends.
 5. Use NO horizontal rules (---) between sections. Use only ## headings to separate stories.
 6. Do NOT use ### sub-headings. Use **Bold Text:** for Key Takeaways and Why It Matters labels.
+7. Add a blank line BEFORE each ## heading and after each list.
 
 OUTPUT FORMAT:
 Return a JSON object with these exact keys:
 - "title": Engaging, descriptive headline that names the key topics
 - "summary": 3-4 sentence executive summary mentioning all covered stories
-- "content": Full markdown content with PROPER NEWLINES
-- "tags": Array of 3-5 relevant tags
-- "sources": Array of {{"title": "...", "url": "..."}} objects - MUST have at least 4 different sources, one per story
+- "content": Full markdown content with PROPER NEWLINES - each section clearly separated
+- "tags": Array of 3-5 relevant tags (MUST all be AI-related)
+- "sources": Array of {{"title": "...", "url": "..."}} objects - MUST have at least 4 different sources from reputable AI sources
 - "link": Primary source URL - MUST be from a high-quality source (prefer Tier 1-2: OpenAI, Anthropic, Google, Meta, TechCrunch, The Verge, Wired, Ars Technica)
 
 IMPORTANT: 
 1. The "sources" array MUST contain at least 4 unique URLs - one for each story
 2. Do NOT repeat the same source URL multiple times
-3. The "link" field should point to the most authoritative source available
+3. EVERY source must be from this week (March 2026)
+4. ALL stories must be about AI/ML - no economics, politics, or non-AI topics
 
 Respond ONLY with the JSON object, no markdown code blocks."""
 
