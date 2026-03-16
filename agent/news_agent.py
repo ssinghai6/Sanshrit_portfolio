@@ -191,21 +191,17 @@ def get_source_quality_score(url: str) -> tuple[int, str, str]:
     Lower score = better quality (priority 1 = best)
     """
     if not url:
-        return (999, "Unknown", "Unknown")
+        return (500, "Unknown", "Unknown - No URL")
     
     url_lower = url.lower()
     
-    # Check exclusions first
-    for excluded in EXCLUDED_DOMAINS:
+    # Check exclusions first (only truly bad sources)
+    for excluded in ["motleyfool.com", "yahoo.com", "msn.com", "scoop.co.nz"]:
         if excluded in url_lower:
             return (999, "Excluded", "Excluded - Low Quality")
     
-    for pattern in EXCLUDED_PATTERNS:
-        if pattern in url_lower:
-            return (999, "Excluded", "Excluded - Pattern Match")
-    
     # Find best matching source
-    best_match = (999, "Unknown", "Unknown")
+    best_match = (500, "Other", "Other - Unknown Source")  # Default to medium priority, not excluded
     
     for domain, info in SOURCE_QUALITY_TIERS.items():
         if domain in url_lower:
@@ -798,14 +794,15 @@ Return a JSON object with these exact keys:
 - "summary": 3-4 sentence executive summary mentioning all covered stories
 - "content": Full markdown content with PROPER NEWLINES - each section clearly separated
 - "tags": Array of 3-5 relevant tags (MUST all be AI-related)
-- "sources": Array of {{"title": "...", "url": "..."}} objects - MUST have at least 4 different sources from reputable AI sources
-- "link": Primary source URL - MUST be from a high-quality source (prefer Tier 1-2: OpenAI, Anthropic, Google, Meta, TechCrunch, The Verge, Wired, Ars Technica)
+- "sources": Array of {{"title": "...", "url": "..."}} objects - MUST have AT LEAST 4 different sources, one for EACH story. DO NOT list only 1 source!
 
 IMPORTANT: 
 1. The "sources" array MUST contain at least 4 unique URLs - one for each story
-2. Do NOT repeat the same source URL multiple times
-3. EVERY source must be from the PREVIOUS WEEK (current date is March 2026)
-4. ALL stories must be about AI/ML - no economics, politics, or non-AI topics
+2. If you only list 1 source, the post will be rejected
+3. Do NOT repeat the same source URL multiple times
+4. Extract source URLs from the news items provided above - each story has its own source URL
+5. EVERY source must be from the PREVIOUS WEEK (current date is March 2026)
+6. ALL stories must be about AI/ML - no economics, politics, or non-AI topics
 
 Respond ONLY with the JSON object, no markdown code blocks."""
 
