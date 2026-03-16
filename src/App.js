@@ -730,17 +730,9 @@ const Portfolio = () => {
                       // Clean up stray artifacts (like trailing # from LLM output)
                       bodyContent = bodyContent.replace(/\s*#\s*$/, '').trim();
 
-                      // Find matching source by fuzzy title match
-                      const matchedSource = selectedPost.sources?.find(s => {
-                        if (!s.title || !title) return false;
-                        const sourceTitleLower = s.title.toLowerCase();
-                        const sectionTitleLower = title.toLowerCase();
-                        // Check if titles share significant words
-                        const sourceWords = sourceTitleLower.split(/\s+/).filter(w => w.length > 3);
-                        const sectionWords = sectionTitleLower.split(/\s+/).filter(w => w.length > 3);
-                        return sourceWords.some(w => sectionTitleLower.includes(w)) ||
-                          sectionWords.some(w => sourceTitleLower.includes(w));
-                      });
+                      // Get source for this story - cycle through sources based on section index
+                      const sourceIndex = idx % (selectedPost.sources?.length || 1);
+                      const matchedSource = selectedPost.sources?.[sourceIndex] || null;
 
                       // Skip sections that are just separators or empty
                       if (title === '---' || (!bodyContent && takeaways.length === 0)) {
@@ -827,14 +819,15 @@ const Portfolio = () => {
 
                           {/* Source Link for this story */}
                           {matchedSource && matchedSource.url && isValidUrl(matchedSource.url) && (
-                            <div className="pt-4 mt-4 border-t border-zinc-800 flex justify-end">
+                            <div className="pt-4 mt-4 border-t border-zinc-800 flex justify-between items-center">
+                              <span className="text-xs text-zinc-500">Source: {matchedSource.title || 'Article'}</span>
                               <a
                                 href={matchedSource.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center gap-2 text-sm font-medium text-primary-400 hover:text-primary-300 bg-primary-500/10 px-4 py-2 rounded-lg border border-primary-500/20 transition-all hover:bg-primary-500/20"
                               >
-                                Read Source <ExternalLink size={14} />
+                                Read Full Article <ExternalLink size={14} />
                               </a>
                             </div>
                           )}
