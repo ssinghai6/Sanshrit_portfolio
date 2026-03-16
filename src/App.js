@@ -351,7 +351,7 @@ const Portfolio = () => {
                 </div>
                 <div className="flex gap-4">
                   <a href="https://github.com/ssinghai6/DocBot" className="text-zinc-400 hover:text-primary-400 transition-colors"><Github size={20} /></a>
-                  <a href="https://docbot-llm.streamlit.app" className="text-zinc-400 hover:text-primary-400 transition-colors"><ExternalLink size={20} /></a>
+                  <a href="https://doc-bot-nine.vercel.app" className="text-zinc-400 hover:text-primary-400 transition-colors"><ExternalLink size={20} /></a>
                 </div>
               </div>
               <h4 className="text-xl font-bold text-white mb-2 group-hover:text-primary-400 transition-colors">DocBot 2.0: AI PDF Assistant</h4>
