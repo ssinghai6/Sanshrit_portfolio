@@ -222,13 +222,55 @@ def rank_news_items_by_source_quality(news_items: list) -> list:
             **item,
             "_source_priority": priority,
             "_source_tier": tier,
-            "_source_name": source_name
+            "_source_name": source_name,
+            "_source_domain": extract_domain(url)
         })
     
     # Sort by priority (lower = better)
     scored_items.sort(key=lambda x: x.get("_source_priority", 999))
     
     return scored_items
+
+
+def extract_domain(url: str) -> str:
+    """Extract domain from URL for deduplication."""
+    try:
+        from urllib.parse import urlparse
+        parsed = urlparse(url)
+        return parsed.netloc.lower().replace("www.", "")
+    except:
+        return ""
+
+
+def ensure_source_diversity(news_items: list, max_per_source: int = 1) -> list:
+    """
+    Ensure we have diverse sources - max 1 article per domain.
+    Returns list with diversity, prioritizing quality within each source.
+    """
+    if not news_items:
+        return news_items
+    
+    seen_domains = {}
+    diverse_items = []
+    
+    for item in news_items:
+        domain = item.get("_source_domain", extract_domain(item.get("link", "")))
+        
+        # Skip if we've already seen this domain (unless we allow multiple)
+        if domain in seen_domains:
+            if seen_domains[domain] >= max_per_source:
+                continue
+            seen_domains[domain] += 1
+        else:
+            seen_domains[domain] = 1
+        
+        diverse_items.append(item)
+        
+        # Stop once we have enough diverse items
+        if len(diverse_items) >= 5:
+            break
+    
+    return diverse_items
 
 
 def get_best_source(news_items: list, preferred_tiers: list = None) -> dict:
@@ -527,8 +569,18 @@ def search_news_node(state: AgentState) -> AgentState:
                 source = item.get("_source_name", "Unknown")
                 print(f"   {i+1}. [{tier}] {source}: {item.get('title', '')[:50]}...")
             
-            # Keep top 5 best quality items for the blog post
+            # Ensure source diversity - max 1 article per domain
+            print("🔄 Ensuring source diversity (one article per source)...")
+            state["news_items"] = ensure_source_diversity(state["news_items"], max_per_source=1)
+            
+            # Keep top 5 diverse items for the blog post
             state["news_items"] = state["news_items"][:5]
+            
+            # Show final selected items with their sources
+            print("📰 Final selected articles (diverse sources):")
+            for i, item in enumerate(state["news_items"]):
+                domain = item.get("_source_domain", "Unknown")
+                print(f"   {i+1}. [{domain}] {item.get('title', '')[:50]}...")
         
         print(f"✅ Found {len(state['news_items'])} AI/ML relevant news items (quality-ranked)")
         
