@@ -676,16 +676,16 @@ def summarize_node(state: AgentState) -> AgentState:
     
     # Source quality guidance for the LLM
     source_guidance = """
-SOURCE QUALITY PRIORITIES (use these for your sources list):
+SOURCE QUALITY PRIORITIES (use these for your sources list - must be from PREVIOUS WEEK):
 ✅ BEST SOURCES (Primary): OpenAI Blog, Anthropic, Google DeepMind, Meta AI, Microsoft Research, Hugging Face
 ✅ GOOD SOURCES (Tech News): TechCrunch, The Verge, Wired, Ars Technica, Engadget
 ✅ ACCEPTABLE (AI-Specific): VentureBeat AI, MarkTechpost, Unite.AI, The Rundown AI
 ⚠️  USE SPARINGLY (Business): Reuters, Bloomberg, Financial Times, Wall Street Journal
 ⚠️  USE SPARINGLY (Academic): Nature, Science, arXiv preprints
 
-AVOID using: Regional news (local newspapers), aggregators (Yahoo, MSN), opinion/analysis sites, business opinion sites (Motley Fool, Business Insider), or low-authority sites.
+AVOID using: Regional news (local newspapers), aggregators (Yahoo, MSN), opinion/analysis sites, business opinion sites (Motley Fool, Business Insider), old articles (older than 2 weeks), or low-authority sites.
 
-CRITICAL: ONLY include AI-related stories. Do NOT include economic/political news unless directly related to AI.
+CRITICAL: ONLY include AI-related stories from the PREVIOUS WEEK. Do NOT include economic/political news unless directly related to AI.
 """
     
     prompt = f"""You are an expert AI/ML journalist. Here are the top news stories from the {context_str}, ranked by source quality and diversity:
@@ -746,7 +746,7 @@ Return a JSON object with these exact keys:
 IMPORTANT: 
 1. The "sources" array MUST contain at least 4 unique URLs - one for each story
 2. Do NOT repeat the same source URL multiple times
-3. EVERY source must be from this week (March 2026)
+3. EVERY source must be from the PREVIOUS WEEK (current date is March 2026)
 4. ALL stories must be about AI/ML - no economics, politics, or non-AI topics
 
 Respond ONLY with the JSON object, no markdown code blocks."""
