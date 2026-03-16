@@ -341,60 +341,61 @@ def validate_sources(sources: list) -> list:
 
 
 def format_newsletter_content(content: str) -> str:
-    """Post-process newsletter content to fix formatting issues."""
+    """Post-process newsletter content to fix formatting issues - match exact output format."""
     if not content:
         return content
     
-    # First, fix headings that have content on the same line (e.g., "## Heading  Some content")
-    # Split on "## " to find headings followed by content
     import re
     
-    # Pattern: "## " followed by heading text, then 2+ spaces, then content
-    content = re.sub(r'(## [^\n]+?)( {2,})', r'\1\n\n', content)
+    # Step 1: Fix headings with content on same line (e.g., "## Heading  Some content")
+    # Split "## " heading from its content with double newline
+    content = re.sub(r'(## [^\n]+?)( {2,})([^\n])', r'\1\n\n\3', content)
     
+    # Step 2: Fix "**Key Takeaways:**" followed by content on same line or run-on bullets
+    # Pattern: "**Key Takeaways:** - item1 - item2" -> split properly
+    content = re.sub(r'\*\*Key Takeaways:\*\*(\s*)- ', r'**Key Takeaways:**\n\n- ', content)
+    content = re.sub(r'(-\s+[^\n]+?)\s+-\s+', r'\1\n- ', content)
+    
+    # Step 3: Fix "**Why It Matters:**" followed by content on same line
+    content = re.sub(r'\*\*Why It Matters:\*\*(\s+)', r'**Why It Matters:**\n\n', content)
+    
+    # Step 4: Split by lines and ensure proper spacing
     lines = content.split('\n')
     formatted_lines = []
+    skip_next = False
     
-    for line in lines:
+    for i, line in enumerate(lines):
         stripped = line.strip()
         
-        # Fix: Remove leading spaces from headings (e.g., " ## Heading" -> "## Heading")
-        if stripped.startswith('## '):
-            line = '## ' + stripped[3:]
-            # Add blank line before heading if previous line isn't empty
-            if formatted_lines and formatted_lines[-1].strip() != '':
+        # Skip empty lines that might cause double spacing
+        if stripped == '':
+            # Add single blank line if previous wasn't blank
+            if formatted_lines and formatted_lines[-1] != '':
                 formatted_lines.append('')
-            formatted_lines.append(line)
-        # Add blank line after bold labels
-        elif stripped == '**Key Takeaways:**' or stripped == '**Why It Matters:**':
+            continue
+        
+        # Fix headings - ensure content is on new line after heading
+        if stripped.startswith('## '):
+            # Add blank line before heading if needed
+            if formatted_lines and formatted_lines[-1].strip() != '' and formatted_lines[-1].strip() != '':
+                formatted_lines.append('')
             formatted_lines.append(stripped)
             formatted_lines.append('')
-        # Fix run-on bullet points - when bullet points are on same line after **Key Takeaways:**
-        elif '**Key Takeaways:**' in line and ' - ' in line:
-            parts = line.split(' - ')
-            if len(parts) > 1:
-                formatted_lines.append(parts[0].strip())
-                formatted_lines.append('')
-                for part in parts[1:]:
-                    if part.strip():
-                        formatted_lines.append('- ' + part.strip())
-            else:
-                formatted_lines.append(line)
-        # Fix run-on bullet points in "Why It Matters:" section too
-        elif '**Why It Matters:**' in line and ' - ' in line:
-            parts = line.split(' - ')
-            if len(parts) > 1:
-                formatted_lines.append(parts[0].strip())
-                formatted_lines.append('')
-                for part in parts[1:]:
-                    if part.strip():
-                        formatted_lines.append('- ' + part.strip())
-            else:
-                formatted_lines.append(line)
+        # Ensure blank line after **Key Takeaways:** and **Why It Matters:**
+        elif stripped == '**Key Takeaways:**':
+            formatted_lines.append(stripped)
+            formatted_lines.append('')
+        elif stripped == '**Why It Matters:**':
+            formatted_lines.append(stripped)
+            formatted_lines.append('')
         else:
             formatted_lines.append(line)
     
-    return '\n'.join(formatted_lines)
+    # Final cleanup: remove multiple consecutive blank lines
+    result = '\n'.join(formatted_lines)
+    result = re.sub(r'\n{3,}', '\n\n', result)
+    
+    return result
 
 
 def validate_and_enhance_sources(generated_post: dict, news_items: list) -> dict:
