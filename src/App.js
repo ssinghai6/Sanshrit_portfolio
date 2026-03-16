@@ -5,6 +5,15 @@ import { FaFileAlt, FaNewspaper, FaGraduationCap } from 'react-icons/fa';
 import blogPosts from './data/blogPosts.json';
 import { Analytics } from '@vercel/analytics/react';
 
+const isValidUrl = (url) => {
+  try {
+    const parsed = new URL(url);
+    return ['http:', 'https:'].includes(parsed.protocol);
+  } catch {
+    return false;
+  }
+};
+
 const Portfolio = () => {
 
   const [selectedPost, setSelectedPost] = useState(null);
@@ -637,28 +646,41 @@ const Portfolio = () => {
       {selectedPost && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/90 backdrop-blur-md" onClick={() => setSelectedPost(null)}></div>
-          <div className="glass-panel w-full max-w-3xl max-h-[90vh] rounded-2xl overflow-hidden flex flex-col relative z-10 animate-slide-up bg-[#0f0f0f]">
-            <div className="sticky top-0 p-6 border-b border-white/10 flex justify-between items-start bg-[#0f0f0f]/95 backdrop-blur z-20">
+          <div className="glass-panel w-full max-w-3xl max-h-[90vh] rounded-2xl overflow-hidden flex flex-col relative z-10 animate-slide-up bg-[#0a0a0a] border border-zinc-800/50">
+            <div className="sticky top-0 p-6 border-b border-zinc-800/50 flex justify-between items-start bg-[#0a0a0a]/95 backdrop-blur z-20">
               <div>
                 <div className="flex gap-2 mb-3">
                   {selectedPost.tags.map(tag => (
-                    <span key={tag} className="text-xs font-mono text-primary-400 bg-primary-500/10 px-2 py-1 rounded">
+                    <span key={tag} className="text-xs font-mono text-primary-400 bg-primary-500/10 px-2.5 py-1 rounded-full border border-primary-500/20">
                       {tag}
                     </span>
                   ))}
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold text-white leading-tight">{selectedPost.title}</h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-white leading-tight max-w-xl">{selectedPost.title}</h2>
+                <p className="text-sm text-zinc-500 mt-2 font-mono">
+                  {new Date(selectedPost.date).toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                  })}
+                </p>
               </div>
               <button onClick={() => setSelectedPost(null)} className="p-2 hover:bg-white/10 rounded-full transition-colors flex-shrink-0">
                 <X size={24} className="text-zinc-400" />
               </button>
             </div>
 
-            <div className="overflow-y-auto p-8 md:p-12">
-              {/* Content Rendering with ReactMarkdown */}
-              {/* Content Rendering with ReactMarkdown */}
+            <div className="overflow-y-auto p-6 md:p-8">
+              {/* Lead Summary */}
+              {selectedPost.summary && (
+                <p className="text-xl text-zinc-200 font-light leading-relaxed mb-8 pb-6 border-b border-zinc-800">
+                  {selectedPost.summary}
+                </p>
+              )}
+              
+              {/* Content Rendering */}
               {selectedPost.content ? (
-                <div className="space-y-8">
+                <div className="space-y-6">
                   {(() => {
                     // Split content by ## headers (sections start with \n## or at beginning)
                     const sections = selectedPost.content.split(/\n(?=## )/).filter(s => s.trim());
@@ -726,18 +748,19 @@ const Portfolio = () => {
                       }
 
                       return (
-                        <div key={idx} className="bg-zinc-900/50 border border-zinc-800 rounded-2xl p-6 md:p-8">
+                        <div className="bg-zinc-900/60 border border-zinc-800/50 rounded-2xl p-6 md:p-8 backdrop-blur-sm transition-all duration-300 hover:border-zinc-700/50 hover:bg-zinc-900/80">
                           {/* Story Title */}
-                          <h2 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-6">
+                          <h2 className="text-xl md:text-2xl font-semibold text-white mb-6 flex items-center gap-3">
+                            <span className="h-1.5 w-8 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500"></span>
                             {title}
                           </h2>
 
                           {/* Story Content */}
                           {bodyContent && (
-                            <div className="text-gray-300 leading-relaxed text-lg mb-6 space-y-4">
+                            <div className="text-zinc-300 leading-relaxed text-lg mb-6 space-y-4">
                               {bodyContent.split(/\s{2,}/).map((paragraph, pIdx) => (
                                 paragraph.trim() && (
-                                  <p key={pIdx} className="text-gray-300">
+                                  <p key={pIdx} className="text-zinc-300 leading-relaxed">
                                     {paragraph.trim()}
                                   </p>
                                 )
@@ -747,15 +770,15 @@ const Portfolio = () => {
 
                           {/* Key Takeaways Box */}
                           {takeaways.length > 0 && (
-                            <div className="bg-blue-500/10 border-l-4 border-blue-500 rounded-r-xl p-5 mb-6">
-                              <h4 className="text-white font-bold mb-3 flex items-center gap-2">
-                                <span className="w-2 h-2 rounded-full bg-blue-500"></span>
+                            <div className="bg-primary-500/10 border-l-4 border-primary-500 rounded-r-xl p-5 mb-6 mt-4">
+                              <h4 className="text-white font-semibold mb-3 flex items-center gap-2">
+                                <span className="w-2 h-2 rounded-full bg-primary-500"></span>
                                 Key Takeaways
                               </h4>
                               <ul className="space-y-2">
                                 {takeaways.map((t, i) => (
-                                  <li key={i} className="flex items-start gap-2 text-gray-300">
-                                    <span className="text-blue-400 mt-1">•</span>
+                                  <li key={i} className="flex items-start gap-2 text-zinc-300">
+                                    <span className="text-primary-400 mt-1">→</span>
                                     <span>{t}</span>
                                   </li>
                                 ))}
@@ -765,23 +788,23 @@ const Portfolio = () => {
 
                           {/* Why It Matters */}
                           {whyItMatters && (
-                            <div className="bg-purple-500/10 border-l-4 border-purple-500 rounded-r-xl p-5 mb-6">
-                              <h4 className="text-white font-bold mb-3 flex items-center gap-2">
-                                <span className="w-2 h-2 rounded-full bg-purple-500"></span>
+                            <div className="bg-secondary-500/10 border-l-4 border-secondary-500 rounded-r-xl p-5 mb-6">
+                              <h4 className="text-white font-semibold mb-3 flex items-center gap-2">
+                                <span className="w-2 h-2 rounded-full bg-secondary-500"></span>
                                 Why It Matters
                               </h4>
-                              <p className="text-gray-300">{whyItMatters}</p>
+                              <p className="text-zinc-300 leading-relaxed">{whyItMatters}</p>
                             </div>
                           )}
 
                           {/* Source Link for this story */}
-                          {matchedSource && (
-                            <div className="pt-4 border-t border-zinc-800 flex justify-end">
+                          {matchedSource && matchedSource.url && isValidUrl(matchedSource.url) && (
+                            <div className="pt-4 mt-4 border-t border-zinc-800 flex justify-end">
                               <a
                                 href={matchedSource.url}
                                 target="_blank"
-                                rel="noreferrer"
-                                className="inline-flex items-center gap-2 text-sm font-medium text-blue-400 hover:text-blue-300 bg-blue-500/10 px-4 py-2 rounded-lg border border-blue-500/20"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 text-sm font-medium text-primary-400 hover:text-primary-300 bg-primary-500/10 px-4 py-2 rounded-lg border border-primary-500/20 transition-all hover:bg-primary-500/20"
                               >
                                 Read Source <ExternalLink size={14} />
                               </a>
@@ -792,27 +815,29 @@ const Portfolio = () => {
                     }).filter(Boolean);
                   })()}
                 </div>
-              ) : <p>Loading...</p>}
+              ) : (
+                <p className="text-zinc-500">Loading...</p>
+              )}
 
               {/* All Sources Reference Section */}
               {selectedPost.sources && selectedPost.sources.length > 0 && (
-                <div className="mt-12 pt-8 border-t border-white/10">
-                  <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                    <FaNewspaper className="text-primary-400" /> All Sources
+                <div className="mt-10 pt-8 border-t border-zinc-800">
+                  <h3 className="text-lg font-semibold text-white mb-5 flex items-center gap-2">
+                    <FaNewspaper className="text-primary-400" /> Sources
                   </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {selectedPost.sources.map((source, idx) => (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {selectedPost.sources.filter(s => s.url && isValidUrl(s.url)).map((source, idx) => (
                       <a
                         key={idx}
                         href={source.url}
                         target="_blank"
-                        rel="noreferrer"
-                        className="flex items-center gap-3 p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-primary-500/30 transition-all group"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-primary-500/30 transition-all group"
                       >
-                        <div className="w-10 h-10 rounded-full bg-primary-500/10 flex items-center justify-center text-primary-400 group-hover:scale-110 transition-transform flex-shrink-0">
-                          <ExternalLink size={18} />
+                        <div className="w-8 h-8 rounded-full bg-primary-500/10 flex items-center justify-center text-primary-400 group-hover:scale-110 transition-transform flex-shrink-0">
+                          <ExternalLink size={14} />
                         </div>
-                        <span className="text-sm font-medium text-zinc-300 group-hover:text-white line-clamp-2">
+                        <span className="text-sm font-medium text-zinc-300 group-hover:text-white line-clamp-2 transition-colors">
                           {source.title || source.url}
                         </span>
                       </a>

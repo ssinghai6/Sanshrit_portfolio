@@ -40,32 +40,371 @@ AI_KEYWORDS = [
     'generative', 'diffusion', 'robotics', 'automation', 'data science'
 ]
 
-# Trusted tech news domains for AI/ML content
-TRUSTED_DOMAINS = [
-    'techcrunch.com', 'theverge.com', 'wired.com', 'venturebeat.com',
-    'arstechnica.com', 'thenextweb.com', 'zdnet.com', 'engadget.com',
-    'towardsdatascience.com', 'medium.com', 'arxiv.org', 'openai.com',
-    'anthropic.com', 'deepmind.com', 'ai.meta.com', 'huggingface.co',
-    'mit.edu', 'stanford.edu', 'reuters.com', 'bloomberg.com',
-    'techxplore.com', 'blog.google', 'therundown.ai', 'artificialintelligence-news.com'
+# ============================================================================
+# SOURCE QUALITY RANKING SYSTEM
+# ============================================================================
+# Priority tiers for AI/ML news sources (lower number = higher priority)
+# Tier 1: Primary AI Company Blogs (highest authority - direct from source)
+# Tier 2: Top-Tier Tech News (established tech journalism)
+# Tier 3: AI-Specific Reputable Outlets (focused on AI/tech)
+# Tier 4: Major Business/Financial News (reputable general news)
+# Tier 5: Academic/Research (technical depth but may be dense)
+# EXCLUDED: Aggregators, regional news, low-authority sites
+
+SOURCE_QUALITY_TIERS = {
+    # TIER 1: Primary AI Company Blogs (Priority: 10)
+    # These are the most authoritative - direct from the companies building AI
+    "openai.com": {"tier": 1, "priority": 100, "name": "OpenAI Blog", "category": "company"},
+    "anthropic.com": {"tier": 1, "priority": 99, "name": "Anthropic", "category": "company"},
+    "blog.google": {"tier": 1, "priority": 98, "name": "Google AI Blog", "category": "company"},
+    "blog.google.dev": {"tier": 1, "priority": 98, "name": "Google AI Blog", "category": "company"},
+    "deepmind.com": {"tier": 1, "priority": 97, "name": "DeepMind Blog", "category": "company"},
+    "ai.meta.com": {"tier": 1, "priority": 96, "name": "Meta AI Blog", "category": "company"},
+    "research.google": {"tier": 1, "priority": 95, "name": "Google Research", "category": "company"},
+    "developer.microsoft.com": {"tier": 1, "priority": 94, "name": "Microsoft Developer Blog", "category": "company"},
+    "aws.amazon.com": {"tier": 1, "priority": 93, "name": "AWS AI Blog", "category": "company"},
+    "huggingface.co": {"tier": 1, "priority": 92, "name": "Hugging Face", "category": "company"},
+    "bard.google.com": {"tier": 1, "priority": 91, "name": "Google Bard/Gemini", "category": "company"},
+    "mistral.ai": {"tier": 1, "priority": 90, "name": "Mistral AI", "category": "company"},
+    
+    # TIER 2: Top-Tier Tech News (Priority: 20)
+    # Established technology journalism with high editorial standards
+    "techcrunch.com": {"tier": 2, "priority": 80, "name": "TechCrunch", "category": "tech_news"},
+    "theverge.com": {"tier": 2, "priority": 79, "name": "The Verge", "category": "tech_news"},
+    "wired.com": {"tier": 2, "priority": 78, "name": "Wired", "category": "tech_news"},
+    "arstechnica.com": {"tier": 2, "priority": 77, "name": "Ars Technica", "category": "tech_news"},
+    "engadget.com": {"tier": 2, "priority": 76, "name": "Engadget", "category": "tech_news"},
+    
+    # TIER 3: AI-Specific Reputable Outlets (Priority: 30)
+    # Publications focused specifically on AI/tech
+    "venturebeat.com": {"tier": 3, "priority": 70, "name": "VentureBeat", "category": "ai_specific"},
+    "venturebeat.com/ai": {"tier": 3, "priority": 70, "name": "VentureBeat AI", "category": "ai_specific"},
+    "aitimews.com": {"tier": 3, "priority": 69, "name": "AI News", "category": "ai_specific"},
+    "artificialintelligence-news.com": {"tier": 3, "priority": 68, "name": "AI News", "category": "ai_specific"},
+    "marktechpost.com": {"tier": 3, "priority": 67, "name": "MarkTechpost", "category": "ai_specific"},
+    "unite.ai": {"tier": 3, "priority": 66, "name": "Unite.AI", "category": "ai_specific"},
+    "syncedreview.com": {"tier": 3, "priority": 65, "name": "Synced Review", "category": "ai_specific"},
+    "therundown.ai": {"tier": 3, "priority": 64, "name": "The Rundown AI", "category": "ai_specific"},
+    
+    # TIER 4: Major Business/Financial News (Priority: 40)
+    # Reputable business journalism with tech coverage
+    "reuters.com": {"tier": 4, "priority": 60, "name": "Reuters", "category": "business"},
+    "bloomberg.com": {"tier": 4, "priority": 59, "name": "Bloomberg", "category": "business"},
+    "ft.com": {"tier": 4, "priority": 58, "name": "Financial Times", "category": "business"},
+    "wsj.com": {"tier": 4, "priority": 57, "name": "Wall Street Journal", "category": "business"},
+    "economist.com": {"tier": 4, "priority": 56, "name": "The Economist", "category": "business"},
+    
+    # TIER 5: Major Tech Portals & Science (Priority: 50)
+    # Well-established tech and science publications
+    "zdnet.com": {"tier": 5, "priority": 50, "name": "ZDNet", "category": "tech"},
+    "cnet.com": {"tier": 5, "priority": 49, "name": "CNET", "category": "tech"},
+    "techradar.com": {"tier": 5, "priority": 48, "name": "TechRadar", "category": "tech"},
+    "theinformation.com": {"tier": 5, "priority": 47, "name": "The Information", "category": "tech"},
+    "protocol.com": {"tier": 5, "priority": 46, "name": "Protocol", "category": "tech"},
+    "semafor.com": {"tier": 5, "priority": 45, "name": "Semafor", "category": "tech"},
+    "restofworld.org": {"tier": 5, "priority": 44, "name": "Rest of World", "category": "tech"},
+    
+    # TIER 6: Academic/Research (Priority: 60)
+    # Technical depth but more academic
+    "nature.com": {"tier": 6, "priority": 40, "name": "Nature", "category": "academic"},
+    "science.org": {"tier": 6, "priority": 39, "name": "Science", "category": "academic"},
+    "cacm.acm.org": {"tier": 6, "priority": 38, "name": "Communications of the ACM", "category": "academic"},
+    "arxiv.org": {"tier": 6, "priority": 37, "name": "ArXiv Preprints", "category": "academic"},
+    "mit.edu": {"tier": 6, "priority": 36, "name": "MIT", "category": "academic"},
+    "stanford.edu": {"tier": 6, "priority": 35, "name": "Stanford", "category": "academic"},
+    "harvard.edu": {"tier": 6, "priority": 34, "name": "Harvard", "category": "academic"},
+    "berkeley.edu": {"tier": 6, "priority": 33, "name": "UC Berkeley", "category": "academic"},
+    "phys.org": {"tier": 6, "priority": 32, "name": "Phys.org", "category": "science"},
+    "techxplore.com": {"tier": 6, "priority": 31, "name": "TechXplore", "category": "science"},
+}
+
+# Domains to EXCLUDE completely (aggregators, regional, low-authority)
+EXCLUDED_DOMAINS = [
+    # Aggregators and content scrapers
+    "msn.com", "yahoo.com", "aol.com", "outlook.com",
+    "bing.com", "google.com/search", "duckduckgo.com",
+    
+    # Regional/Local news (not tech-focused)
+    "local", "daily", "chronicle", "herald", "tribune",
+    "scoop.co.nz",  # New Zealand aggregator
+    "indianexpress.com",  # Regional Indian
+    "hindustantimes.com",  # Regional Indian
+    "timesofindia.com",  # Regional Indian
+    
+    # Low-quality/Clickbait
+    "dailymail.co.uk",
+    "mirror.co.uk", 
+    "express.co.uk",
+    "thesun.co.uk",
+    "newyorkpost.com",
+    "dailystar.co.uk",
+    
+    # Business/marketing sites with low editorial standards
+    "businessinsider.com",  # Often opinion pieces
+    "investopedia.com",  # Educational, not news
+    "fool.com",  # Motley Fool - opinion/analysis
+    "crunchbase.com",  # Business database, not news
+    "livelaw.in",  # Regional law
+    "kfvs12.com",  # Local US news
+    "manilatimes.net",  # Regional
+    "irishtimes.com",  # Regional Irish
+    
+    # Content mills/Affiliate sites
+    "makeuseof.com",
+    "lifewire.com",
+    "howtogeek.com",
+    "techjunkie.com",
+    "tomsguide.com",
+    "digitaltrends.com",  # Often reviews/affiliate
+    
+    # AI-specific but low quality
+    "aitrends.com",
+    "aiformankind.com",
+    "aiportal.com",
+    "ainews.io",
+    "aibusiness.com",
+    "aizone.com",
 ]
 
-# Domains to exclude (sports, entertainment, aggregators)
+# Sports/entertainment exclusions
 EXCLUDED_PATTERNS = [
     '/sports/', '/nfl/', '/nba/', '/mlb/', '/entertainment/',
-    '/celebrity/', '/gossip/', '/fashion/',
-    'msn.com', 'yahoo.com', 'aol.com', 'marketwatch.com'
+    '/celebrity/', '/gossip/', '/fashion/', '/politics/',
+    '/opinion/', '/analysis/', '/press-release/',
 ]
+
+
+def get_source_quality_score(url: str) -> tuple[int, str, str]:
+    """
+    Get the quality score for a URL.
+    Returns: (priority_score, tier_name, source_name)
+    Lower score = better quality (priority 1 = best)
+    """
+    if not url:
+        return (999, "Unknown", "Unknown")
+    
+    url_lower = url.lower()
+    
+    # Check exclusions first
+    for excluded in EXCLUDED_DOMAINS:
+        if excluded in url_lower:
+            return (999, "Excluded", "Excluded - Low Quality")
+    
+    for pattern in EXCLUDED_PATTERNS:
+        if pattern in url_lower:
+            return (999, "Excluded", "Excluded - Pattern Match")
+    
+    # Find best matching source
+    best_match = (999, "Unknown", "Unknown")
+    
+    for domain, info in SOURCE_QUALITY_TIERS.items():
+        if domain in url_lower:
+            # Calculate effective priority (lower is better)
+            # tier * 100 + offset within tier
+            effective_priority = (info["tier"] * 100) - info["priority"]
+            if effective_priority < best_match[0]:
+                best_match = (effective_priority, f"Tier {info['tier']}", info["name"])
+    
+    return best_match
+
+
+def rank_news_items_by_source_quality(news_items: list) -> list:
+    """
+    Sort news items by source quality, prioritizing authoritative sources.
+    """
+    scored_items = []
+    
+    for item in news_items:
+        url = item.get("link", "")
+        priority, tier, source_name = get_source_quality_score(url)
+        
+        scored_items.append({
+            **item,
+            "_source_priority": priority,
+            "_source_tier": tier,
+            "_source_name": source_name
+        })
+    
+    # Sort by priority (lower = better)
+    scored_items.sort(key=lambda x: x.get("_source_priority", 999))
+    
+    return scored_items
+
+
+def get_best_source(news_items: list, preferred_tiers: list = None) -> dict:
+    """
+    Get the best source from news items.
+    If preferred_tiers is specified (e.g., [1, 2]), only consider those tiers.
+    Otherwise, return the highest quality source available.
+    """
+    if not news_items:
+        return None
+    
+    # Score all items
+    scored_items = rank_news_items_by_source_quality(news_items)
+    
+    # Filter by preferred tiers if specified
+    if preferred_tiers:
+        for item in scored_items:
+            tier_num = int(item.get("_source_tier", "Tier 999").replace("Tier ", ""))
+            if tier_num in preferred_tiers:
+                return item
+        # If no preferred tier found, fall back to best available
+        return scored_items[0] if scored_items else None
+    
+    # Return best available
+    return scored_items[0] if scored_items else None
+
+
+def validate_sources(sources: list) -> list:
+    """
+    Validate and rank a list of sources, removing excluded ones.
+    Returns sorted list of valid sources with quality metadata.
+    """
+    validated = []
+    
+    for source in sources:
+        url = source.get("url", "")
+        title = source.get("title", "")
+        
+        priority, tier, source_name = get_source_quality_score(url)
+        
+        # Skip completely excluded sources
+        if priority >= 999:
+            print(f"⚠️  Excluding low-quality source: {title} ({url})")
+            continue
+        
+        validated.append({
+            **source,
+            "_quality_priority": priority,
+            "_quality_tier": tier,
+            "_quality_source_name": source_name,
+            "_is_primary_source": tier in ["Tier 1", "Tier 2"]
+        })
+    
+    # Sort by quality (best first)
+    validated.sort(key=lambda x: x.get("_quality_priority", 999))
+    
+    return validated
+
+
+def validate_and_enhance_sources(generated_post: dict, news_items: list) -> dict:
+    """
+    Validate and enhance sources in the generated post.
+    If the LLM chose low-quality sources, replace with better ones from news_items.
+    """
+    if not generated_post:
+        return generated_post
+    
+    sources = generated_post.get("sources", [])
+    if not sources:
+        return generated_post
+    
+    # Validate each source
+    validated_sources = validate_sources(sources)
+    
+    # If we have better sources from news_items, potentially replace
+    news_item_urls = {item.get("link", ""): item for item in news_items if item.get("link")}
+    
+    enhanced_sources = []
+    for source in sources:
+        url = source.get("url", "")
+        
+        # Check if this source is in our validated list
+        for vs in validated_sources:
+            if vs.get("url") == url:
+                enhanced_sources.append(vs)
+                break
+        else:
+            # Source not validated well - try to find a better one
+            # Check if we have a better version in news_items
+            if url in news_item_urls:
+                item = news_item_urls[url]
+                priority, tier, source_name = get_source_quality_score(url)
+                if priority < 999:
+                    enhanced_sources.append({
+                        "title": source.get("title", item.get("title", "")),
+                        "url": url,
+                        "_quality_priority": priority,
+                        "_quality_tier": tier,
+                        "_quality_source_name": source_name
+                    })
+                else:
+                    # This is a bad source, skip it
+                    print(f"⚠️  Skipping low-quality source: {source.get('title', url)}")
+                    continue
+            else:
+                # Not in news items, use as-is but add quality metadata
+                priority, tier, source_name = get_source_quality_score(url)
+                enhanced_sources.append({
+                    **source,
+                    "_quality_priority": priority,
+                    "_quality_tier": tier,
+                    "_quality_source_name": source_name
+                })
+    
+    # Also add high-quality sources from news_items that might be missing
+    if len(enhanced_sources) < 5:
+        for item in news_items[:5]:
+            url = item.get("link", "")
+            # Check if we already have this URL
+            if any(s.get("url") == url for s in enhanced_sources):
+                continue
+            
+            priority, tier, source_name = get_source_quality_score(url)
+            if priority < 500:  # Good quality
+                enhanced_sources.append({
+                    "title": item.get("title", ""),
+                    "url": url,
+                    "_quality_priority": priority,
+                    "_quality_tier": tier,
+                    "_quality_source_name": source_name
+                })
+                
+                if len(enhanced_sources) >= 5:
+                    break
+    
+    # Sort by quality
+    enhanced_sources.sort(key=lambda x: x.get("_quality_priority", 999))
+    
+    # Clean up internal metadata before returning
+    final_sources = []
+    for s in enhanced_sources:
+        clean = {k: v for k, v in s.items() if not k.startswith("_")}
+        final_sources.append(clean)
+    
+    # Update the post
+    generated_post["sources"] = final_sources
+    
+    # Also update the primary link if it's not high quality
+    current_link = generated_post.get("link", "")
+    if current_link:
+        link_priority, _, _ = get_source_quality_score(current_link)
+        if link_priority >= 500 and final_sources:
+            # Primary link is low quality, use best source link instead
+            generated_post["link"] = final_sources[0].get("url", current_link)
+            print(f"🔄 Updated primary link to higher quality source")
+    
+    return generated_post
+
+
+# Legacy compatibility - updated trusted domains list
+TRUSTED_DOMAINS = list(SOURCE_QUALITY_TIERS.keys())
 
 
 def is_ai_relevant(title: str, snippet: str, link: str) -> bool:
-    """Check if a news item is AI/ML relevant based on keywords."""
+    """Check if a news item is AI/ML relevant based on keywords and source quality."""
     text = (title + " " + snippet).lower()
     link_lower = link.lower()
     
     # Check for excluded patterns in URL
     for pattern in EXCLUDED_PATTERNS:
         if pattern in link_lower:
+            return False
+    
+    # Check if source is in excluded domains list (low quality)
+    for excluded in EXCLUDED_DOMAINS:
+        if excluded in link_lower:
             return False
     
     # Check for AI keywords in title or snippet
@@ -76,20 +415,42 @@ def is_ai_relevant(title: str, snippet: str, link: str) -> bool:
     return False
 
 
-def get_best_link(news_items: list) -> str:
-    """Get the most relevant link from news items, preferring trusted domains."""
-    # First try to find a link from a trusted domain
+def get_best_link(news_items: list, preferred_tiers: list = None) -> str:
+    """
+    Get the most relevant link from news items using source quality ranking.
+    
+    Args:
+        news_items: List of news item dictionaries
+        preferred_tiers: Optional list of preferred tiers (e.g., [1, 2] for company blogs and top tech news)
+    
+    Returns:
+        URL string of the best quality source
+    """
+    if not news_items:
+        return "https://news.ycombinator.com/news"
+    
+    # Use the new quality-based selection
+    best_item = get_best_source(news_items, preferred_tiers)
+    
+    if best_item:
+        link = best_item.get("link", "")
+        if link:
+            tier = best_item.get("_source_tier", "Unknown")
+            source = best_item.get("_source_name", "Unknown")
+            print(f"📌 Best source selected: {source} ({tier}) - {link[:50]}...")
+            return link
+    
+    # Fallback: try to find any trusted domain
     for item in news_items:
         link = item.get('link', '')
         for domain in TRUSTED_DOMAINS:
-            if domain in link:
+            if domain in link.lower():
                 return link
     
-    # Fallback to first item's link if available
+    # Last resort fallback
     if news_items and news_items[0].get('link'):
         return news_items[0]['link']
     
-    # Last resort fallback
     return "https://news.ycombinator.com/news"
 
 
@@ -151,10 +512,25 @@ def search_news_node(state: AgentState) -> AgentState:
         for item in raw_results:
             if is_ai_relevant(item["title"], item["snippet"], item["link"]):
                 state["news_items"].append(item)
-                if len(state["news_items"]) >= 5:  # Keep top 5 relevant results
+                if len(state["news_items"]) >= 10:  # Keep top 10 to allow for quality ranking
                     break
         
-        print(f"✅ Found {len(state['news_items'])} AI/ML relevant news items")
+        # Sort by source quality (best sources first)
+        if state["news_items"]:
+            print(f"📊 Ranking {len(state['news_items'])} items by source quality...")
+            state["news_items"] = rank_news_items_by_source_quality(state["news_items"])
+            
+            # Show top 5 with their quality scores
+            print("🏆 Top sources by quality:")
+            for i, item in enumerate(state["news_items"][:5]):
+                tier = item.get("_source_tier", "Unknown")
+                source = item.get("_source_name", "Unknown")
+                print(f"   {i+1}. [{tier}] {source}: {item.get('title', '')[:50]}...")
+            
+            # Keep top 5 best quality items for the blog post
+            state["news_items"] = state["news_items"][:5]
+        
+        print(f"✅ Found {len(state['news_items'])} AI/ML relevant news items (quality-ranked)")
         
     except Exception as e:
         print(f"❌ Error searching news: {e}")
@@ -209,9 +585,9 @@ def summarize_node(state: AgentState) -> AgentState:
         temperature=0.7
     )
     
-    # Format news items for the prompt
+    # Format news items for the prompt - include source quality info
     news_text = "\\n".join([
-        f"- {item['title']}: {item.get('snippet', '')} ({item.get('link', '')})"
+        f"- [{item.get('_source_tier', 'Unknown')} - {item.get('_source_name', 'Unknown')}] {item['title']}: {item.get('snippet', '')} ({item.get('link', '')})"
         for item in state["news_items"]
     ])
     
@@ -219,7 +595,30 @@ def summarize_node(state: AgentState) -> AgentState:
     if state.get("query"):
         context_str = "specified period"
     
-    prompt = f"""You are an expert AI/ML journalist. Here are the top news stories from the {context_str}:
+    # Source quality guidance for the LLM
+    source_guidance = """
+SOURCE QUALITY PRIORITIES (use these for your sources list):
+✅ BEST SOURCES (Primary): OpenAI Blog, Anthropic, Google DeepMind, Meta AI, Microsoft Research, Hugging Face
+✅ GOOD SOURCES (Tech News): TechCrunch, The Verge, Wired, Ars Technica, Engadget
+✅ ACCEPTABLE (AI-Specific): VentureBeat AI, MarkTechpost, Unite.AI, The Rundown AI
+⚠️  USE SPARINGLY (Business): Reuters, Bloomberg, Financial Times, Wall Street Journal
+⚠️  USE SPARINGLY (Academic): Nature, Science, arXiv preprints
+
+AVOID using: Regional news (local newspapers), aggregators (Yahoo, MSN), opinion/analysis sites, business opinion sites (Motley Fool, Business Insider), or low-authority sites.
+"""
+    
+    prompt = f"""You are an expert AI/ML journalist. Here are the top news stories from the {context_str}, ranked by source quality:
+
+{news_text}
+
+{source_guidance}
+
+Task: Create a SINGLE comprehensive "Weekly Digest" blog post covering EXACTLY 4 to 5 stories. You MUST cover at least 4 distinct stories.
+
+CRITICAL: When selecting sources for your sources list, prioritize:
+1. Primary company blogs (OpenAI, Anthropic, Google, Meta) for announcements
+2. Top-tier tech journalism (TechCrunch, The Verge, Wired, Ars Technica) for analysis
+3. Use the provided source quality rankings as a guide
 
 {news_text}
 
@@ -250,12 +649,14 @@ CRITICAL FORMATTING RULES:
 
 OUTPUT FORMAT:
 Return a JSON object with these exact keys:
-- "title": Engaging, descriptive headline that names the key topics (e.g. "Convergence of Quant Shops and AI Labs, Neuro-Symbolic Concepts, and AI Creativity")
+- "title": Engaging, descriptive headline that names the key topics
 - "summary": 3-4 sentence executive summary mentioning all covered stories
 - "content": Full markdown content with PROPER NEWLINES
 - "tags": Array of 3-5 relevant tags
-- "sources": Array of {{"title": "...", "url": "..."}} objects for each story
-- "link": Primary source URL (from the most important story)
+- "sources": Array of {{"title": "...", "url": "..."}} objects for each story - PRIORITIZE HIGH-QUALITY SOURCES (company blogs, top tech news)
+- "link": Primary source URL - MUST be from a high-quality source (prefer Tier 1-2: OpenAI, Anthropic, Google, Meta, TechCrunch, The Verge, Wired, Ars Technica)
+
+IMPORTANT: The "link" field should point to the most authoritative source available. Avoid linking to regional news, aggregators, or low-authority sites.
 
 Respond ONLY with the JSON object, no markdown code blocks."""
 
@@ -296,9 +697,20 @@ Respond ONLY with the JSON object, no markdown code blocks."""
             state["error"] = error_msg
             state["generated_post"] = None
             return state
-            
+        
+        # Validate and enhance sources with quality metadata
+        data = validate_and_enhance_sources(data, state["news_items"])
+        
         state["generated_post"] = data
         print(f"✅ Generated detailed digest: {state['generated_post']['title']}")
+        
+        # Log source quality summary
+        sources = data.get('sources', [])
+        if sources:
+            print(f"📚 Source Quality Summary:")
+            for i, s in enumerate(sources[:5]):
+                tier = s.get('_quality_tier', 'Unknown')
+                print(f"   {i+1}. [{tier}] {s.get('title', 'Unknown')[:40]}...")
 
     except Exception as e:
         print(f"❌ Error generating summary: {e}")

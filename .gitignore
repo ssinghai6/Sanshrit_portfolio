@@ -32,3 +32,4 @@ __pycache__/
 # Environment variables (API keys)
 .env
 agent/.env
+.opencode/
