@@ -345,6 +345,13 @@ def format_newsletter_content(content: str) -> str:
     if not content:
         return content
     
+    # First, fix headings that have content on the same line (e.g., "## Heading  Some content")
+    # Split on "## " to find headings followed by content
+    import re
+    
+    # Pattern: "## " followed by heading text, then 2+ spaces, then content
+    content = re.sub(r'(## [^\n]+?)( {2,})', r'\1\n\n', content)
+    
     lines = content.split('\n')
     formatted_lines = []
     
@@ -353,24 +360,20 @@ def format_newsletter_content(content: str) -> str:
         
         # Fix: Remove leading spaces from headings (e.g., " ## Heading" -> "## Heading")
         if stripped.startswith('## '):
-            line = '## ' + stripped[3:]  # Remove leading spaces
+            line = '## ' + stripped[3:]
+            # Add blank line before heading if previous line isn't empty
             if formatted_lines and formatted_lines[-1].strip() != '':
                 formatted_lines.append('')
             formatted_lines.append(line)
         # Add blank line after bold labels
         elif stripped == '**Key Takeaways:**' or stripped == '**Why It Matters:**':
-            if stripped == '**Key Takeaways:**':
-                line = '**Key Takeaways:**'
-            else:
-                line = '**Why It Matters:**'
-            formatted_lines.append(line)
+            formatted_lines.append(stripped)
             formatted_lines.append('')
         # Fix run-on bullet points - when bullet points are on same line after **Key Takeaways:**
         elif '**Key Takeaways:**' in line and ' - ' in line:
-            # Split "**Key Takeaways:** - item1 - item2 - item3" into separate lines
             parts = line.split(' - ')
             if len(parts) > 1:
-                formatted_lines.append(parts[0])
+                formatted_lines.append(parts[0].strip())
                 formatted_lines.append('')
                 for part in parts[1:]:
                     if part.strip():
@@ -381,7 +384,7 @@ def format_newsletter_content(content: str) -> str:
         elif '**Why It Matters:**' in line and ' - ' in line:
             parts = line.split(' - ')
             if len(parts) > 1:
-                formatted_lines.append(parts[0])
+                formatted_lines.append(parts[0].strip())
                 formatted_lines.append('')
                 for part in parts[1:]:
                     if part.strip():
