@@ -66,6 +66,16 @@ SOURCE_QUALITY_TIERS = {
     "huggingface.co": {"tier": 1, "priority": 92, "name": "Hugging Face", "category": "company"},
     "bard.google.com": {"tier": 1, "priority": 91, "name": "Google Bard/Gemini", "category": "company"},
     "mistral.ai": {"tier": 1, "priority": 90, "name": "Mistral AI", "category": "company"},
+    "x.com/ai": {"tier": 1, "priority": 89, "name": "xAI", "category": "company"},
+    "cohere.com": {"tier": 1, "priority": 88, "name": "Cohere", "category": "company"},
+    "inflection.ai": {"tier": 1, "priority": 87, "name": "Inflection", "category": "company"},
+    
+    # TIER 1.5: Popular AI Newsletters (Priority: 15)
+    # Trending newsletter sources
+    "sequoiacap.com": {"tier": 1, "priority": 85, "name": "Sequoia Blog", "category": "newsletter"},
+    "a16z.com": {"tier": 1, "priority": 84, "name": "a16z AI", "category": "newsletter"},
+    "nytimes.com/ai": {"tier": 1, "priority": 83, "name": "NYT AI", "category": "newsletter"},
+    "wsj.com/ai": {"tier": 1, "priority": 82, "name": "WSJ AI", "category": "newsletter"},
     
     # TIER 2: Top-Tier Tech News (Priority: 20)
     # Established technology journalism with high editorial standards
@@ -529,8 +539,8 @@ def search_news_node(state: AgentState) -> AgentState:
     if custom_query:
         base_query = custom_query
     else:
-        # Improved query targeting AI/ML content specifically
-        base_query = '"artificial intelligence" OR "machine learning" OR "LLM" OR "GPT" news'
+        # Query prioritizing major company news + trending topics
+        base_query = 'site:openai.com OR site:anthropic.com OR site:deepmind.com OR site:ai.meta.com OR site:developer.microsoft.com OR site:huggingface.co OR (artificial intelligence news) OR (AI breakthrough OR AI launch OR AI announcement) -filter'
     
     try:
         print(f"👉 Querying DuckDuckGo: '{base_query}'")
