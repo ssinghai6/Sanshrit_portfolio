@@ -620,7 +620,7 @@ const Portfolio = () => {
       {showAllPosts && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setShowAllPosts(false)}></div>
-          <div className="glass-panel w-full max-w-4xl max-h-[85vh] rounded-2xl overflow-hidden flex flex-col relative z-10 animate-blob">
+          <div className="glass-panel w-full max-w-4xl max-h-[85vh] rounded-2xl overflow-hidden flex flex-col relative z-10 bg-[#0a0a0a] border border-zinc-800/50">
             <div className="p-6 border-b border-white/10 flex justify-between items-center bg-black/40">
               <h2 className="text-2xl font-bold text-white">Archive</h2>
               <button onClick={() => setShowAllPosts(false)} className="p-2 hover:bg-white/10 rounded-full transition-colors">
