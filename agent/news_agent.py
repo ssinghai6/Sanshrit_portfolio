@@ -659,7 +659,7 @@ SOURCE QUALITY PRIORITIES (use these for your sources list):
 AVOID using: Regional news (local newspapers), aggregators (Yahoo, MSN), opinion/analysis sites, business opinion sites (Motley Fool, Business Insider), or low-authority sites.
 """
     
-    prompt = f"""You are an expert AI/ML journalist. Here are the top news stories from the {context_str}, ranked by source quality:
+    prompt = f"""You are an expert AI/ML journalist. Here are the top news stories from the {context_str}, ranked by source quality and diversity:
 
 {news_text}
 
@@ -667,10 +667,11 @@ AVOID using: Regional news (local newspapers), aggregators (Yahoo, MSN), opinion
 
 Task: Create a SINGLE comprehensive "Weekly Digest" blog post covering EXACTLY 4 to 5 stories. You MUST cover at least 4 distinct stories.
 
-CRITICAL: When selecting sources for your sources list, prioritize:
-1. Primary company blogs (OpenAI, Anthropic, Google, Meta) for announcements
-2. Top-tier tech journalism (TechCrunch, The Verge, Wired, Ars Technica) for analysis
-3. Use the provided source quality rankings as a guide
+CRITICAL SOURCE REQUIREMENT:
+- You MUST include AT LEAST 4-5 DIFFERENT sources in the "sources" array - one for EACH story
+- Each story should cite a different source URL from the ones provided above
+- DO NOT use the same source for multiple stories
+- The "sources" array MUST have at least 4 items with unique URLs
 
 {news_text}
 
@@ -705,10 +706,13 @@ Return a JSON object with these exact keys:
 - "summary": 3-4 sentence executive summary mentioning all covered stories
 - "content": Full markdown content with PROPER NEWLINES
 - "tags": Array of 3-5 relevant tags
-- "sources": Array of {{"title": "...", "url": "..."}} objects for each story - PRIORITIZE HIGH-QUALITY SOURCES (company blogs, top tech news)
+- "sources": Array of {{"title": "...", "url": "..."}} objects - MUST have at least 4 different sources, one per story
 - "link": Primary source URL - MUST be from a high-quality source (prefer Tier 1-2: OpenAI, Anthropic, Google, Meta, TechCrunch, The Verge, Wired, Ars Technica)
 
-IMPORTANT: The "link" field should point to the most authoritative source available. Avoid linking to regional news, aggregators, or low-authority sites.
+IMPORTANT: 
+1. The "sources" array MUST contain at least 4 unique URLs - one for each story
+2. Do NOT repeat the same source URL multiple times
+3. The "link" field should point to the most authoritative source available
 
 Respond ONLY with the JSON object, no markdown code blocks."""
 
