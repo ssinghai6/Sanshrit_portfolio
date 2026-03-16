@@ -758,13 +758,41 @@ const Portfolio = () => {
                           {/* Story Content */}
                           {bodyContent && (
                             <div className="text-zinc-300 leading-relaxed text-lg mb-6 space-y-4">
-                              {bodyContent.split(/\s{2,}/).map((paragraph, pIdx) => (
-                                paragraph.trim() && (
+                              {bodyContent.split(/\n\n|\s{2,}/).map((paragraph, pIdx) => {
+                                const trimmed = paragraph.trim();
+                                if (!trimmed) return null;
+                                
+                                // Check if this paragraph contains bullet points
+                                const hasBullets = trimmed.includes('•') || trimmed.includes('\u2022') || /^\s*[-*]\s/m.test(trimmed);
+                                
+                                if (hasBullets) {
+                                  // Split by bullet characters and render as list
+                                  const items = trimmed.split(/(?:^|\n)\s*(?:[-*•]\s*|\u2022\s*)/).filter(item => item.trim());
+                                  return (
+                                    <ul key={pIdx} className="space-y-2 list-none pl-0">
+                                      {items.map((item, iIdx) => (
+                                        <li key={iIdx} className="flex items-start gap-3 text-zinc-300">
+                                          <span className="text-primary-400 mt-1">•</span>
+                                          <span>{item.trim()}</span>
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  );
+                                }
+                                
+                                // Handle line breaks within paragraphs
+                                const lines = trimmed.split(/\n/);
+                                return (
                                   <p key={pIdx} className="text-zinc-300 leading-relaxed">
-                                    {paragraph.trim()}
+                                    {lines.map((line, lIdx) => (
+                                      <span key={lIdx}>
+                                        {line.trim()}
+                                        {lIdx < lines.length - 1 && <br />}
+                                      </span>
+                                    ))}
                                   </p>
-                                )
-                              ))}
+                                );
+                              })}
                             </div>
                           )}
 
