@@ -105,7 +105,7 @@ const Portfolio = () => {
               <SocialLink href="mailto:singhai.sanshrit@live.com" icon={Mail} />
               <div className="h-4 w-px bg-white/10 mx-2"></div>
               <a
-                href="https://1drv.ms/b/c/a9a13d4ed9947e83/IQCb0Lq-Ps0mTqblBJKtjRlQAdX_NuTn9t1I0b--yiFD4Fg?e=N9Zt95"
+                href="https://1drv.ms/b/c/a9a13d4ed9947e83/IQCb0Lq-Ps0mTqblBJKtjRlQATGzMjfwaHtpQofCVCDi980?e=KOzc2Z"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-3 py-1.5 bg-white/5 hover:bg-white/10 rounded-full text-xs font-mono text-zinc-300 transition-colors border border-white/5"
@@ -354,18 +354,21 @@ const Portfolio = () => {
                   <a href="https://doc-bot-nine.vercel.app" className="text-zinc-400 hover:text-primary-400 transition-colors"><ExternalLink size={20} /></a>
                 </div>
               </div>
-              <h4 className="text-xl font-bold text-white mb-2 group-hover:text-primary-400 transition-colors">DocBot 2.0: AI PDF Assistant</h4>
+              <h4 className="text-xl font-bold text-white mb-2 group-hover:text-primary-400 transition-colors">DocBot: AI Document & Database Analyst</h4>
               <ul className="list-disc space-y-2 text-zinc-400 flex-grow pl-4 text-sm mb-6 marker:text-primary-500">
-                <li>Engineered a multimodal RAG assistant (Llama 3.3 70B via Groq) that utilizes Vision AI to analyze charts/graphs within PDFs.</li>
-                <li>Implemented 'Smart Expert Personas' and 'Deep Research Mode' for domain-specific context and deep reasoning.</li>
-                <li>Supports full local privacy with Ollama (Llama 3.2) and cloud speed with Groq LPU.</li>
+                <li>Architected a hybrid Docs+DB reasoning engine with 8 expert personas, intent-based auto-routing, and discrepancy detection across PDFs and live databases.</li>
+                <li>Built a 7-step bounded SQL pipeline with sqlglot AST validation, 3-layer read-only enforcement, schema drift auto-recovery, and agentic multi-step Autopilot via LangGraph.</li>
+                <li>Enterprise-ready with SAML SSO, RBAC, PII masking, audit logging, E2B sandboxed Python analysis, and LLM fallback chains (Groq → Gemini). 599 tests passing.</li>
               </ul>
               <div className="flex gap-3 text-xs font-mono text-primary-300/80">
-                <span>Llama 3.3</span>
-                <span>Groq</span>
-                <span>Ollama</span>
+                <span>LLaMA 3.3</span>
+                <span>Gemini 2.5</span>
                 <span>LangChain</span>
-                <span>Streamlit</span>
+                <span>LangGraph</span>
+                <span>FastAPI</span>
+                <span>Next.js</span>
+                <span>PostgreSQL</span>
+                <span>E2B</span>
               </div>
             </div>
 
