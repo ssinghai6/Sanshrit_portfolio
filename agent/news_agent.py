@@ -95,7 +95,14 @@ SOURCE_QUALITY_TIERS = {
     "unite.ai": {"tier": 3, "priority": 66, "name": "Unite.AI", "category": "ai_specific"},
     "syncedreview.com": {"tier": 3, "priority": 65, "name": "Synced Review", "category": "ai_specific"},
     "therundown.ai": {"tier": 3, "priority": 64, "name": "The Rundown AI", "category": "ai_specific"},
-    
+    "therundownai.com": {"tier": 3, "priority": 64, "name": "The Rundown AI", "category": "ai_specific"},
+    "semianalysis.com": {"tier": 2, "priority": 75, "name": "SemiAnalysis", "category": "tech_news"},
+    "technologyreview.com": {"tier": 2, "priority": 74, "name": "MIT Technology Review", "category": "tech_news"},
+    "spectrum.ieee.org": {"tier": 3, "priority": 63, "name": "IEEE Spectrum", "category": "ai_specific"},
+    "bensbites.co": {"tier": 3, "priority": 62, "name": "Ben's Bites", "category": "ai_specific"},
+    "simonwillison.net": {"tier": 3, "priority": 61, "name": "Simon Willison's Blog", "category": "ai_specific"},
+    "lilianweng.github.io": {"tier": 3, "priority": 60, "name": "Lilian Weng Blog", "category": "ai_specific"},
+
     # TIER 4: Major Business/Financial News (Priority: 40)
     # Reputable business journalism with tech coverage
     "reuters.com": {"tier": 4, "priority": 60, "name": "Reuters", "category": "business"},
@@ -581,101 +588,224 @@ class AgentState(TypedDict):
 
 from ddgs import DDGS
 
+# ============================================================================
+# SEARCH CATEGORIES - Multi-query approach for topic diversity
+# ============================================================================
+SEARCH_CATEGORIES = [
+    {
+        "name": "Model Releases & AI Products",
+        "query": "new AI model release OR LLM launch OR AI product announcement this week",
+        "description": "New model launches, product updates from OpenAI, Anthropic, Google, Meta, etc."
+    },
+    {
+        "name": "AI Research & Breakthroughs",
+        "query": "AI research breakthrough OR machine learning paper OR AI benchmark this week",
+        "description": "Academic papers, research milestones, new techniques"
+    },
+    {
+        "name": "AI Business & Industry Impact",
+        "query": "AI business impact OR AI startup funding OR AI enterprise adoption this week",
+        "description": "Funding rounds, partnerships, enterprise deployments, market shifts"
+    },
+    {
+        "name": "AI Policy & Safety",
+        "query": "AI regulation OR AI safety OR AI policy OR AI ethics this week",
+        "description": "Government regulation, safety research, ethical debates"
+    },
+    {
+        "name": "AI Tools & Developer Updates",
+        "query": "AI developer tools OR AI API update OR Claude OR ChatGPT features this week",
+        "description": "New features, API updates, developer tools, open source releases"
+    }
+]
+
 def search_news_node(state: AgentState) -> AgentState:
     """
     Node 1: Search for AI/ML news using DuckDuckGo.
     Free and requires no API key.
     """
     print("🔍 Searching for AI/ML news...")
-    
-    # Use custom query if provided, otherwise use improved default
+
+    # Use custom query if provided, otherwise use category-based multi-query
     custom_query = state.get("query")
-    if custom_query:
-        base_query = custom_query
-    else:
-        # Simplified query - DuckDuckGo handles these better
-        base_query = 'artificial intelligence OR LLM OR GPT OR AI news this week'
-    
+
     try:
-        print(f"👉 Querying DuckDuckGo: '{base_query}'")
-        
-        raw_results = []
-        try:
-            with DDGS() as ddgs:
-                # Fetch more results initially to filter down to relevant ones
-                ddg_gen = ddgs.news(base_query, max_results=30, timelimit='w')  # 'w' = past week
-                
-                for item in ddg_gen:
-                    raw_results.append({
-                        "title": item.get("title", ""),
-                        "snippet": item.get("body", ""),
-                        "link": item.get("url", "")
-                    })
-        except Exception as e:
-            print(f"⚠️ DuckDuckGo news search failed: {e}")
-            print("🔄 Trying text search as fallback...")
+        # Collect raw results per category
+        category_results = {}  # category_name -> list of results
+
+        if custom_query:
+            # Single custom query mode
+            queries_to_run = [{"name": "Custom", "query": custom_query}]
+        else:
+            # Multi-query category-based search for diversity
+            queries_to_run = SEARCH_CATEGORIES
+
+        for cat in queries_to_run:
+            cat_name = cat["name"]
+            cat_query = cat["query"]
+            print(f"👉 Querying DuckDuckGo [{cat_name}]: '{cat_query}'")
+
+            cat_results = []
             try:
                 with DDGS() as ddgs:
-                    ddg_gen = ddgs.text(base_query, max_results=30)
+                    ddg_gen = ddgs.news(cat_query, max_results=15, timelimit='w')
                     for item in ddg_gen:
-                        raw_results.append({
+                        cat_results.append({
                             "title": item.get("title", ""),
                             "snippet": item.get("body", ""),
-                            "link": item.get("href", "")
+                            "link": item.get("url", ""),
+                            "_search_category": cat_name,
                         })
-            except Exception as e2:
-                print(f"⚠️ DuckDuckGo text search also failed: {e2}")
-                # Fall back to empty results - will show error message
-                raw_results = []
-        
-        print(f"📥 Retrieved {len(raw_results)} raw results, filtering for AI/ML relevance...")
-        
-        # Filter results for AI/ML relevance
-        state["news_items"] = []
-        for item in raw_results:
-            if is_ai_relevant(item["title"], item["snippet"], item["link"]):
-                state["news_items"].append(item)
-                if len(state["news_items"]) >= 10:  # Keep top 10 to allow for quality ranking
+            except Exception as e:
+                print(f"  ⚠️ DuckDuckGo news search failed for [{cat_name}]: {e}")
+                try:
+                    with DDGS() as ddgs:
+                        ddg_gen = ddgs.text(cat_query, max_results=15)
+                        for item in ddg_gen:
+                            cat_results.append({
+                                "title": item.get("title", ""),
+                                "snippet": item.get("body", ""),
+                                "link": item.get("href", ""),
+                                "_search_category": cat_name,
+                            })
+                except Exception as e2:
+                    print(f"  ⚠️ Text search also failed for [{cat_name}]: {e2}")
+
+            print(f"  📥 [{cat_name}] Retrieved {len(cat_results)} raw results")
+            category_results[cat_name] = cat_results
+
+        # Filter all results for AI relevance AND source quality early
+        filtered_by_category = {}  # category_name -> list of quality-filtered results
+        seen_domains_global = set()
+
+        for cat_name, results in category_results.items():
+            filtered = []
+            for item in results:
+                link = item.get("link", "")
+                title = item.get("title", "")
+                snippet = item.get("snippet", "")
+
+                # Check AI relevance
+                if not is_ai_relevant(title, snippet, link):
+                    continue
+
+                # Early source quality filter: skip unknown/untrusted sources (priority >= 500)
+                priority, tier, source_name = get_source_quality_score(link)
+                if priority >= 500:
+                    print(f"  ⛔ Skipping unknown source: {extract_domain(link)} - {title[:40]}...")
+                    continue
+
+                # Deduplicate by domain across all categories
+                domain = extract_domain(link)
+                if domain in seen_domains_global:
+                    continue
+                seen_domains_global.add(domain)
+
+                # Attach quality metadata
+                item["_source_priority"] = priority
+                item["_source_tier"] = tier
+                item["_source_name"] = source_name
+                item["_source_domain"] = domain
+                filtered.append(item)
+
+            # Sort within category by source quality (best first)
+            filtered.sort(key=lambda x: x.get("_source_priority", 999))
+            filtered_by_category[cat_name] = filtered
+            print(f"  ✅ [{cat_name}] {len(filtered)} quality-filtered results")
+
+        # Pick best result from each category first (ensures diversity)
+        selected = []
+        for cat_name in [c["name"] for c in queries_to_run]:
+            candidates = filtered_by_category.get(cat_name, [])
+            if candidates:
+                best = candidates[0]
+                selected.append(best)
+                print(f"  🏆 [{cat_name}] Selected: [{best.get('_source_tier', '?')}] {best.get('_source_name', '?')} - {best.get('title', '')[:50]}...")
+
+        # If we have fewer than 5, fill from remaining results across all categories
+        if len(selected) < 5:
+            selected_domains = {item.get("_source_domain") for item in selected}
+            all_remaining = []
+            for cat_name, candidates in filtered_by_category.items():
+                for item in candidates:
+                    if item.get("_source_domain") not in selected_domains:
+                        all_remaining.append(item)
+            # Sort remaining by quality
+            all_remaining.sort(key=lambda x: x.get("_source_priority", 999))
+            for item in all_remaining:
+                if len(selected) >= 5:
                     break
-        
-        # Sort by source quality (best sources first)
+                selected.append(item)
+                selected_domains.add(item.get("_source_domain"))
+                print(f"  ➕ Backfill: [{item.get('_source_tier', '?')}] {item.get('_source_name', '?')} - {item.get('title', '')[:50]}...")
+
+        # Fallback: if category-based search yielded fewer than 5, try broad query
+        if len(selected) < 5 and not custom_query:
+            print("🔄 Category search yielded < 5 results, falling back to broad query...")
+            fallback_query = 'artificial intelligence OR LLM OR GPT OR AI news this week'
+            try:
+                with DDGS() as ddgs:
+                    ddg_gen = ddgs.news(fallback_query, max_results=30, timelimit='w')
+                    for item in ddg_gen:
+                        link = item.get("url", "")
+                        title = item.get("title", "")
+                        snippet = item.get("body", "")
+
+                        if not is_ai_relevant(title, snippet, link):
+                            continue
+
+                        priority, tier, source_name = get_source_quality_score(link)
+                        if priority >= 500:
+                            continue
+
+                        domain = extract_domain(link)
+                        if domain in seen_domains_global:
+                            continue
+                        seen_domains_global.add(domain)
+
+                        selected.append({
+                            "title": title,
+                            "snippet": snippet,
+                            "link": link,
+                            "_search_category": "Fallback",
+                            "_source_priority": priority,
+                            "_source_tier": tier,
+                            "_source_name": source_name,
+                            "_source_domain": domain,
+                        })
+                        print(f"  ➕ Fallback: [{tier}] {source_name} - {title[:50]}...")
+
+                        if len(selected) >= 5:
+                            break
+            except Exception as fb_err:
+                print(f"  ⚠️ Fallback search failed: {fb_err}")
+
+        # Final sort by quality and trim to 5
+        selected.sort(key=lambda x: x.get("_source_priority", 999))
+        state["news_items"] = selected[:5]
+
+        # Show final selected items
         if state["news_items"]:
-            print(f"📊 Ranking {len(state['news_items'])} items by source quality...")
-            state["news_items"] = rank_news_items_by_source_quality(state["news_items"])
-            
-            # Show top 5 with their quality scores
-            print("🏆 Top sources by quality:")
-            for i, item in enumerate(state["news_items"][:5]):
-                tier = item.get("_source_tier", "Unknown")
-                source = item.get("_source_name", "Unknown")
-                print(f"   {i+1}. [{tier}] {source}: {item.get('title', '')[:50]}...")
-            
-            # Ensure source diversity - max 1 article per domain
-            print("🔄 Ensuring source diversity (one article per source)...")
-            state["news_items"] = ensure_source_diversity(state["news_items"], max_per_source=1)
-            
-            # Keep top 5 diverse items for the blog post
-            state["news_items"] = state["news_items"][:5]
-            
-            # Show final selected items with their sources
-            print("📰 Final selected articles (diverse sources):")
+            print("📰 Final selected articles (diverse categories & sources):")
             for i, item in enumerate(state["news_items"]):
+                cat = item.get("_search_category", "Unknown")
                 domain = item.get("_source_domain", "Unknown")
-                print(f"   {i+1}. [{domain}] {item.get('title', '')[:50]}...")
-        
-        print(f"✅ Found {len(state['news_items'])} AI/ML relevant news items (quality-ranked)")
-        
+                tier = item.get("_source_tier", "Unknown")
+                print(f"   {i+1}. [{cat}] [{tier}] {domain} - {item.get('title', '')[:50]}...")
+
+        print(f"✅ Found {len(state['news_items'])} AI/ML relevant news items (quality-ranked, category-diverse)")
+
     except Exception as e:
         print(f"❌ Error searching news: {e}")
         state["error"] = str(e)
         state["news_items"] = []
-    
-    # Fail clearly if no results — do NOT fall back to mock data
+
+    # Fail clearly if no results -- do NOT fall back to mock data
     if not state["news_items"]:
         error_msg = "No AI/ML relevant news found. DuckDuckGo may be rate-limiting. Try again in a few minutes."
         print(f"❌ {error_msg}")
         state["error"] = error_msg
-    
+
     return state
 
 
@@ -718,91 +848,97 @@ def summarize_node(state: AgentState) -> AgentState:
         temperature=0.7
     )
     
-    # Format news items for the prompt - include source quality info
+    # Assign category tags to news items based on title/snippet keywords
+    def _categorize(item):
+        text = (item.get("title", "") + " " + item.get("snippet", "")).lower()
+        if any(w in text for w in ["launch", "release", "model", "gpt", "claude", "gemini", "llama", "open-source", "parameter", "weights"]):
+            return "Model Releases"
+        if any(w in text for w in ["paper", "research", "study", "benchmark", "arxiv", "breakthrough", "dataset"]):
+            return "Research"
+        if any(w in text for w in ["regulation", "policy", "law", "ban", "govern", "eu", "congress", "safety", "executive order"]):
+            return "Policy"
+        if any(w in text for w in ["sdk", "api", "framework", "tool", "developer", "library", "plugin", "open source", "platform"]):
+            return "Developer Tools"
+        return "Business"
+
+    # Format news items for the prompt - include source quality and category info
     news_text = "\\n".join([
-        f"- [{item.get('_source_tier', 'Unknown')} - {item.get('_source_name', 'Unknown')}] {item['title']}: {item.get('snippet', '')} ({item.get('link', '')})"
+        f"- [{item.get('_source_tier', 'Unknown')} - {item.get('_source_name', 'Unknown')}] [Category: {_categorize(item)}] {item['title']}: {item.get('snippet', '')} ({item.get('link', '')})"
         for item in state["news_items"]
     ])
-    
+
     context_str = "past week"
     if state.get("query"):
         context_str = "specified period"
-    
+
     # Source quality guidance for the LLM
     source_guidance = """
-SOURCE QUALITY PRIORITIES (use these for your sources list - must be from PREVIOUS WEEK):
-✅ BEST SOURCES (Primary): OpenAI Blog, Anthropic, Google DeepMind, Meta AI, Microsoft Research, Hugging Face
-✅ GOOD SOURCES (Tech News): TechCrunch, The Verge, Wired, Ars Technica, Engadget
-✅ ACCEPTABLE (AI-Specific): VentureBeat AI, MarkTechpost, Unite.AI, The Rundown AI
-⚠️  USE SPARINGLY (Business): Reuters, Bloomberg, Financial Times, Wall Street Journal
-⚠️  USE SPARINGLY (Academic): Nature, Science, arXiv preprints
-
-AVOID using: Regional news (local newspapers), aggregators (Yahoo, MSN), opinion/analysis sites, business opinion sites (Motley Fool, Business Insider), old articles (older than 2 weeks), or low-authority sites.
-
-CRITICAL: ONLY include AI-related stories from the PREVIOUS WEEK. Do NOT include economic/political news unless directly related to AI.
+SOURCE QUALITY (must be from PREVIOUS WEEK):
+- BEST: OpenAI Blog, Anthropic, Google DeepMind, Meta AI, Microsoft Research, Hugging Face
+- GOOD: TechCrunch, The Verge, Wired, Ars Technica, VentureBeat AI
+- ACCEPTABLE: MarkTechpost, Unite.AI, The Rundown AI, Reuters, Bloomberg
+- AVOID: Aggregators (Yahoo, MSN), opinion sites, regional news, articles older than 2 weeks
 """
-    
-    prompt = f"""You are an expert AI/ML journalist. Here are the top news stories from the {context_str}, ranked by source quality and diversity:
+
+    prompt = f"""You are a senior AI engineer briefing your team on this week's most important developments. Write with technical depth but keep it accessible. Be opinionated but fair. Lead every story with the most surprising or impactful detail, not background context.
+
+Here are the top news stories from the {context_str}, with source quality tiers and category tags:
 
 {news_text}
 
 {source_guidance}
 
-Task: Create a SINGLE comprehensive "Weekly Digest" blog post covering EXACTLY 4 to 5 stories about ARTIFICIAL INTELLIGENCE. You MUST cover at least 4 distinct AI-focused stories.
+TASK: Create a "Weekly Digest" blog post covering EXACTLY 4-5 stories about AI/ML. Pick stories that span DIVERSE categories (the items above are tagged: Model Releases, Research, Business, Policy, Developer Tools). Do not cluster on one category. Mention the category context when introducing each story (e.g., "On the policy front..." or "In model releases this week...").
 
-CRITICAL CONTENT RULES:
-1. ONLY write about AI/ML topics - exclude economic/political news unless directly tied to AI
-2. Each story MUST have specific details: numbers, dates, product names, company names
-3. Avoid generic phrases like "significant developments", "notable achievements" - be specific
-4. Write like a professional journalist, not a template
+WRITING RULES — CRITICAL, FOLLOW ALL:
+1. Every sentence must add NEW information. If it restates something already said, delete it.
+2. NEVER repeat the same idea across different sections of the post.
+3. Each "Why It Matters" MUST be unique and specific to THAT story — no generic AI platitudes.
+4. BANNED PHRASES — do NOT use these or close variants:
+   "As AI continues to evolve", "significant implications", "remains to be seen",
+   "potential to revolutionize", "raising important questions", "significant developments",
+   "notable achievements", "rapidly evolving landscape", "underscores the importance",
+   "it is essential to consider", "the potential implications"
+5. When you catch yourself writing a generic statement, replace it with a specific fact, number, or concrete prediction.
+6. ONLY AI/ML topics. No economics or politics unless directly about AI.
 
-CRITICAL SOURCE REQUIREMENT:
-- You MUST include AT LEAST 4-5 DIFFERENT sources in the "sources" array - one for EACH story
-- Each story should cite a different source URL from the ones provided above
-- DO NOT use the same source for multiple stories
-- The "sources" array MUST have at least 4 items with unique URLs
+WORD BUDGET: Each story section = 150-200 words MAX (excluding Key Takeaways and Why It Matters). Entire post UNDER 1200 words.
 
-Task: Create a SINGLE comprehensive "Weekly Digest" blog post covering EXACTLY 4 to 5 AI stories.
+STORY STRUCTURE — each of the 4-5 stories MUST use this EXACT format:
 
-CRITICAL FORMATTING RULES:
-1. Use DOUBLE NEWLINES (\\n\\n) between ALL sections, paragraphs, and elements.
-2. Start with "## Weekly Overview" — a 2-paragraph summary of the week's themes.
-3. Each of the 4-5 stories MUST follow this EXACT structure:
+## [Specific Story Headline]
 
-## [Story Headline]
+[Paragraph 1: What happened. Lead with the most newsworthy detail. WHO, WHAT, WHEN. 2-3 sentences max.]
 
-[Paragraph 1 — 3-4 sentences introducing the story and its significance]
-
-[Paragraph 2 — 3-4 sentences with deeper detail, specifics, or technical context]
+[Paragraph 2: Technical context or competitive landscape. How does this compare? What is technically different? 2-3 sentences max.]
 
 **Key Takeaways:**
 
-- [Concrete takeaway 1 - with specific details]
-- [Concrete takeaway 2 - with specific details]
-- [Concrete takeaway 3 - with specific details]
+- [Specific fact or number, not an opinion]
+- [Specific fact or number, not an opinion]
+- [Specific fact or number, not an opinion]
 
-**Why It Matters:** [1-2 paragraphs explaining broader significance and future implications]
+**Why It Matters:** [ONE paragraph max. State a concrete implication or prediction. Name a specific company, product, or metric that will be affected. No vague "this could change everything" language.]
 
-4. End with "## Looking Ahead" — a 1-2 paragraph section on future trends.
-5. Use NO horizontal rules (---) between sections. Use only ## headings to separate stories.
-6. Do NOT use ### sub-headings. Use **Bold Text:** for Key Takeaways and Why It Matters labels.
-7. Add a blank line BEFORE each ## heading and after each list.
+FORMATTING RULES:
+1. Use DOUBLE NEWLINES (\\n\\n) between ALL sections, paragraphs, and elements.
+2. Start with "## Weekly Overview" — 2-3 sentences ONLY. Name the week's theme and the top stories. No filler.
+3. End with "## Looking Ahead" — 2-3 sentences with a specific prediction or upcoming event. No vague optimism.
+4. Use NO horizontal rules (---). Use only ## headings to separate stories.
+5. Do NOT use ### sub-headings. Use **Bold Text:** for Key Takeaways and Why It Matters labels.
+6. Add a blank line BEFORE each ## heading and after each list.
 
-OUTPUT FORMAT:
-Return a JSON object with these exact keys:
-- "title": Engaging, descriptive headline that names the key topics
-- "summary": 3-4 sentence executive summary mentioning all covered stories
-- "content": Full markdown content with PROPER NEWLINES - each section clearly separated
-- "tags": Array of 3-5 relevant tags (MUST all be AI-related)
-- "sources": Array of {{"title": "...", "url": "..."}} objects - MUST have AT LEAST 4 different sources, one for EACH story. DO NOT list only 1 source!
+SOURCE REQUIREMENTS:
+- The "sources" array MUST have AT LEAST 4 unique source URLs — one per story
+- Extract URLs from the news items above; each story has its own source
+- Do NOT reuse the same URL. If only 1 source is listed, the post will be rejected.
 
-IMPORTANT: 
-1. The "sources" array MUST contain at least 4 unique URLs - one for each story
-2. If you only list 1 source, the post will be rejected
-3. Do NOT repeat the same source URL multiple times
-4. Extract source URLs from the news items provided above - each story has its own source URL
-5. EVERY source must be from the PREVIOUS WEEK (current date is March 2026)
-6. ALL stories must be about AI/ML - no economics, politics, or non-AI topics
+OUTPUT FORMAT — return a JSON object with these exact keys:
+- "title": Specific headline naming the key topics (not generic like "AI News This Week")
+- "summary": 2-3 sentences mentioning all covered stories with specifics
+- "content": Full markdown content with proper double-newline separation
+- "tags": Array of 3-5 AI-related tags
+- "sources": Array of {{"title": "...", "url": "..."}} — AT LEAST 4 unique sources
 
 Respond ONLY with the JSON object, no markdown code blocks."""
 
