@@ -1,5 +1,37 @@
 [
   {
+    "id": 19,
+    "title": "AI Safety Bills, AGI Research, and White House Policy",
+    "date": "2026-03-30",
+    "summary": "This week saw significant developments in AI policy, research, and business, including a proposed bill to halt data center construction and discussions on animal welfare in the context of artificial general intelligence. The White House unveiled its AI policy, and Goldman Sachs' CIO spoke about the rapid improvements in AI. In the research category, a unique idea was proposed, combining animal welfare with AGI.    The week's top stories also covered the elusive AI bill that the White House wants to land, with specific details on the bill's progression and expected impact.    On the policy front, a new bill would give lawmakers time to ensure AI safety, with Alexandria Ocasio-Cortez set to introduce a similar bill in the House.",
+    "content": "## Weekly Overview\n\nThis week's theme revolves around AI policy, research, and business, with top stories including a proposed bill to halt data center construction, discussions on animal welfare in the context of AGI, and the White House unveiling its AI policy. The week's top stories span diverse categories, from policy to research and business.   \n\n## New Bernie Sanders AI Safety Bill\n\nA proposed bill by Bernie Sanders would halt data center construction to give lawmakers time to ensure AI safety. Alexandria Ocasio-Cortez will introduce a similar bill in the House in the weeks ahead. The bill aims to address concerns about AI safety and its potential impact on society.  \n The proposed bill is a significant development in AI policy, as it highlights the growing concern about AI safety and its potential consequences. The bill's progression will be closely watched, with many expecting it to have a significant impact on the AI industry.  \n**Key Takeaways:**\n\n- The proposed bill aims to halt data center construction to ensure AI safety.\n- Alexandria Ocasio-Cortez will introduce a similar bill in the House. - The bill's progression will be closely watched, with many expecting it to have a significant impact on the AI industry.  \n**Why It Matters:**\n\nThe proposed bill will affect companies like Google and Amazon, which rely heavily on data centers for their AI operations. If the bill passes, these companies may need to re-evaluate their AI strategies and invest in alternative infrastructure.  \n\n## The Download: Animal Welfare Gets AGI-Pilled\n\nAnimal welfare advocates and AI researchers gathered to discuss a provocative idea: combining animal welfare with artificial general intelligence. The discussion aimed to explore the potential consequences of AGI on animal welfare and the ethical implications of AI development.  \n The idea of combining animal welfare with AGI is a unique perspective, as it highlights the potential consequences of AI development on non-human entities. The discussion will likely lead to further research and debate on the ethics of AI development.  \n**Key Takeaways:**\n\n- Animal welfare advocates and AI researchers discussed combining animal welfare with AGI.\n- The discussion aimed to explore the potential consequences of AGI on animal welfare. - The idea highlights the potential consequences of AI development on non-human entities.  \n**Why It Matters:**\n\nThe discussion will likely lead to further research and debate on the ethics of AI development, with companies like Microsoft and Facebook investing in AI research and development. The outcome of this discussion may impact the development of AI systems that interact with animals.  \n\n## White House Unveils AI Policy\n\nThe White House unveiled its AI policy, which aims to address concerns about AI safety and its potential impact on society. The policy includes guidelines for AI development and deployment, with a focus on ensuring AI safety and transparency.  \n The White House's AI policy is a significant development in AI governance, as it provides a framework for AI development and deployment. The policy will likely influence the development of AI systems and the way companies approach AI safety and transparency.  \n**Key Takeaways:**\n\n- The White House unveiled its AI policy, which aims to address concerns about AI safety.\n- The policy includes guidelines for AI development and deployment. - The policy focuses on ensuring AI safety and transparency.  \n**Why It Matters:**\n\nThe policy will affect companies like IBM and Intel, which are investing heavily in AI research and development. The policy may lead to increased investment in AI safety and transparency, with companies prioritizing these aspects in their AI development.  \n\n## Goldman CIO on AI Improvements\n\nGoldman Sachs' CIO, Marco Argenti, spoke about the rapid improvements in AI, highlighting the bank's deployment of AI tools and development of internal AI systems. Argenti emphasized the importance of AI in the financial industry, with many banks investing in AI research and development.  \n The rapid improvements in AI are a significant development in the financial industry, as they enable banks to automate tasks and improve decision-making. The deployment of AI tools and development of internal AI systems will likely lead to increased efficiency and productivity in the financial sector.  \n**Key Takeaways:**\n\n- Goldman Sachs' CIO spoke about the rapid improvements in AI.\n- The bank has deployed AI tools and developed internal AI systems. - The improvements in AI will likely lead to increased efficiency and productivity in the financial sector.  \n**Why It Matters:**\n\nThe rapid improvements in AI will affect companies like JPMorgan and Bank of America, which are also investing in AI research and development. The deployment of AI tools and development of internal AI systems may lead to a competitive advantage in the financial industry.  \n\n## Looking Ahead\n\nThe upcoming weeks will see further developments in AI policy, research, and business, with the proposed bill to halt data center construction and the White House's AI policy likely to have a significant impact on the AI industry. The discussion on animal welfare and AGI will also continue, with potential consequences for AI development and deployment.  The AI industry can expect significant developments in the coming months, with a focus on AI safety, transparency, and ethics.    ",
+    "tags": [
+      "AI Policy",
+      "Artificial General Intelligence",
+      "AI Safety",
+      "Animal Welfare"
+    ],
+    "sources": [
+      {
+        "title": "Wired",
+        "url": "https://www.wired.com/story/new-bernie-sanders-ai-safety-bill-would-halt-data-center-construction/"
+      },
+      {
+        "title": "MIT Technology Review",
+        "url": "https://www.technologyreview.com/2026/03/23/1134509/the-download-animal-welfare-agi-pilled-white-house-unveils-ai-policy/"
+      },
+      {
+        "title": "Reuters",
+        "url": "https://www.reuters.com/technology/artificial-intelligence/artificial-intelligencer-white-house-pushes-first-big-federal-ai-law-this-year-2026-03-25/"
+      },
+      {
+        "title": "Bloomberg",
+        "url": "https://www.bloomberg.com/news/audio/2026-03-30/odd-lots-goldman-sachs-cio-marco-argenti-on-the-improvements-in-ai"
+      }
+    ],
+    "link": "#"
+  },
+  {
     "id": 18,
     "title": "AI Advances: Monitoring Platforms, Public Records, and AI Research",
     "date": "2026-03-23",
