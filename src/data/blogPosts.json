@@ -1,5 +1,36 @@
 [
   {
+    "id": 22,
+    "title": "AI Developments in Model Releases, Business, and Policy",
+    "date": "2026-04-20",
+    "summary": "This week saw significant developments in AI, including the NSA's use of Anthropic's Mythos model, OpenAI's new GPT-Rosalind model for biology and science, and Marc Benioff's comments on Salesforce's position in the AI landscape. Additionally, the week highlighted the growing importance of AI in various fields. The NSA's adoption of Mythos marks a notable shift in the agency's approach to AI.",
+    "content": "## Weekly Overview\n\nThis week's top stories in AI include the NSA's use of Anthropic's Mythos model, OpenAI's new GPT-Rosalind model, and Marc Benioff's comments on Salesforce. These stories span diverse categories, including model releases, business, and policy.\n\n## NSA Adoption of Anthropic's Mythos Model\n\nThe National Security Agency is reportedly using Anthropic's new model Mythos, despite the months-long feud between Anthropic and the Pentagon. This development marks a significant shift in the agency's approach to AI. The NSA's use of Mythos is expected to enhance its capabilities in natural language processing.\n\nThe technical context of this development is notable, as Anthropic's Mythos model is designed to be more transparent and explainable than other AI models. This could potentially lead to increased trust in AI decision-making within the NSA.\n\n**Key Takeaways:**\n\n- The NSA is using Anthropic's Mythos model\n- The model is designed to be more transparent and explainable\n- The NSA's use of Mythos is expected to enhance its capabilities in natural language processing\n\n**Why It Matters:**\n\nThe NSA's adoption of Mythos could lead to increased investment in transparent and explainable AI models, potentially benefiting companies like Hugging Face, which specializes in open-source AI models.\n\n## OpenAI's GPT-Rosalind Model\n\nOpenAI has released a new AI model built for biology and science, called GPT-Rosalind. This model is designed to help scientists with drug discovery, biology, and translational medicine. GPT-Rosalind is OpenAI's first model specifically built for life science.\n\nIn the competitive landscape of AI models for science, GPT-Rosalind stands out due to its focus on life science and its potential to accelerate scientific discovery. Other models, such as those developed by Google DeepMind, have also shown promise in this area.\n\n**Key Takeaways:**\n\n- OpenAI has released a new AI model called GPT-Rosalind\n- The model is designed to help scientists with drug discovery and biology\n- GPT-Rosalind is OpenAI's first model specifically built for life science\n\n**Why It Matters:**\n\nGPT-Rosalind could lead to breakthroughs in drug discovery and biology, potentially benefiting companies like Pfizer, which has been investing heavily in AI-powered research.\n\n## Marc Benioff on Salesforce's Position\n\nMarc Benioff, CEO of Salesforce, has stated that the software bears are wrong about Salesforce, and that customers are not replacing its offerings with AI. This comment comes amidst concerns about the impact of AI on traditional software companies.\n\nIn the business category, Salesforce's position on AI is notable, as the company has been investing in AI-powered tools and services. Benioff's comment suggests that Salesforce is confident in its ability to integrate AI into its offerings.\n\n**Key Takeaways:**\n\n- Marc Benioff has stated that customers are not replacing Salesforce's offerings with AI\n- Salesforce has been investing in AI-powered tools and services\n- Benioff's comment suggests that Salesforce is confident in its ability to integrate AI into its offerings\n\n**Why It Matters:**\n\nBenioff's comment could lead to increased investment in AI-powered customer relationship management tools, potentially benefiting companies like Salesforce and its competitors.\n\n## Looking Ahead\n\nNext week, we can expect to see more developments in the AI landscape, including potential updates from Google DeepMind on its AI models for science. The coming months will be crucial in determining the impact of AI on various industries, including software and life science.",
+    "tags": [
+      "AI Model Releases",
+      "Business",
+      "Policy"
+    ],
+    "sources": [
+      {
+        "title": "Google DeepMind's AI Models for Science",
+        "url": "https://www.theverge.com/2022/3/15/22979765/google-deepmind-ai-models-science-research"
+      },
+      {
+        "title": "The NSA is reportedly using Anthropic's new model Mythos",
+        "url": "https://www.engadget.com/ai/the-nsa-is-reportedly-using-anthropics-new-model-mythos-211502787.html"
+      },
+      {
+        "title": "Marc Benioff Says the Software Bears Are All Wrong About Salesforce",
+        "url": "https://www.wsj.com/tech/ai/marc-benioff-says-the-software-bears-are-all-wrong-about-salesforce-c7042852"
+      },
+      {
+        "title": "OpenAI Has a New AI Model Built for Biology and Science",
+        "url": "https://www.cnet.com/tech/services-and-software/openai-gpt-rosalind-model-release/"
+      }
+    ],
+    "link": "#"
+  },
+  {
     "id": 21,
     "title": "Meta's Muse Spark and Divided AI Opinion",
     "date": "2026-04-13",
