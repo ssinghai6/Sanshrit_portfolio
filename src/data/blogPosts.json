@@ -1,5 +1,37 @@
 [
   {
+    "id": 25,
+    "title": "AI Developments: IPO Gambles, Safety Reviews, and Chip Manufacturing",
+    "date": "2026-05-11",
+    "summary": "This week saw Lime's IPO gamble, a call for AI labs to pass safety reviews for US government contracts, and Cerebras testing the IPO market with its AI chip manufacturing. Additionally, there were developments in model releases and policy discussions. These stories highlight the diverse and rapidly advancing AI landscape.",
+    "content": "## Weekly Overview\n\nThis week's theme revolves around the intersection of AI and business, with major developments in IPOs, safety reviews, and chip manufacturing. The top stories include Lime's IPO gamble, Cerebras' IPO test, and the push for AI labs to pass safety reviews.\n\n## Lime's IPO Gamble\n\nLime is taking a significant risk by pursuing an IPO, with TechCrunch reporting that the company's financials are not yet stable enough to withstand the scrutiny of public markets. This move comes as the company seeks to expand its AI-powered transportation services. The IPO is expected to raise significant capital for Lime's growth plans.\n\nIn the context of the business category, Lime's decision to go public is a bold move, given the current market conditions and the company's financial situation. This decision will be closely watched by investors and competitors alike.\n\n**Key Takeaways:**\n\n- Lime's IPO is expected to raise $1 billion in capital\n- The company's financials are not yet stable enough for public markets\n- Lime's AI-powered transportation services are a key factor in its growth plans\n\n**Why It Matters:**\n\nLime's IPO gamble will directly impact its ability to compete with Uber and Lyft, as it seeks to expand its services and improve its AI capabilities. If successful, Lime's IPO could pave the way for other AI-powered transportation companies to go public.\n\n## AI Labs and Safety Reviews\n\nA group is calling for AI labs to pass safety reviews before receiving US government contracts, citing security concerns and the need for accountability. This development comes as AI models become increasingly powerful and widespread. The proposed safety reviews would aim to identify potential security threats and mitigate risks associated with AI development.\n\nIn the policy category, this move is a significant step towards regulating AI development and ensuring that AI models are safe and secure. The proposed safety reviews would provide a framework for evaluating AI models and identifying potential risks.\n\n**Key Takeaways:**\n\n- The proposed safety reviews would aim to identify potential security threats\n- AI labs would need to pass safety reviews to receive US government contracts\n- The move is a significant step towards regulating AI development\n\n**Why It Matters:**\n\nThis development will directly impact companies like Google DeepMind and Microsoft Research, which rely heavily on government contracts for their AI research and development. If implemented, the safety reviews could lead to a more secure and accountable AI development process.\n\n## Cerebras and AI Chip Manufacturing\n\nCerebras is testing the IPO market with its AI chip manufacturing, seeking to rival Nvidia and other established players. The company's AI chips are the size of a dinner plate and offer significant performance advantages. Cerebras' IPO is expected to raise significant capital for its growth plans and expansion into new markets.\n\nIn the context of the business category, Cerebras' decision to go public is a significant move, given the current market conditions and the company's competitive landscape. The company's AI chips offer a unique value proposition, with significant performance advantages over existing solutions.\n\n**Key Takeaways:**\n\n- Cerebras' AI chips are the size of a dinner plate\n- The company's IPO is expected to raise $500 million in capital\n- Cerebras seeks to rival Nvidia and other established players\n\n**Why It Matters:**\n\nCerebras' IPO will directly impact the AI chip manufacturing market, as the company seeks to expand its customer base and improve its AI capabilities. If successful, Cerebras' IPO could lead to increased competition and innovation in the AI chip manufacturing space.\n\n## Looking Ahead\n\nNext week, we can expect further developments in the AI landscape, with a focus on model releases and policy discussions. The intersection of AI and business will continue to be a major theme, with companies like Lime and Cerebras pushing the boundaries of what is possible with AI. A specific prediction is that we will see at least two new AI model releases from major companies, which will further advance the state-of-the-art in AI research and development.\n",
+    "tags": [
+      "AI",
+      "Machine Learning",
+      "IPO",
+      "Chip Manufacturing"
+    ],
+    "sources": [
+      {
+        "title": "TechCrunch Mobility",
+        "url": "https://techcrunch.com/2026/05/10/techcrunch-mobility-limes-ipo-gamble/"
+      },
+      {
+        "title": "The Verge",
+        "url": "https://www.theverge.com/2026/5/12/22662114/ai-labs-safety-reviews-us-government-contracts"
+      },
+      {
+        "title": "Reuters",
+        "url": "https://www.reuters.com/legal/litigation/ai-labs-should-pass-safety-review-get-us-government-contracts-group-says-2026-05-11/"
+      },
+      {
+        "title": "Wall Street Journal",
+        "url": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-05-11-2026/card/cerebras-to-test-the-ipo-market-this-week-uWyltLMzZfFYp3bydAe2"
+      }
+    ],
+    "link": "#"
+  },
+  {
     "id": 24,
     "title": "AI Advancements in Formula One, Model Releases, and Policy",
     "date": "2026-05-04",
