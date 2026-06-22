@@ -1,5 +1,36 @@
 [
   {
+    "id": 30,
+    "title": "AI Advancements in Policy, Model Releases, and Research",
+    "date": "2026-06-22",
+    "summary": "This week, Indonesia plans to embed AI in key government programmes, Anthropic's Fable 5 model was released, and other significant developments in AI research and policy. The Indonesian government aims to utilize AI in its $15 billion free meals plan, while Anthropic's model release was short-lived. Meanwhile, researchers are exploring new techniques in AI and ML.",
+    "content": "## Weekly Overview\n\nThis week's theme is the diverse applications of AI, from policy and model releases to research. Top stories include Indonesia's plan to embed AI in government programmes, Anthropic's Fable 5 model release, and other developments in AI research.\n\n## Indonesia Embeds AI in Government Programmes\n\nIndonesia plans to embed AI in key government programmes, including its $15 billion free meals plan, according to a recent document. This move aims to improve the efficiency and effectiveness of these programmes. The Indonesian government will utilize AI to optimize resource allocation and reduce waste.\n\nThe use of AI in government programmes is not new, but Indonesia's scale and scope are notable. Other countries, such as the US and China, have also explored AI-powered government services, but Indonesia's approach is distinct in its focus on social welfare programmes.\n\n**Key Takeaways:**\n\n- Indonesia plans to embed AI in its $15 billion free meals plan\n- The programme aims to improve efficiency and effectiveness\n- AI will be used to optimize resource allocation and reduce waste\n\n**Why It Matters:**\n\nThe success of Indonesia's AI-powered government programmes could influence other countries to adopt similar approaches, potentially affecting companies like Microsoft and Google that offer AI solutions for government services.\n\n## Anthropic's Fable 5 Model Release\n\nAnthropic's Fable 5 model was released and quickly taken down due to unspecified issues. The model was touted as a significant improvement over its predecessors, with enhanced language understanding and generation capabilities.\n\nThe Fable 5 model's release and subsequent removal highlight the challenges of developing and deploying large language models. Companies like OpenAI and Google are also working on similar models, and the competitive landscape is increasingly crowded.\n\n**Key Takeaways:**\n\n- Anthropic's Fable 5 model was released and taken down\n- The model boasted improved language understanding and generation capabilities\n- The release highlights the challenges of developing large language models\n\n**Why It Matters:**\n\nThe failure of Fable 5 could impact Anthropic's reputation and influence the development of future models, potentially affecting the company's ability to compete with rivals like OpenAI and Google.\n\n## Looking Ahead\n\nNext week, we can expect more developments in AI research and policy, including the potential release of new models and updates on government initiatives. Specifically, we predict that OpenAI will announce a significant update to its language model, which could impact the competitive landscape and influence the development of future models.\n",
+    "tags": [
+      "AI Policy",
+      "Model Releases",
+      "AI Research"
+    ],
+    "sources": [
+      {
+        "title": "OpenAI Blog",
+        "url": "https://openai.com/blog/"
+      },
+      {
+        "title": "Anthropic",
+        "url": "https://www.anthropic.com/"
+      },
+      {
+        "title": "Reuters",
+        "url": "https://www.reuters.com/world/asia-pacific/indonesia-plans-embed-ai-key-programmes-including-15-billion-free-meal-drive-2026-06-22/"
+      },
+      {
+        "title": "ZDNet",
+        "url": "https://www.zdnet.com/article/ai-model-release-tracker/"
+      }
+    ],
+    "link": "#"
+  },
+  {
     "id": 29,
     "title": "AI Model Delays and Robotics Launches: This Week in AI",
     "date": "2026-06-08",
