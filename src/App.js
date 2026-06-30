@@ -105,7 +105,7 @@ const Portfolio = () => {
               <SocialLink href="mailto:singhai.sanshrit@live.com" icon={Mail} />
               <div className="h-4 w-px bg-white/10 mx-2"></div>
               <a
-                href="https://1drv.ms/b/c/a9a13d4ed9947e83/IQCb0Lq-Ps0mTqblBJKtjRlQATGzMjfwaHtpQofCVCDi980?e=xuKzoR"
+                href="https://1drv.ms/b/c/a9a13d4ed9947e83/IQCLw89MMXH9RoG4RnbbZneUAXfEDA5bhZ0tnz12hVWve74?e=C4NzfS"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-3 py-1.5 bg-white/5 hover:bg-white/10 rounded-full text-xs font-mono text-zinc-300 transition-colors border border-white/5"
@@ -165,11 +165,13 @@ const Portfolio = () => {
             <span className="text-gradient">Singhai</span>
           </h1>
           <h2 className="text-2xl md:text-3xl text-zinc-400 font-light mb-8 max-w-2xl">
-            Data Scientist & ML Engineer specializing in <span className="text-secondary-400">GenAI</span>, <span className="text-accent-400">Optimization</span> & <span className="text-primary-400">Scalable Systems</span>.
+            Machine Learning Engineer building production <span className="text-secondary-400">GenAI</span> & <span className="text-primary-400">Agentic Systems</span> — plus <span className="text-accent-400">Optimization</span> & large-scale ML.
           </h2>
-          <p className="max-w-xl text-lg text-zinc-500 leading-relaxed mb-10">
-            <p className="max-w-xl text-lg text-zinc-500 leading-relaxed mb-10">I’m a Lead Data scientist and ML engineer with ~3 years of industry experience building production-grade machine learning, optimization, and GenAI systems. I hold an MS in Computational Science & Engineering (Machine Learning) from Georgia Tech and have also worked on National Science Foundation–funded research, which shaped my approach to rigorous system design and experimentation.
-              I enjoy turning ambiguous, real-world problems into scalable, high-impact ML systems—working at the intersection of data, engineering, and product with a strong focus on ownership, clarity, and measurable outcomes.</p>
+          <p className="max-w-2xl text-lg text-zinc-400 leading-relaxed mb-4">
+            I build production <span className="text-white font-medium">Machine Learning</span>, <span className="text-white font-medium">Data Science</span>, and <span className="text-white font-medium">GenAI</span> systems — agentic reasoning engines, ML/DL models, RAG and LLM orchestration, and optimization pipelines that ship to real users, not notebooks that demo well.
+          </p>
+          <p className="max-w-2xl text-lg text-zinc-500 leading-relaxed mb-10">
+            I work end-to-end: framing ambiguous problems into ML/AI solutions, training and deploying deep-learning and predictive models, building agentic LangGraph and RAG pipelines, and engineering the optimization and data infrastructure (FastAPI, vector stores, streaming) that holds it together. MS in Computational Science &amp; Engineering (ML) from Georgia Tech.
           </p>
 
           <div className="flex gap-4">
@@ -251,20 +253,21 @@ const Portfolio = () => {
                   <div className="mt-1 md:hidden h-2 w-2 rounded-full bg-primary-500 absolute -left-[5px] top-1.5 ring-4 ring-background"></div>
                 </div>
                 <div className="md:col-span-3">
-                  <h4 className="text-xl text-white font-medium flex items-center gap-2 mb-2">
+                  <h4 className="text-xl text-white font-medium flex items-center gap-2 mb-1">
                     Lead Data Scientist <a href="https://www.enru.io/" target="_blank" rel="noopener noreferrer" className="text-primary-400 hover:text-primary-300 transition-colors">@ ENRU</a>
                   </h4>
-                  <p className="text-sm text-zinc-400 mb-2">ML/AI & Optimization – Developed models improving cost estimation by 40% and routing revenue by 25%.</p>
+                  <p className="text-xs text-zinc-500 font-mono mb-2">Promoted from Data Scientist · GenAI · Optimization · Production ML</p>
+                  <p className="text-sm text-zinc-400 mb-2">Shipped production GenAI and a profit-maximizing optimizer that lifted revenue per truck 25% and cut analyst query time with a RAG system.</p>
                   <button onClick={() => setExpandedExp(prev => ({ ...prev, enru: !prev.enru }))} className="text-primary-400 hover:underline mb-2">
                     {expandedExp.enru ? 'Hide' : 'Show'} details
                   </button>
                   {expandedExp.enru && (
                     <ul className="list-disc leading-relaxed space-y-3 text-zinc-400 pl-4 marker:text-primary-500">
-                      <li>Developed ML & DL models (TensorFlow/PyTorch, ensembles) for multi-label classification and accessorial cost prediction, improving cost estimation accuracy by 40% for new locations.</li>
-                      <li>Built a RAG-based GenAI chatbot (LangChain & FAISS) to enable natural-language planning queries, reducing analyst lookup time by 60%.</li>
-                      <li>Engineered a profit-maximizing integer-programming optimizer (OR-Tools, Gurobi) that improved routing decisions and increased revenue per truck by 25%, while achieving a 10× speed improvement over legacy heuristics.</li>
-                      <li>Designed a real-time Azure EventHub pipeline that streams 3PL freight data and supports downstream ML systems.</li>
-                      <li>Built and optimized GSQL graph queries for journey verification and truck assignment, enabling robust logistics decision-making.</li>
+                      <li>Architected a production RAG GenAI system (LangChain, FAISS, HuggingFace) with hierarchical chunking, hybrid semantic retrieval, and conversational memory over FastAPI — cutting analyst query time.</li>
+                      <li>Drove a 10× solver speedup via systematic benchmarking and gradient-free optimization; evaluated Gurobi vs. OR-Tools and shipped the winning integer-programming solution, raising revenue per truck 25%.</li>
+                      <li>Built multi-label classification and accessorial cost-prediction models (TensorFlow) with iterative feature engineering, improving cost-estimation accuracy 40% for new locations.</li>
+                      <li>Took end-to-end ownership of the ACTNx middleware during org restructuring — designed a 3PL middleware and Azure EventHub streaming pipeline for real-time freight ingestion, plus TigerGraph/GSQL workflows for journey verification.</li>
+                      <li>Mentored junior data scientists and coordinated 2 offshore teams across concurrent sprints; completed contractor knowledge transfer, eliminating an external dependency.</li>
                     </ul>
                   )}
                 </div>
