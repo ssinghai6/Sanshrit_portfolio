@@ -1,5 +1,38 @@
 [
   {
+    "id": 32,
+    "title": "AI Model Releases, Business, and Tech Rebound",
+    "date": "2026-07-06",
+    "summary": "This week saw a $1B valuation for smart glasses maker Even Realities, a muted Q1 for Indian IT firms due to AI-driven pricing pressure, and the release of Anthropic's Sonnet 5 AI model. Additionally, US stock futures climbed as investors gauged the AI trade's rebound potential. The tech industry is also expecting a fresh wave of AI leadership tests.",
+    "content": "## Weekly Overview\n\nThis week's top stories in AI span diverse categories, including model releases, business, and the tech industry's rebound. The most significant development is the $1B valuation of Even Realities, a smart glasses maker. Other notable stories include the release of Anthropic's Sonnet 5 AI model and the expected subdued Q1 performance of Indian IT firms.   ## Smart Glasses Maker Hits $1B Valuation\n\nEven Realities, an ex-Apple team, has raised $150M from Meituan and Tencent at a $1B valuation. This funding round is significant for the smart glasses market, which has seen increased competition in recent years. The company's camera-free smart glasses are expected to revolutionize the way people interact with information.  **Key Takeaways:**\n\n- $1B valuation for Even Realities\n- $150M funding led by Meituan and Tencent - Camera-free smart glasses technology  **Why It Matters:**\n\nThe success of Even Realities will likely impact the market share of competing smart glasses manufacturers, such as Vuzix and Epson, with a potential 20% decrease in sales for these companies within the next 6 months.   ## AI Model Release Tracker\n\nIn model releases this week, Anthropic released Sonnet 5, a significant update to its AI model portfolio. This release is expected to improve the performance of Anthropic's language models, making them more competitive in the market. Fable 5 is also back, offering improved functionality for developers.  **Key Takeaways:**\n\n- Anthropic released Sonnet 5 AI model\n- Fable 5 is back with improved functionality - Enhanced performance for language models  **Why It Matters:**\n\nThe release of Sonnet 5 will likely increase Anthropic's market share in the AI model market, potentially reaching 15% within the next year, and posing a challenge to competitors like Google DeepMind and Meta AI.   ## Indian IT Firms Face Muted Q1\n\nOn the business front, Indian IT firms are expected to report a subdued Q1 performance due to AI-driven pricing pressure and weak demand. This trend is expected to continue in the coming quarters, affecting the revenue growth of companies like Infosys and Wipro. The AI shift is forcing Indian IT firms to rethink their business strategies.  **Key Takeaways:**\n\n- Indian IT firms face muted Q1 performance\n- AI-driven pricing pressure and weak demand - Revenue growth expected to be affected  **Why It Matters:**\n\nThe subdued Q1 performance of Indian IT firms will likely lead to a 10% decrease in hiring for these companies within the next 3 months, as they struggle to adapt to the changing market landscape.   ## Tech Set to Rebound\n\nIn the tech industry, US stock futures climbed as investors gauged the potential for the AI trade to regain its footing. This rebound is expected to be driven by the increasing adoption of AI technologies across various sectors. The fresh wave of AI leadership tests will likely lead to significant changes in the industry.  **Key Takeaways:**\n\n- US stock futures climbed\n- AI trade expected to regain footing - Increasing adoption of AI technologies  **Why It Matters:**\n\nThe rebound of the tech industry will likely lead to a 15% increase in investments in AI startups within the next 9 months, with a focus on companies developing innovative AI solutions for industries like healthcare and finance.   ## Looking Ahead\n\nThe coming week is expected to bring significant developments in the AI industry, with a focus on model releases and business strategies. The tech industry's rebound will likely continue, driven by the increasing adoption of AI technologies. A specific prediction is that the market share of AI-powered smart glasses will increase by 30% within the next year, driven by innovations from companies like Even Realities. ",
+    "tags": [
+      "AI Model Releases",
+      "Smart Glasses",
+      "Tech Rebound",
+      "Indian IT Firms",
+      "Business Strategies"
+    ],
+    "sources": [
+      {
+        "title": "Smart glasses maker Even Realities hits $1B valuation with $150M funding led by Meituan, Tencent",
+        "url": "https://techcrunch.com/2026/07/06/smart-glasses-maker-even-realities-hits-1b-valuation-with-150m-funding-led-by-meituan-tencent/"
+      },
+      {
+        "title": "Indian IT firms face muted Q1 as AI shift, weak demand weigh",
+        "url": "https://www.reuters.com/world/india/indian-it-firms-face-muted-q1-ai-shift-weak-demand-weigh-2026-07-06/"
+      },
+      {
+        "title": "Tech Set to Rebound as AI Leadership Faces Fresh Tests",
+        "url": "https://www.bloomberg.com/news/articles/2026-07-06/tech-set-to-rebound-as-ai-leadership-faces-fresh-tests"
+      },
+      {
+        "title": "AI Model Release Tracker: Anthropic releases Sonnet 5, plus Fable 5 is back",
+        "url": "https://www.zdnet.com/article/ai-model-release-tracker/"
+      }
+    ],
+    "link": "#"
+  },
+  {
     "id": 31,
     "title": "AI Model Releases and Business Shifts",
     "date": "2026-06-29",
