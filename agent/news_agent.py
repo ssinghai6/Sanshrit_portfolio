@@ -689,10 +689,12 @@ def search_news_node(state: AgentState) -> AgentState:
                 if not is_ai_relevant(title, snippet, link):
                     continue
 
-                # Early source quality filter: skip unknown/untrusted sources (priority >= 500)
+                # Early source quality filter: only drop explicitly excluded/low-quality sources.
+                # Unranked ("Other") sources are kept as fallback candidates so we never starve
+                # the pool down to too few real stories (which forces the LLM to invent ones).
                 priority, tier, source_name = get_source_quality_score(link)
-                if priority >= 500:
-                    print(f"  ⛔ Skipping unknown source: {extract_domain(link)} - {title[:40]}...")
+                if priority >= 999:
+                    print(f"  ⛔ Skipping excluded source: {extract_domain(link)} - {title[:40]}...")
                     continue
 
                 # Deduplicate by domain across all categories
@@ -755,7 +757,7 @@ def search_news_node(state: AgentState) -> AgentState:
                             continue
 
                         priority, tier, source_name = get_source_quality_score(link)
-                        if priority >= 500:
+                        if priority >= 999:
                             continue
 
                         domain = extract_domain(link)
@@ -844,8 +846,9 @@ def summarize_node(state: AgentState) -> AgentState:
     # Initialize Groq LLM
     llm = ChatGroq(
         api_key=GROQ_API_KEY,
-        model_name="llama-3.3-70b-versatile",
-        temperature=0.7
+        model_name="openai/gpt-oss-120b",
+        temperature=0.7,
+        max_tokens=8000
     )
     
     # Assign category tags to news items based on title/snippet keywords
@@ -860,6 +863,18 @@ def summarize_node(state: AgentState) -> AgentState:
         if any(w in text for w in ["sdk", "api", "framework", "tool", "developer", "library", "plugin", "open source", "platform"]):
             return "Developer Tools"
         return "Business"
+
+    # Refuse to generate rather than let the LLM pad out missing stories with
+    # fabricated ones. 3 real items is the floor for a "diverse categories" digest.
+    num_items = len(state["news_items"])
+    if num_items < 3:
+        error_msg = f"Only {num_items} real news item(s) found after quality filtering — refusing to generate (would force the LLM to invent stories). Try again later or loosen SOURCE_QUALITY_TIERS."
+        print(f"❌ {error_msg}")
+        state["error"] = error_msg
+        state["generated_post"] = None
+        return state
+
+    story_count = min(5, num_items)
 
     # Format news items for the prompt - include source quality and category info
     news_text = "\\n".join([
@@ -888,7 +903,10 @@ Here are the top news stories from the {context_str}, with source quality tiers 
 
 {source_guidance}
 
-TASK: Create a "Weekly Digest" blog post covering EXACTLY 4-5 stories about AI/ML. Pick stories that span DIVERSE categories (the items above are tagged: Model Releases, Research, Business, Policy, Developer Tools). Do not cluster on one category. Mention the category context when introducing each story (e.g., "On the policy front..." or "In model releases this week...").
+TASK: Create a "Weekly Digest" blog post covering EXACTLY {story_count} stories — ONE story per news item listed above, no more, no fewer. Pick stories that span DIVERSE categories where possible. Mention the category context when introducing each story (e.g., "On the policy front..." or "In model releases this week...").
+
+GROUNDING RULE — ABSOLUTE, NON-NEGOTIABLE:
+Every story MUST come from the news items list above. Do NOT invent, extrapolate, or fabricate a story, company, product, or event that is not in that list. Do NOT invent specific numbers, percentages, prices, benchmark scores, or dates that are not present in the title/snippet given — if the snippet doesn't state a figure, write about the story qualitatively instead of making one up. Every URL in "sources" MUST be copied verbatim from the "(...)" at the end of each news item line above — never construct or guess a URL.
 
 WRITING RULES — CRITICAL, FOLLOW ALL:
 1. Every sentence must add NEW information. If it restates something already said, delete it.
@@ -899,12 +917,12 @@ WRITING RULES — CRITICAL, FOLLOW ALL:
    "potential to revolutionize", "raising important questions", "significant developments",
    "notable achievements", "rapidly evolving landscape", "underscores the importance",
    "it is essential to consider", "the potential implications"
-5. When you catch yourself writing a generic statement, replace it with a specific fact, number, or concrete prediction.
+5. When you catch yourself writing a generic statement, replace it with a specific fact drawn from the snippet — never a fabricated one.
 6. ONLY AI/ML topics. No economics or politics unless directly about AI.
 
 WORD BUDGET: Each story section = 150-200 words MAX (excluding Key Takeaways and Why It Matters). Entire post UNDER 1200 words.
 
-STORY STRUCTURE — each of the 4-5 stories MUST use this EXACT format:
+STORY STRUCTURE — each of the {story_count} stories MUST use this EXACT format:
 
 ## [Specific Story Headline]
 
@@ -929,16 +947,15 @@ FORMATTING RULES:
 6. Add a blank line BEFORE each ## heading and after each list.
 
 SOURCE REQUIREMENTS:
-- The "sources" array MUST have AT LEAST 4 unique source URLs — one per story
-- Extract URLs from the news items above; each story has its own source
-- Do NOT reuse the same URL. If only 1 source is listed, the post will be rejected.
+- The "sources" array MUST have EXACTLY {story_count} unique source URLs — one per story
+- Every URL must be copied verbatim from the news items list above. Do NOT reuse the same URL twice, and do NOT introduce any URL not present in that list.
 
 OUTPUT FORMAT — return a JSON object with these exact keys:
 - "title": Specific headline naming the key topics (not generic like "AI News This Week")
 - "summary": 2-3 sentences mentioning all covered stories with specifics
 - "content": Full markdown content with proper double-newline separation
 - "tags": Array of 3-5 AI-related tags
-- "sources": Array of {{"title": "...", "url": "..."}} — AT LEAST 4 unique sources
+- "sources": Array of {{"title": "...", "url": "..."}} — EXACTLY {story_count} sources, URLs copied verbatim from above
 
 Respond ONLY with the JSON object, no markdown code blocks."""
 
