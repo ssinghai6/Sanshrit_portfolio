@@ -1,5 +1,42 @@
 [
   {
+    "id": 38,
+    "title": "AI Drives Insurance Cleanup, Enterprise Tools, and Global Regulation Push",
+    "date": "2026-09-28",
+    "summary": "This week Soteris raised seed funding to uncover up to 30% of hidden insurance policies, a new quality\u2011engineering framework broadened AI testing, Scaffold secured $15M after a Polsky partnership, global regulators intensified calls for a unified AI rulebook, and Meta launched an Enterprise Platform bundling Muse agents and APIs.",
+    "content": "## Weekly Overview\n\nThe week highlighted AI\u2019s expansion into legacy industries, tighter testing standards, and mounting regulatory coordination. Key moves include a startup tackling invisible insurance policies, a comprehensive testing framework, a construction\u2011tech funding round, a push for global AI law, and Meta\u2019s enterprise\u2011focused agent suite.\n\n## AI Startup Soteris Targets Up to 30% Unidentified Insurance Policies\n\nSoteris announced seed funding to deploy AI that can surface hidden, unprofitable policies, claiming that as many as 20\u201130% of an insurer\u2019s portfolio may be invisible to current systems, draining profitability even in a strong market year.\n\nTraditional actuarial pipelines rely on static rule\u2011based matching, which struggles with legacy data formats. Soteris layers a graph\u2011based entity\u2011resolution engine on top of a transformer\u2011driven claim classifier, promising higher recall without manual re\u2011keying, a capability competitors such as Lemonade lack.\n\n**Key Takeaways:**\n\n- Up to 30% of policies may be unidentifiable.\n- Seed funding secured to build the solution.\n- The insurance sector experienced a strong year despite the loss.\n\n**Why It Matters:**\n\nInsurers like AXA could cut loss ratios by integrating Soteris\u2019 AI, forcing legacy vendors to upgrade their data pipelines or risk losing market share.\n\n## New QE Framework Expands AI Testing Beyond Pass/Fail\n\nHackernoon reported the release of a quality\u2011engineering framework that treats data validation, model robustness, LLM evaluation, and regression testing as first\u2011class checkpoints, arguing that single\u2011metric scores no longer capture production risk.\n\nCompared to legacy unit\u2011test suites, the framework integrates fuzzing of input distributions and adversarial perturbations, echoing safety\u2011critical software practices. Few vendors provide an end\u2011to\u2011end pipeline; this proposal fills a gap between MLOps platforms and academic robustness research.\n\n**Key Takeaways:**\n\n- Includes data validation as a core step.\n- Emphasizes model robustness testing.\n- Adds LLM evaluations and regression checks.\n\n**Why It Matters:**\n\nPlatforms such as Databricks that embed this framework can reduce AI\u2011related incidents, protecting customers from unexpected model failures.\n\n## Scaffold Secures $15M After Polsky Center Partnership\n\nChicago Booth\u2019s Polsky Center announced a partnership with fintech accelerator Current, coinciding with Scaffold\u2019s $15\u202fmillion raise that moves the startup from pre\u2011seed toward Series\u202fC. The funding round was highlighted alongside three other Polsky ventures reaching similar milestones.\n\nScaffold\u2019s platform automates construction budgeting using generative AI, differentiating itself from earlier BIM tools by offering real\u2011time cost forecasts. The Polsky\u2011Current collaboration supplies mentorship and access to enterprise pilots, a support model not typical for early\u2011stage AI builders.\n\n**Key Takeaways:**\n\n- $15M raised for Scaffold.\n- Polsky Center partnered with Current.\n- Four Polsky ventures were featured.\n\n**Why It Matters:**\n\nWith new capital, Scaffold can accelerate integration with large contractors like Bechtel, potentially reshaping AI adoption in construction finance.\n\n## Growing Calls for a Unified Global AI Regulatory Regime\n\nThe Conversation outlined mounting pressure from governments to craft a worldwide AI governance framework, citing recent attempts to curb youth access to social media as a precedent for coordinated policy action. Multiple nations are drafting legislation that mirrors the EU\u2019s AI Act.\n\nUnlike fragmented national rules, a global consensus could harmonize compliance requirements for multinational model providers such as OpenAI and Anthropic, reducing the need for region\u2011specific model tuning. Existing social\u2011media restrictions provide a template for enforcement mechanisms.\n\n**Key Takeaways:**\n\n- Push for global consensus on AI regulation.\n- Reference to social\u2011media youth\u2011access curbs.\n- Many countries are adopting similar legislative moves.\n\n**Why It Matters:**\n\nA unified regime would force companies like OpenAI to embed compliance checks into model release pipelines, likely adding latency to API updates but simplifying cross\u2011border deployment.\n\n## Meta Launches Enterprise Platform Bundling Muse Agents and APIs\n\nMeta unveiled an Enterprise Platform that packages its Muse conversational agent, the Meta Business Agent, a dedicated Muse API, and Muse Code tools for corporate developers. The rollout targets Fortune\u2011500 customers seeking internal chatbot automation.\n\nThe suite differs from Meta\u2019s consumer\u2011focused AI products by offering on\u2011premises deployment options and granular data\u2011governance controls, features absent from the public Llama models. Competitors like Microsoft\u2019s Azure OpenAI Service provide similar APIs but lack the integrated code\u2011generation component that Muse Code supplies.\n\n**Key Takeaways:**\n\n- Platform includes Muse, Meta Business Agent, Muse API, and Muse Code.\n- Designed for enterprise adoption.\n- Offers on\u2011premises deployment and data\u2011governance.\n\n**Why It Matters:**\n\nEarly adopters such as Deloitte could replace legacy ticketing bots, delivering measurable productivity gains through faster ticket resolution.\n\n## Looking Ahead\n\nExpect the EU\u2019s AI Act to enter its first enforcement phase in early 2027, prompting multinational providers to adjust compliance tooling. Meta is slated to release a developer preview of Muse Code extensions next quarter, expanding its enterprise footprint.",
+    "tags": [
+      "AI",
+      "Enterprise",
+      "Regulation",
+      "Quality Engineering",
+      "Insurance"
+    ],
+    "sources": [
+      {
+        "title": "Soteris seed funding AI unprofitable insurance policies",
+        "url": "https://www.unite.ai/nl/soteris-seed-funding-ai-unprofitable-insurance-policies/"
+      },
+      {
+        "title": "A Quality Engineering Framework for Testing AI, ML, and LLM Systems",
+        "url": "https://hackernoon.com/a-quality-engineering-framework-for-testing-ai-ml-and-llm-systems"
+      },
+      {
+        "title": "Polsky 10: Polsky Center partners with Current | Scaffold raises $15M",
+        "url": "https://polsky.uchicago.edu/2026/09/28/polsky-10-polsky-center-partners-with-current-scaffold-raises-15m-from-pre-seed-to-series-c/"
+      },
+      {
+        "title": "Calls for global regulation of AI are growing. What exactly could it look like?",
+        "url": "https://theconversation.com/calls-for-global-regulation-of-ai-are-growing-what-exactly-could-it-look-like-292243"
+      },
+      {
+        "title": "Meta Takes Its AI Agents to the Enterprise With New Meta Enterprise Platform",
+        "url": "https://windowsreport.com/meta-takes-its-ai-agents-to-the-enterprise-with-new-meta-enterprise-platform/"
+      }
+    ],
+    "link": "#"
+  },
+  {
     "id": 37,
     "title": "Googlebook Launch, Microsoft AI Playbook, Market Pullback, AI\u2011Fund Bill, Claude Forecasts",
     "date": "2026-09-21",
