@@ -168,7 +168,7 @@ const Portfolio = () => {
             <span className="text-secondary-400">AI/ML Engineer</span> &amp; <span className="text-primary-400">Forward Deployed Engineer</span>. I take LLM and agent systems from a real business problem to production, and I own the result.
           </h2>
           <p className="max-w-2xl text-lg text-zinc-400 leading-relaxed mb-4">
-            I'm the founder of <span className="text-white font-medium">DocBot</span>, an AI analyst that answers questions across a company's documents and live databases. At <span className="text-white font-medium">micro1</span>, I build the evaluation suites and RL environments that test how well AI models reason and run code. Before that, I spent three years at <span className="text-white font-medium">Enru Logistics</span> shipping GenAI and optimization systems that cut freight spend 20% and lifted revenue per truck 25%.
+            I'm the founder of <span className="text-white font-medium">DocBot</span>, an AI analyst that answers questions across a company's documents and live databases. Before that, I spent three years at <span className="text-white font-medium">Enru Logistics</span> shipping GenAI and optimization systems that cut freight spend 20% and lifted revenue per truck 25%.
           </p>
           <p className="max-w-2xl text-lg text-zinc-500 leading-relaxed mb-10">
             I start with the problem, not the model. I connect to the systems a team already runs (SSO, databases, webhooks, event streams), ship something that works, then measure whether it holds up. MS in Computational Science &amp; Engineering (ML) from Georgia Tech.
@@ -244,29 +244,6 @@ const Portfolio = () => {
           </h3>
 
           <div className="space-y-12 border-l border-zinc-800 ml-4 md:ml-0 md:border-none">
-            {/* MICRO1 */}
-            <div className="relative pl-8 md:pl-0 group">
-              <div className="md:grid md:grid-cols-4 md:gap-8">
-                <div className="mb-4 md:mb-0">
-                  <span className="font-mono text-sm text-zinc-500 block mb-1">Oct 2023 — Present</span>
-                  <span className="text-xs text-zinc-600 font-mono">Remote</span>
-                  <div className="mt-1 md:hidden h-2 w-2 rounded-full bg-primary-500 absolute -left-[5px] top-1.5 ring-4 ring-background"></div>
-                </div>
-                <div className="md:col-span-3">
-                  <h4 className="text-xl text-white font-medium flex items-center gap-2 mb-1">
-                    ML Engineer <a href="https://www.micro1.ai/" target="_blank" rel="noopener noreferrer" className="text-primary-400 hover:text-primary-300 transition-colors">@ micro1</a>
-                  </h4>
-                  <p className="text-xs text-zinc-500 font-mono mb-2">Contract · AI Evaluation · RL Environments · Agent Benchmarks</p>
-                  <p className="text-sm text-zinc-400 mb-4">I build the tests that decide whether an AI model can actually reason and run code correctly.</p>
-                  <ul className="list-disc leading-relaxed space-y-3 text-zinc-400 pl-4 marker:text-primary-500">
-                    <li>Build deterministic evaluation workflows and verification suites in Python and Linux that score model reasoning and code execution. Same input, same verdict, every run.</li>
-                    <li>Design sandboxed, reproducible RL environments and reference trajectories modeled on open-source agent benchmarks such as Terminal-Bench.</li>
-                    <li>Trace where models break, down to numerical edge cases, and feed those failure modes back into making AI systems more reliable.</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
             {/* ENRU */}
             <div className="relative pl-8 md:pl-0 group">
               <div className="md:grid md:grid-cols-4 md:gap-8">
