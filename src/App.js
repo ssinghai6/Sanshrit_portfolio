@@ -165,13 +165,13 @@ const Portfolio = () => {
             <span className="text-gradient">Singhai</span>
           </h1>
           <h2 className="text-2xl md:text-3xl text-zinc-400 font-light mb-8 max-w-2xl">
-            Machine Learning Engineer & <span className="text-secondary-400">Lead Data Scientist</span> building production <span className="text-secondary-400">GenAI</span> & <span className="text-primary-400">Agentic Systems</span> — plus <span className="text-accent-400">Optimization</span> & large-scale ML.
+            <span className="text-secondary-400">AI/ML Engineer</span> &amp; <span className="text-primary-400">Forward Deployed Engineer</span>. I take LLM and agent systems from a real business problem to production, and I own the result.
           </h2>
           <p className="max-w-2xl text-lg text-zinc-400 leading-relaxed mb-4">
-            I build production <span className="text-white font-medium">Machine Learning</span>, <span className="text-white font-medium">Data Science</span>, and <span className="text-white font-medium">GenAI</span> systems — agentic reasoning engines, ML/DL models, RAG and LLM orchestration, statistical modeling and experimentation, and optimization pipelines that ship to real users, not notebooks that demo well.
+            I'm the founder of <span className="text-white font-medium">DocBot</span>, an AI analyst that answers questions across a company's documents and live databases. At <span className="text-white font-medium">micro1</span>, I build the evaluation suites and RL environments that test how well AI models reason and run code. Before that, I spent three years at <span className="text-white font-medium">Enru Logistics</span> shipping GenAI and optimization systems that cut freight spend 20% and lifted revenue per truck 25%.
           </p>
           <p className="max-w-2xl text-lg text-zinc-500 leading-relaxed mb-10">
-            I work end-to-end: framing ambiguous problems into ML/AI solutions, digging into data to surface insights and validate ideas with experiments and A/B tests, training and deploying deep-learning and predictive models, building agentic LangGraph and RAG pipelines, and engineering the optimization and data infrastructure (FastAPI, vector stores, streaming) that holds it together. MS in Computational Science &amp; Engineering (ML) from Georgia Tech.
+            I start with the problem, not the model. I connect to the systems a team already runs (SSO, databases, webhooks, event streams), ship something that works, then measure whether it holds up. MS in Computational Science &amp; Engineering (ML) from Georgia Tech.
           </p>
 
           <div className="flex gap-4">
@@ -195,10 +195,10 @@ const Portfolio = () => {
             <div className="glass-panel p-8 rounded-2xl relative overflow-hidden group">
               <div className="absolute top-0 right-0 p-32 bg-primary-500/10 blur-[100px] rounded-full -mr-16 -mt-16 group-hover:bg-primary-500/20 transition-all duration-700"></div>
               <h4 className="text-2xl text-white mb-6 relative flex items-center gap-2">
-                <div className="h-2 w-2 rounded-full bg-primary-500"></div> ML & GenAI
+                <div className="h-2 w-2 rounded-full bg-primary-500"></div> GenAI & Agents
               </h4>
               <div className="flex flex-wrap gap-2 relative">
-                {['Python', 'PyTorch', 'TensorFlow', 'Scikit-learn', 'LLMs', 'LangChain', 'LangGraph', 'OpenCV', 'FAISS', 'Computer Vision'].map((skill) => (
+                {['LLMs', 'LangGraph', 'LangChain', 'RAG', 'NL-to-SQL', 'Multi-Agent Systems', 'Agent Evaluation', 'RL Environments', 'Prompt Engineering', 'Vector Stores', 'FAISS'].map((skill) => (
                   <span key={skill} className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm text-zinc-300 hover:border-primary-500/50 hover:text-primary-300 transition-colors cursor-default">
                     {skill}
                   </span>
@@ -209,10 +209,10 @@ const Portfolio = () => {
             <div className="glass-panel p-8 rounded-2xl relative overflow-hidden group">
               <div className="absolute top-0 right-0 p-32 bg-secondary-500/10 blur-[100px] rounded-full -mr-16 -mt-16 group-hover:bg-secondary-500/20 transition-all duration-700"></div>
               <h4 className="text-2xl text-white mb-6 relative flex items-center gap-2">
-                <div className="h-2 w-2 rounded-full bg-secondary-500"></div> Data & Cloud
+                <div className="h-2 w-2 rounded-full bg-secondary-500"></div> Integrations & Cloud
               </h4>
               <div className="flex flex-wrap gap-2 relative">
-                {['PySpark', 'Kafka', 'Azure', 'AWS', 'BigQuery', 'Redis', 'Docker', 'Git', 'FastAPI'].map((skill) => (
+                {['FastAPI', 'Next.js', 'PostgreSQL', 'SAML/OAuth SSO', 'Webhooks', 'Kafka', 'Azure Event Hubs', 'AWS', 'Terraform', 'Docker', 'Redis', 'CI/CD'].map((skill) => (
                   <span key={skill} className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm text-zinc-300 hover:border-secondary-500/50 hover:text-secondary-300 transition-colors cursor-default">
                     {skill}
                   </span>
@@ -223,10 +223,10 @@ const Portfolio = () => {
             <div className="glass-panel p-8 rounded-2xl relative overflow-hidden group md:col-span-2">
               <div className="absolute top-0 right-0 p-32 bg-accent-500/10 blur-[100px] rounded-full -mr-16 -mt-16 group-hover:bg-accent-500/20 transition-all duration-700"></div>
               <h4 className="text-2xl text-white mb-6 relative flex items-center gap-2">
-                <div className="h-2 w-2 rounded-full bg-accent-500"></div> Optimization & Analytics
+                <div className="h-2 w-2 rounded-full bg-accent-500"></div> ML & Optimization
               </h4>
               <div className="flex flex-wrap gap-2 relative">
-                {['OR-Tools', 'Gurobi', 'TigerGraph', 'GSQL', 'SQL', 'Tableau', 'Power BI', 'MATLAB'].map((skill) => (
+                {['Python', 'PyTorch', 'TensorFlow', 'Scikit-learn', 'XGBoost', 'HuggingFace', 'OR-Tools', 'Gurobi', 'TigerGraph/GSQL', 'SQL', 'Tableau', 'Power BI'].map((skill) => (
                   <span key={skill} className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm text-zinc-300 hover:border-accent-500/50 hover:text-accent-300 transition-colors cursor-default">
                     {skill}
                   </span>
@@ -244,11 +244,34 @@ const Portfolio = () => {
           </h3>
 
           <div className="space-y-12 border-l border-zinc-800 ml-4 md:ml-0 md:border-none">
+            {/* MICRO1 */}
+            <div className="relative pl-8 md:pl-0 group">
+              <div className="md:grid md:grid-cols-4 md:gap-8">
+                <div className="mb-4 md:mb-0">
+                  <span className="font-mono text-sm text-zinc-500 block mb-1">Oct 2023 — Present</span>
+                  <span className="text-xs text-zinc-600 font-mono">Remote</span>
+                  <div className="mt-1 md:hidden h-2 w-2 rounded-full bg-primary-500 absolute -left-[5px] top-1.5 ring-4 ring-background"></div>
+                </div>
+                <div className="md:col-span-3">
+                  <h4 className="text-xl text-white font-medium flex items-center gap-2 mb-1">
+                    ML Engineer <a href="https://www.micro1.ai/" target="_blank" rel="noopener noreferrer" className="text-primary-400 hover:text-primary-300 transition-colors">@ micro1</a>
+                  </h4>
+                  <p className="text-xs text-zinc-500 font-mono mb-2">Contract · AI Evaluation · RL Environments · Agent Benchmarks</p>
+                  <p className="text-sm text-zinc-400 mb-4">I build the tests that decide whether an AI model can actually reason and run code correctly.</p>
+                  <ul className="list-disc leading-relaxed space-y-3 text-zinc-400 pl-4 marker:text-primary-500">
+                    <li>Build deterministic evaluation workflows and verification suites in Python and Linux that score model reasoning and code execution. Same input, same verdict, every run.</li>
+                    <li>Design sandboxed, reproducible RL environments and reference trajectories modeled on open-source agent benchmarks such as Terminal-Bench.</li>
+                    <li>Trace where models break, down to numerical edge cases, and feed those failure modes back into making AI systems more reliable.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
             {/* ENRU */}
             <div className="relative pl-8 md:pl-0 group">
               <div className="md:grid md:grid-cols-4 md:gap-8">
                 <div className="mb-4 md:mb-0">
-                  <span className="font-mono text-sm text-zinc-500 block mb-1">Jun 2023 — Present</span>
+                  <span className="font-mono text-sm text-zinc-500 block mb-1">Jun 2023 — Jun 2026</span>
                   <span className="text-xs text-zinc-600 font-mono">Atlanta, GA</span>
                   <div className="mt-1 md:hidden h-2 w-2 rounded-full bg-primary-500 absolute -left-[5px] top-1.5 ring-4 ring-background"></div>
                 </div>
@@ -256,19 +279,19 @@ const Portfolio = () => {
                   <h4 className="text-xl text-white font-medium flex items-center gap-2 mb-1">
                     Lead Data Scientist <a href="https://www.enru.io/" target="_blank" rel="noopener noreferrer" className="text-primary-400 hover:text-primary-300 transition-colors">@ ENRU</a>
                   </h4>
-                  <p className="text-xs text-zinc-500 font-mono mb-2">Promoted from Data Scientist · GenAI · Optimization · Production ML</p>
-                  <p className="text-sm text-zinc-400 mb-2">Shipped production GenAI and a profit-maximizing optimizer that lifted revenue per truck 25% and cut analyst query time with a RAG system.</p>
+                  <p className="text-xs text-zinc-500 font-mono mb-2">Network Operations · Promoted to Lead, Feb 2026 · GenAI · Optimization · Production ML</p>
+                  <p className="text-sm text-zinc-400 mb-2">Turned freight operations problems into production systems: <span className="text-primary-300 font-semibold">20%</span> lower freight spend, <span className="text-primary-300 font-semibold">25%</span> more revenue per truck, and a GenAI assistant planners use to fix USPS file errors.</p>
                   <button onClick={() => setExpandedExp(prev => ({ ...prev, enru: !prev.enru }))} className="text-primary-400 hover:underline mb-2">
                     {expandedExp.enru ? 'Hide' : 'Show'} details
                   </button>
                   {expandedExp.enru && (
                     <ul className="list-disc leading-relaxed space-y-3 text-zinc-400 pl-4 marker:text-primary-500">
-                      <li>Architected a production RAG GenAI system (LangChain, FAISS, HuggingFace) with hierarchical chunking, hybrid semantic retrieval, and conversational memory over FastAPI — cutting analyst query time.</li>
-                      <li>Built a freight-consolidation engine that clusters raw customer shipment data into full Truck Load groups (residual LTL handled via 3PL) and computes optimal routing to minimize shipping cost, reducing freight spend by <span className="text-primary-300 font-semibold">20%</span> across multiple enterprise accounts.</li>
-                      <li>Drove a 10× solver speedup via systematic benchmarking and gradient-free optimization; evaluated Gurobi vs. OR-Tools and shipped the winning integer-programming solution, raising revenue per truck 25%.</li>
-                      <li>Built multi-label classification and accessorial cost-prediction models (TensorFlow) with iterative feature engineering, improving cost-estimation accuracy 40% for new locations.</li>
-                      <li>Took end-to-end ownership of the ACTNx middleware during org restructuring — designed a 3PL middleware and Azure EventHub streaming pipeline for real-time freight ingestion, plus TigerGraph/GSQL workflows for journey verification.</li>
-                      <li>Mentored junior data scientists and coordinated 2 offshore teams across concurrent sprints; completed contractor knowledge transfer, eliminating an external dependency.</li>
+                      <li>Shipped a production RAG assistant (LangChain, FAISS, HuggingFace, FastAPI) that lets planners resolve USPS .dat file errors by asking questions of USPS documentation and customer contracts. Hierarchical chunking, hybrid retrieval and conversational memory cut resolution time.</li>
+                      <li>Owned the ACTNx middleware layer end to end: a 3PL middleware pipeline and Azure Event Hubs streaming for real-time freight data across federated sources, plus TigerGraph/GSQL workflows for journey verification and truck assignment.</li>
+                      <li>Built a freight-consolidation engine that groups shipments into full truckloads and routes them optimally, with a closed feedback loop that keeps improving it. Freight spend dropped <span className="text-primary-300 font-semibold">20%</span> across multiple enterprise accounts.</li>
+                      <li>Made the solver <span className="text-primary-300 font-semibold">10x</span> faster through benchmarking, data-structure redesign and gradient-free optimization. Chose between Gurobi and OR-Tools on the evidence and shipped the integer program that raised revenue per truck <span className="text-primary-300 font-semibold">25%</span>.</li>
+                      <li>Built cost-prediction models (TensorFlow, PyTorch) that made cost estimates <span className="text-primary-300 font-semibold">40%</span> more accurate.</li>
+                      <li>Mentored junior data scientists and coordinated 2 offshore teams across concurrent sprints. Ran the contractor knowledge transfer that removed an external dependency.</li>
                     </ul>
                   )}
                 </div>
@@ -355,21 +378,24 @@ const Portfolio = () => {
                 </div>
                 <div className="flex gap-4">
                   <a href="https://github.com/ssinghai6/DocBot" className="text-zinc-400 hover:text-primary-400 transition-colors"><Github size={20} /></a>
-                  <a href="https://doc-bot-nine.vercel.app" className="text-zinc-400 hover:text-primary-400 transition-colors"><ExternalLink size={20} /></a>
+                  <a href="https://docbot.space" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-primary-400 transition-colors"><ExternalLink size={20} /></a>
                 </div>
               </div>
-              <h4 className="text-xl font-bold text-white mb-2 group-hover:text-primary-400 transition-colors">DocBot: AI Document & Database Analyst</h4>
+              <h4 className="text-xl font-bold text-white mb-1 group-hover:text-primary-400 transition-colors">DocBot: AI Analyst for Documents & Live Databases</h4>
+              <p className="text-xs text-zinc-500 font-mono mb-4">Founder & Solo Engineer · 2026 — Present · docbot.space</p>
+              <p className="text-sm text-zinc-400 mb-4">Companies keep their numbers in databases and their context in PDFs, and nobody can ask both at once. I started DocBot to fix that: one question, one answer drawn from both, every source cited, and a flag whenever the numbers disagree.</p>
               <ul className="list-disc space-y-2 text-zinc-400 flex-grow pl-4 text-sm mb-6 marker:text-primary-500">
-                <li>Architected a hybrid Docs+DB reasoning engine with 8 expert personas, intent-based auto-routing, and discrepancy detection across PDFs and live databases.</li>
-                <li>Built a 7-step bounded SQL pipeline with sqlglot AST validation, 3-layer read-only enforcement, schema drift auto-recovery, and agentic multi-step Autopilot via LangGraph.</li>
-                <li>Enterprise-ready with SAML SSO, RBAC, PII masking, audit logging, E2B sandboxed Python analysis, and LLM fallback chains (Groq → Gemini).</li>
-                <li>Achieved <span className="text-primary-300 font-semibold">90% recall@5</span> retrieval, <span className="text-primary-300 font-semibold">~600ms</span> time-to-first-token, and <span className="text-primary-300 font-semibold">sub-2s</span> end-to-end latency; validated with <span className="text-primary-300 font-semibold">686+</span> automated tests.</li>
+                <li>Built it alone, end to end: product, architecture, integrations, security and deployment on Next.js, FastAPI and PostgreSQL.</li>
+                <li>NL-to-SQL that stays bounded: at most 3 LLM calls per question, sqlglot AST validation and three layers of read-only enforcement. Autopilot, a LangGraph agent, runs multi-step investigations with Python analysis in E2B sandboxes.</li>
+                <li>Built for enterprise buyers: SAML SSO (Okta, Azure AD), RBAC, audit logging, PII masking and multi-tenant row-level security, with connectors for Amazon SP-API, Shopify and SEC EDGAR.</li>
+                <li>Fast and cheap to run: <span className="text-primary-300 font-semibold">90% recall@5</span>, <span className="text-primary-300 font-semibold">~600ms</span> to first token, <span className="text-primary-300 font-semibold">sub-2s</span> end to end, and per-session cost ceilings. <span className="text-primary-300 font-semibold">1000+</span> tests and CI evals guard every change.</li>
+                <li><span className="text-white font-medium">Where it stands:</span> live at docbot.space, with Terraform written for the move from Railway to AWS (ECS Fargate, RDS).</li>
               </ul>
               <div className="flex gap-3 text-xs font-mono text-primary-300/80">
-                <span>LLaMA 3.3</span>
-                <span>Gemini 2.5</span>
-                <span>LangChain</span>
+                <span>Groq</span>
+                <span>Gemini</span>
                 <span>LangGraph</span>
+                <span>Terraform</span>
                 <span>FastAPI</span>
                 <span>Next.js</span>
                 <span>PostgreSQL</span>
