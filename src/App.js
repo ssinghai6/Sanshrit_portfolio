@@ -105,7 +105,7 @@ const Portfolio = () => {
               <SocialLink href="mailto:singhai.sanshrit@live.com" icon={Mail} />
               <div className="h-4 w-px bg-white/10 mx-2"></div>
               <a
-                href="https://1drv.ms/b/c/a9a13d4ed9947e83/IQBYHxypA5--SJE7Vig-29M2AegXARvfcy2u131636sR_ZE?e=CngETr"
+                href="https://1drv.ms/b/c/a9a13d4ed9947e83/IQCLw89MMXH9RoG4RnbbZneUAXfEDA5bhZ0tnz12hVWve74?e=C4NzfS"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-3 py-1.5 bg-white/5 hover:bg-white/10 rounded-full text-xs font-mono text-zinc-300 transition-colors border border-white/5"
